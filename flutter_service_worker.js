@@ -37,9 +37,9 @@ const RESOURCES = {"flutter.js": "24bc71911b75b5f8135c949e27a2984e",
 "assets/assets/images/laurel_right.png": "777a53a89fa059f516f8a29c61f1b522",
 "assets/assets/images/splash_circle.png": "77c9d22185b1dc219d2b319399ef7302",
 "assets/assets/data/quotes.json": "c3c2582ee6f17942b51c1491bb5b2ca3",
-"assets/assets/translations/en.json": "c6b29f39150430defb314e05cf59a292",
+"assets/assets/translations/en.json": "7e88ab6de525832948febdc1a9a1eba7",
 "assets/assets/translations/merge_translations.py": "7c9afd7451b102a8fdae5b8d06d8b273",
-"assets/assets/translations/ru.json": "8fcb6c22f4157f3c7dbd3120ba4ca310",
+"assets/assets/translations/ru.json": "d711879768dd63897ccd9d3db9cf4cee",
 "assets/assets/translations/flatten_translations.py": "1be90c6cf27e71da4dff406a39c8c492",
 "assets/fonts/MaterialIcons-Regular.otf": "5e6a061b4badc8e1f79db3d7fd7c0f8e",
 "assets/NOTICES": "4aa7970955da268ca9acfb394cc082ac",
@@ -80,9 +80,9 @@ const RESOURCES = {"flutter.js": "24bc71911b75b5f8135c949e27a2984e",
 "canvaskit/skwasm.js.symbols": "3a4aadf4e8141f284bd524976b1d6bdc",
 "favicon.png": "f5757c0ce1aa97087ea8bac961f3400f",
 "main.dart": "c4501414a256d6c7c5d379120ae357e8",
-"flutter_bootstrap.js": "b7428947b8208a32c886a7a45166c889",
+"flutter_bootstrap.js": "4585d46f74f52de6cd93963b93dfccac",
 "version.json": "2d9d4a33e6f2c913431422cfdabeeb74",
-"main.dart.js": "a81e84c4dc7e7a4a62703172cdb73558"};
+"main.dart.js": "763aecfa16d812bd74b96b4718ca0bd0"};
 // The application shell files that are downloaded before a service worker can
 // start.
 const CORE = ["main.dart.js",
