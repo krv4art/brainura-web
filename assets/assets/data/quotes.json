@@ -3,1004 +3,998 @@
     {
       "id": 1,
       "text": "Привычка — вторая натура.",
-      "author": "Аристотель"
+      "text_en": "Habit is second nature.",
+      "author": "Аристотель",
+      "author_en": "Aristotle"
     },
     {
       "id": 2,
       "text": "Мы то, что мы постоянно делаем. Следовательно, совершенство — это не действие, а привычка.",
-      "author": "Аристотель"
+      "text_en": "We are what we repeatedly do. Therefore excellence is not an act, but a habit.",
+      "author": "Аристотель",
+      "author_en": "Aristotle"
     },
     {
       "id": 3,
       "text": "Успешный человек вырабатывает привычку делать то, что не любит делать неудачник.",
-      "author": "Томас Эдисон"
+      "text_en": "Successful people have the habit of doing the things that failures don't like to do.",
+      "author": "Томас Эдисон",
+      "author_en": "Thomas Edison"
     },
     {
       "id": 4,
       "text": "Мотивация тебя зажигает, но не делает ни одного дела. Дисциплина, намерение, сильная привычка — вот что выполняет дела.",
-      "author": "Неизвестный автор / Народная мудрость"
+      "text_en": "Motivation sparks you, but doesn't get anything done. Discipline, intention, and strong habit — those are what get things done.",
+      "author": "Эллиот Халс",
+      "author_en": "Elliott Hulse"
     },
     {
       "id": 5,
       "text": "Гвоздь выбивается другим гвоздём; привычка преодолевается привычкой.",
-      "author": "Сенека Младший"
+      "text_en": "Nail is driven out by nail; habit is overcome by habit.",
+      "author": "Сенека Младший",
+      "author_en": "Seneca the Younger"
     },
     {
       "id": 6,
-      "text": "Легче удержаться от ссоры чем потом из неё выйти.",
-      "author": "Сенека Младший"
+      "text": "Жизнь похожа на езду на велосипеде. Чтобы сохранить равновесие, ты должен продолжать двигаться.",
+      "text_en": "Life is like riding a bicycle. To keep your balance, you must keep moving.",
+      "author": "Альберт Эйнштейн",
+      "author_en": "Albert Einstein"
     },
     {
       "id": 7,
       "text": "Цепи привычки слишком слабы, чтобы их почувствовать, пока они не станут слишком сильными, чтобы их сломать.",
-      "author": "Уоррен Баффет"
+      "text_en": "The chains of habit are generally too small to be felt until they are too strong to be broken.",
+      "author": "Уоррен Баффет",
+      "author_en": "Warren Buffett"
     },
     {
       "id": 8,
-      "text": "Не то, что мы делаем время от времени, формирует нашу жизнь. То, что мы делаем постоянно.",
-      "author": "Аристотель"
+      "text": "Не то, что мы делаем время от времени, формирует нашу жизнь. А то — что мы делаем постоянно.",
+      "text_en": "It's not what we do once in a while that shapes our lives. It's what we do consistently.",
+      "author": "Аристотель",
+      "author_en": "Aristotle"
     },
     {
       "id": 9,
-      "text": "Обычные вещи, последовательно выполняемые, дают необычные результаты.",
-      "author": "Народная мудрость"
+      "text": "Обычные вещи, которые делаешь последовательно, приносят необычные результаты.",
+      "text_en": "Ordinary things consistently done produce extraordinary results.",
+      "author": "Мэттью Хасси",
+      "author_en": "Matthew Hussey"
     },
     {
       "id": 10,
-      "text": "Маленькие дисциплины, повторяемые с постоянством каждый день, ведут к великим достижениям.",
-      "author": "Робин Шарма"
+      "text": "Нереализованный потенциал — это тихая трагедия: люди предают свои самые сокровенные желания не из-за драматических неудач, а из-за комфорта, страха и самообмана.",
+      "text_en": "Unrealized potential is a quiet tragedy: people betray their deepest desires not because of dramatic failures, but because of comfort, fear, and self-deception.",
+      "author": "Оскар Хартманн",
+      "author_en": "Oscar Hartmann"
     },
     {
       "id": 11,
       "text": "Успех — это сумма небольших усилий, повторяемых день за днем.",
-      "author": "Робин Шарма"
+      "text_en": "Success is the sum of small efforts, repeated day in and day out.",
+      "author": "Робин Шарма",
+      "author_en": "Robin Sharma"
     },
     {
       "id": 12,
       "text": "Долгосрочная последовательность побеждает краткосрочную интенсивность.",
-      "author": "Джеймс Клир"
+      "text_en": "Long-term consistency beats short-term intensity.",
+      "author": "Джеймс Клир",
+      "author_en": "James Clear"
     },
     {
       "id": 13,
       "text": "Капля за каплей наполняется горшок с водой.",
-      "author": "Будда / Древняя мудрость"
+      "text_en": "Drop by drop the pot is filled with water.",
+      "author": "Будда",
+      "author_en": "Buddha"
     },
     {
       "id": 14,
       "text": "Энергия и настойчивость побеждают все.",
-      "author": "Ральф Уолдо Эмерсон"
+      "text_en": "Energy and persistence conquer all things.",
+      "author": "Ральф Уолдо Эмерсон",
+      "author_en": "Ralph Waldo Emerson"
     },
     {
       "id": 15,
-      "text": "Каждый день вы можете делать прогресс. Каждый шаг может быть плодотворным.",
-      "author": "Народная мудрость"
+      "text": "Великие возможности приходят ко всем, но многие даже не знают, что встретились с ними.",
+      "text_en": "Great opportunities come to all, but many do not know they have met them.",
+      "author": "Уильям Даннинг",
+      "author_en": "William Dunning"
     },
     {
       "id": 16,
       "text": "Путешествие в тысячу миль начинается с одного шага.",
-      "author": "Лао Цзы / Конфуций"
+      "text_en": "A journey of a thousand miles begins with a single step.",
+      "author": "Лао Цзы / Конфуций",
+      "author_en": "Lao Tzu / Confucius"
     },
     {
       "id": 17,
       "text": "Начни там, где ты есть. Используй то, что имеешь. Делай то, что можешь.",
-      "author": "Артур Эш"
+      "text_en": "Start where you are. Use what you have. Do what you can.",
+      "author": "Артур Эш",
+      "author_en": "Arthur Ashe"
     },
     {
       "id": 18,
-      "text": "Через год ты пожелаешь, чтобы начал сегодня.",
-      "author": "Карен Лэмб"
+      "text": "Через год ты будешь жалеть, что не начал сегодня.",
+      "text_en": "A year from now you may wish you had started today.",
+      "author": "Карен Лэмб",
+      "author_en": "Karen Lamb"
     },
     {
       "id": 19,
       "text": "Тебе не нужно быть великим, чтобы начать, но нужно начать, чтобы стать великим.",
-      "author": "Зиг Зиглар"
+      "text_en": "You don't have to be great to start, but you have to start to be great.",
+      "author": "Зиг Зиглар",
+      "author_en": "Zig Ziglar"
     },
     {
       "id": 20,
       "text": "Секрет продвижения вперёд заключается в том, чтобы начать.",
-      "author": "Марк Твен"
+      "text_en": "The secret of getting ahead is getting started.",
+      "author": "Марк Твен",
+      "author_en": "Mark Twain"
     },
     {
       "id": 21,
       "text": "Лучшее время для посадки дерева было 20 лет назад. Второе лучшее время — сейчас.",
-      "author": "Китайская пословица"
+      "text_en": "The best time to plant a tree was 20 years ago. The second best time is now.",
+      "author": "Китайская пословица",
+      "author_en": "Chinese proverb"
     },
     {
       "id": 22,
       "text": "Маленькие дела, которые сделаны, лучше, чем великие дела, которые планируются.",
-      "author": "Робин Шарма"
+      "text_en": "Small deeds done are better than great deeds planned.",
+      "author": "Робин Шарма",
+      "author_en": "Robin Sharma"
     },
-    {
-      "id": 23,
-      "text": "Не ждите идеального момента. Действуйте сейчас.",
-      "author": "Неизвестный автор"
-    },
-    {
-      "id": 24,
-      "text": "Работа, которая никогда не начата, занимает больше всего времени на завершение.",
-      "author": "Неизвестный автор"
-    },
+
     {
       "id": 25,
       "text": "Сделай первый шаг и ты поймешь, что не все так страшно.",
-      "author": "Сенека Младший"
+      "text_en": "Take the first step and you will realize it is not as scary as it seemed.",
+      "author": "Сенека Младший",
+      "author_en": "Seneca the Younger"
     },
     {
       "id": 26,
-      "text": "Мы не осмеливаемся на многие вещи, потому что они тяжелые, но тяжелые, потому что мы не осмеливаемся сделать их.",
-      "author": "Сенека Младший"
+      "text": "Мы не осмеливаемся на многие вещи, потому что они тяжелые, но тяжелые они, потому что мы не осмеливаемся сделать их.",
+      "text_en": "It is not because things are difficult that we do not dare; it is because we do not dare that they are difficult.",
+      "author": "Сенека Младший",
+      "author_en": "Seneca the Younger"
     },
-    {
-      "id": 27,
-      "text": "Если вы идете сквозь ад – не останавливайтесь.",
-      "author": "Уинстон Черчилль"
-    },
+
     {
       "id": 28,
       "text": "Бездействие порождает сомнения и страх. Действие порождает уверенность и мужество.",
-      "author": "Дейл Карнеги"
+      "text_en": "Inaction breeds doubt and fear. Action breeds confidence and courage.",
+      "author": "Дейл Карнеги",
+      "author_en": "Dale Carnegie"
     },
     {
       "id": 29,
       "text": "Путь к началу — это перестать говорить и начать делать.",
-      "author": "Уолт Дисней"
+      "text_en": "The way to get started is to quit talking and begin doing.",
+      "author": "Уолт Дисней",
+      "author_en": "Walt Disney"
     },
     {
       "id": 30,
-      "text": "Сделай шаг вперед и ты поймешь, что многое не так страшно как раз потому что больше всего пугает.",
-      "author": "Сенека Младший"
+      "text": "Сделай первый шаг — и ты поймёшь, что не всё так страшно.",
+      "text_en": "Take the first step — and you will realize it is not as scary as it seemed.",
+      "author": "Сенека Младший",
+      "author_en": "Seneca the Younger"
     },
     {
       "id": 31,
       "text": "Дисциплина — это мост между целями и достижениями.",
-      "author": "Джим Рон"
+      "text_en": "Discipline is the bridge between goals and accomplishment.",
+      "author": "Джим Рон",
+      "author_en": "Jim Rohn"
     },
     {
       "id": 32,
       "text": "Первая и лучшая победа — победа над собой.",
-      "author": "Платон"
+      "text_en": "The first and best victory is to conquer self.",
+      "author": "Платон",
+      "author_en": "Plato"
     },
     {
       "id": 33,
       "text": "Будущее зависит от того, что вы делаете сегодня.",
-      "author": "Махатма Ганди"
+      "text_en": "The future depends on what you do today.",
+      "author": "Махатма Ганди",
+      "author_en": "Mahatma Gandhi"
     },
     {
       "id": 34,
       "text": "Самоконтроль — это сила. Правильная мысль — это мастерство.",
-      "author": "Филип Гиббс"
+      "text_en": "Self-control is strength. Right thought is mastery.",
+      "author": "Филип Гиббс",
+      "author_en": "Philip Gibbs"
     },
     {
       "id": 35,
-      "text": "То, что в наших силах сделать, в наших силах и не делать.",
-      "author": "Аристотель"
+      "text": "То, что в наших силах сделать, в наших же силах и не делать.",
+      "text_en": "What it is in our power to do, it is in our power not to do.",
+      "author": "Аристотель",
+      "author_en": "Aristotle"
     },
     {
       "id": 36,
       "text": "Власть над собой — высшая власть.",
-      "author": "Сенека Младший"
+      "text_en": "Power over oneself is the highest power.",
+      "author": "Сенека Младший",
+      "author_en": "Seneca the Younger"
     },
-    {
-      "id": 37,
-      "text": "Сильнее всех — владеющий собой.",
-      "author": "Сенека Младший"
-    },
+
     {
       "id": 38,
       "text": "Постоянные усилия – а не сила или ум – вот ключ к раскрытию нашего потенциала.",
-      "author": "Уинстон Черчилль"
+      "text_en": "Continuous effort — not strength or intelligence — is the key to unlocking our potential.",
+      "author": "Уинстон Черчилль",
+      "author_en": "Winston Churchill"
     },
     {
       "id": 39,
       "text": "Побороть дурные привычки легче сегодня, чем завтра.",
-      "author": "Народная мудрость"
+      "text_en": "Bad habits are easier to break today than tomorrow.",
+      "author": "Конфуций",
+      "author_en": "Confucius"
     },
     {
       "id": 40,
       "text": "Неспособный подчиняться, не способен и руководить.",
-      "author": "Сенека Младший"
+      "text_en": "He who cannot obey himself will be obeyed.",
+      "author": "Сенека Младший",
+      "author_en": "Seneca the Younger"
     },
     {
       "id": 41,
       "text": "Сначала мы создаём свои привычки, а потом наши привычки создают нас.",
-      "author": "Джон Драйден"
+      "text_en": "First we make our habits, then our habits make us.",
+      "author": "Джон Драйден",
+      "author_en": "John Dryden"
     },
     {
       "id": 42,
       "text": "Мы становимся тем, что повторяем.",
-      "author": "Аристотель"
+      "text_en": "We become what we repeatedly do.",
+      "author": "Аристотель",
+      "author_en": "Aristotle"
     },
     {
       "id": 43,
       "text": "Характер — это просто привычка, продолженная долгое время.",
-      "author": "Максим Ненси"
+      "text_en": "Character is simply habit long continued.",
+      "author": "Максим Ненси",
+      "author_en": "Plutarch"
     },
     {
       "id": 44,
-      "text": "Привычки становятся характером.",
-      "author": "Народная мудрость"
+      "text": "Мы становимся справедливыми, совершая справедливые поступки, умеренными — совершая умеренные поступки, храбрыми — совершая храбрые поступки... Привычки формируют характер.",
+      "text_en": "We become just by doing just acts, temperate by doing temperate acts, brave by doing brave acts… Habits shape character.",
+      "author": "Аристотель",
+      "author_en": "Aristotle"
     },
     {
       "id": 45,
       "text": "Ты есть то, что ты делаешь, а не то, что ты говоришь, что сделаешь.",
-      "author": "Билл Дарр"
+      "text_en": "You are what you do, not what you say you'll do.",
+      "author": "Билл Дарр",
+      "author_en": "Bill Durr"
     },
-    {
-      "id": 46,
-      "text": "Человек — это сумма его привычек.",
-      "author": "Аристотель"
-    },
-    {
-      "id": 47,
-      "text": "Будь собой; все остальные уже заняты.",
-      "author": "Оскар Уайльд"
-    },
-    {
-      "id": 48,
-      "text": "Быть собой в мире, который постоянно пытается сделать из вас что-то другое, — величайшее достижение.",
-      "author": "Ральф Уолдо Эмерсон"
-    },
+
     {
       "id": 49,
       "text": "Ты — это твои повторяющиеся действия. Как только сопоставишь свою идентичность со своим поведением, ты буквально станешь тем, кем хочешь.",
-      "author": "Джеймс Клир"
+      "text_en": "You are your repeated actions. Once you align your identity with your behavior, you will literally become who you want to be.",
+      "author": "Джеймс Клир",
+      "author_en": "James Clear"
     },
     {
       "id": 50,
       "text": "Если хочешь подчинить себе все, подчини себя разуму.",
-      "author": "Сенека Младший"
+      "text_en": "If you would conquer all things, subdue yourself to reason.",
+      "author": "Сенека Младший",
+      "author_en": "Seneca the Younger"
     },
     {
       "id": 51,
       "text": "Успех — не окончателен, неудачи — не фатальны, значение имеет лишь мужество продолжать.",
-      "author": "Уинстон Черчилль"
+      "text_en": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+      "author": "Уинстон Черчилль",
+      "author_en": "Winston Churchill"
     },
-    {
-      "id": 52,
-      "text": "Успех — это умение двигаться от неудачи к неудаче, не теряя энтузиазма.",
-      "author": "Уинстон Черчилль"
-    },
+
     {
       "id": 53,
       "text": "Успех — это способность идти от одной неудачи к другой, не теряя при этом энтузиазма.",
-      "author": "Уинстон Черчилль"
+      "text_en": "Success is the ability to go from one failure to another with no loss of enthusiasm.",
+      "author": "Уинстон Черчилль",
+      "author_en": "Winston Churchill"
     },
     {
       "id": 54,
-      "text": "Ничто в мире не может заменить настойчивость.",
-      "author": "Альберт Эйнштейн / Кальвин Кулидж"
+      "text": "Ничто в мире не может заменить настойчивость. Талант не заменит — нет ничего более обычного, чем талантливые неудачники. Гений не заменит — непризнанный гений почти стал пословицей. Образование не заменит — мир полон образованных изгоев. Только настойчивость и решимость всесильны.",
+      "text_en": "Nothing in this world can take the place of persistence. Talent will not — nothing is more common than unsuccessful men with talent. Genius will not — unrewarded genius is almost a proverb. Education will not — the world is full of educated derelicts. Persistence and determination alone are omnipotent.",
+      "author": "Кальвин Кулидж",
+      "author_en": "Calvin Coolidge"
     },
-    {
-      "id": 55,
-      "text": "Есть три пути к окончательному успеху: быть добрым, быть добрым, быть добрым.",
-      "author": "Народная мудрость"
-    },
+
     {
       "id": 56,
       "text": "Удивительно, какое долгосрочное преимущество получили люди, стараясь последовательно не быть глупыми, вместо того чтобы пытаться быть очень умными.",
-      "author": "Чарли Мангер"
+      "text_en": "It's remarkable how much long-term advantage people like us have gotten by trying to be consistently not stupid, instead of trying to be very intelligent.",
+      "author": "Чарли Мангер",
+      "author_en": "Charlie Munger"
     },
-    {
-      "id": 57,
-      "text": "Развивайте успех из неудач. Уныние и неудача — два самых верных камня преткновения к успеху.",
-      "author": "Уинстон Черчилль"
-    },
+
     {
       "id": 58,
       "text": "Я большой сторонник удачи, и я обнаружил, что чем усерднее я работаю, тем больше её у меня.",
-      "author": "Томас Джефферсон"
+      "text_en": "I'm a great believer in luck, and I find the harder I work, the more I have of it.",
+      "author": "Томас Джефферсон",
+      "author_en": "Thomas Jefferson"
     },
     {
       "id": 59,
       "text": "Когда я освобождаюсь от того, кто я есть, я становлюсь тем, кем я могу быть.",
-      "author": "Лао Цзы"
+      "text_en": "When I let go of what I am, I become what I might be.",
+      "author": "Лао Цзы",
+      "author_en": "Lao Tzu"
     },
     {
       "id": 60,
       "text": "Дело не в желании победить — оно есть у всех. Дело в желании подготовиться к победе.",
-      "author": "Пол Брайант"
-    },
-    {
-      "id": 61,
-      "text": "Всё, что человеческий разум способен понять и во что он способен поверить, достижимо.",
-      "author": "Наполеон Хилл"
+      "text_en": "The will to win is not nearly as important as the will to prepare to win.",
+      "author": "Пол Брайант",
+      "author_en": "Paul Bryant"
     },
     {
       "id": 62,
       "text": "Вы никогда не пересечете океан, если не наберетесь мужества потерять берег из виду.",
-      "author": "Христофор Колумб"
+      "text_en": "You can never cross the ocean until you have the courage to lose sight of the shore.",
+      "author": "Христофор Колумб",
+      "author_en": "Christopher Columbus"
     },
     {
       "id": 63,
       "text": "Я знал немало талантливых людей – они до конца жизни оставались на берегу и спрашивали себя: 'Смогу ли я'.",
-      "author": "Андре Моруа"
+      "text_en": "I knew many talented people — they stayed on the shore till the end of their lives, asking themselves: 'Could I?'",
+      "author": "Андре Моруа",
+      "author_en": "André Maurois"
     },
     {
       "id": 64,
       "text": "Наша величайшая слава не в том, чтобы никогда не падать, а в том, чтобы подниматься каждый раз, когда падаем.",
-      "author": "Конфуций"
+      "text_en": "Our greatest glory is not in never falling, but in rising every time we fall.",
+      "author": "Конфуций",
+      "author_en": "Confucius"
     },
     {
       "id": 65,
       "text": "Упади семь раз, встань восемь.",
-      "author": "Японская пословица"
+      "text_en": "Fall seven times, stand up eight.",
+      "author": "Японская пословица",
+      "author_en": "Japanese proverb"
     },
-    {
-      "id": 66,
-      "text": "Я не потерпел неудачу. Я просто нашёл 10 000 способов, которые не работают.",
-      "author": "Томас Эдисон"
-    },
+
     {
       "id": 67,
       "text": "Человек, который совершил ошибку и не исправляет её, совершает другую ошибку.",
-      "author": "Конфуций"
+      "text_en": "A man who has committed a mistake and doesn't correct it is committing another mistake.",
+      "author": "Конфуций",
+      "author_en": "Confucius"
     },
     {
       "id": 68,
       "text": "Неудача — это просто возможность начать снова более разумно.",
-      "author": "Генри Форд"
+      "text_en": "Failure is simply the opportunity to begin again, this time more intelligently.",
+      "author": "Генри Форд",
+      "author_en": "Henry Ford"
     },
     {
       "id": 69,
       "text": "Каждый удар приближает меня к следующему хоумрану.",
-      "author": "Бейб Рут"
+      "text_en": "Every strike brings me closer to the next home run.",
+      "author": "Бейб Рут",
+      "author_en": "Babe Ruth"
     },
     {
       "id": 70,
       "text": "Трудности укрепляют ум, как труд укрепляет тело.",
-      "author": "Сенека Младший"
+      "text_en": "Difficulties strengthen the mind, as labor does the body.",
+      "author": "Сенека Младший",
+      "author_en": "Seneca the Younger"
     },
     {
       "id": 71,
       "text": "Неудача — это не ругательное слово. Неудача имеет важное значение. Я узнал больше из моих неудач, чем из моих успехов.",
-      "author": "Уинстон Черчилль"
+      "text_en": "Failure is not a dirty word. Failure matters. I learned more from my failures than from my successes.",
+      "author": "Уинстон Черчилль",
+      "author_en": "Winston Churchill"
     },
     {
       "id": 72,
       "text": "Неважно, как медленно ты идёшь, пока ты не останавливаешься.",
-      "author": "Конфуций"
+      "text_en": "It does not matter how slowly you go as long as you do not stop.",
+      "author": "Конфуций",
+      "author_en": "Confucius"
     },
     {
       "id": 73,
       "text": "Мужество — это не обладание силой, чтобы продолжать; а продолжать, когда у тебя уже нет сил.",
-      "author": "Народная мудрость"
+      "text_en": "Courage is not having the strength to go on; it is going on when you don't have the strength.",
+      "author": "Теодор Рузвельт",
+      "author_en": "Theodore Roosevelt"
     },
     {
       "id": 74,
       "text": "Нерешительность хуже, чем неудачная попытка.",
-      "author": "Фернандо Де Рохас"
+      "text_en": "Indecision is worse than a failed attempt.",
+      "author": "Фернандо Де Рохас",
+      "author_en": "Fernando de Rojas"
     },
     {
       "id": 75,
-      "text": "Всё, что кажется невозможным, пока это не сделано.",
-      "author": "Нельсон Мандела"
+      "text": "Всё кажется невозможным, пока это не сделано.",
+      "text_en": "It always seems impossible until it's done.",
+      "author": "Нельсон Мандела",
+      "author_en": "Nelson Mandela"
     },
-    {
-      "id": 76,
-      "text": "Я все ещё учусь.",
-      "author": "Микельанджело"
-    },
+
     {
       "id": 77,
       "text": "Инвестиции в знания приносят наилучший доход.",
-      "author": "Бенджамин Франклин"
+      "text_en": "An investment in knowledge pays the best interest.",
+      "author": "Бенджамин Франклин",
+      "author_en": "Benjamin Franklin"
     },
     {
       "id": 78,
       "text": "Практика — это не то, что вы делаете, когда уже хороши. Это то, что делает вас хорошими.",
-      "author": "Малькольм Гладвелл"
+      "text_en": "Practice isn't the thing you do once you're good. It's the thing you do that makes you good.",
+      "author": "Малькольм Гладвелл",
+      "author_en": "Malcolm Gladwell"
     },
     {
       "id": 79,
       "text": "Мы становимся тем, что постоянно практикуем.",
-      "author": "Аристотель"
+      "text_en": "We become what we consistently practice.",
+      "author": "Аристотель",
+      "author_en": "Aristotle"
     },
     {
       "id": 80,
       "text": "Учение никогда не утомляет разум.",
-      "author": "Леонардо да Винчи"
+      "text_en": "Learning never exhausts the mind.",
+      "author": "Леонардо да Винчи",
+      "author_en": "Leonardo da Vinci"
     },
     {
       "id": 81,
       "text": "Ошибки — это порталы открытий.",
-      "author": "Джеймс Джойс"
+      "text_en": "Mistakes are the portals of discovery.",
+      "author": "Джеймс Джойс",
+      "author_en": "James Joyce"
     },
     {
       "id": 82,
       "text": "Чем больше я практикуюсь, тем удачливее становлюсь.",
-      "author": "Гари Плеер"
+      "text_en": "The more I practice, the luckier I get.",
+      "author": "Гари Плеер",
+      "author_en": "Gary Player"
     },
     {
       "id": 83,
       "text": "Изменение — это конечный результат истинного обучения.",
-      "author": "Лео Бускалия"
+      "text_en": "Change is the end result of all true learning.",
+      "author": "Лео Бускалия",
+      "author_en": "Leo Buscaglia"
     },
     {
       "id": 84,
       "text": "Как один шаг не проложит тропу на земле, так одна мысль не проложит путь в уме. Чтобы проложить глубокую физическую тропу, мы ходим снова и снова. Чтобы проложить глубокий ментальный путь, мы должны думать снова и снова о тех мыслях, которые хотим, чтобы доминировали в нашей жизни.",
-      "author": "Генри Дэвид Торо"
+      "text_en": "As a single footstep will not make a path on the earth, so a single thought will not make a pathway in the mind. To make a deep physical path, we walk again and again. To make a deep mental path, we must think over and over the kind of thoughts we wish to dominate our lives.",
+      "author": "Генри Дэвид Торо",
+      "author_en": "Henry David Thoreau"
     },
-    {
-      "id": 85,
-      "text": "Обучение никогда не исчерпывает ум.",
-      "author": "Леонардо да Винчи"
-    },
+
     {
       "id": 86,
       "text": "Век живи век учись.",
-      "author": "Сенека Младший"
+      "text_en": "Live and learn.",
+      "author": "Сенека Младший",
+      "author_en": "Seneca the Younger"
     },
-    {
-      "id": 87,
-      "text": "Если ты ждешь вдохновения, чтобы начать писать, ты не писатель, а официант.",
-      "author": "Дэн Пойнтер"
-    },
-    {
-      "id": 88,
-      "text": "Берегите своё тело. Это единственное место, где вы можете жить.",
-      "author": "Джим Рон"
-    },
+
     {
       "id": 89,
       "text": "Рано ложиться и рано вставать делает человека здоровым, богатым и мудрым.",
-      "author": "Бенджамин Франклин"
+      "text_en": "Early to bed and early to rise makes a man healthy, wealthy, and wise.",
+      "author": "Бенджамин Франклин",
+      "author_en": "Benjamin Franklin"
     },
     {
       "id": 90,
       "text": "Те, кто думают, что у них нет времени на физические упражнения, рано или поздно должны будут найти время для болезни.",
-      "author": "Эдвард Стэнли"
+      "text_en": "Those who think they have no time for exercise will sooner or later have to find time for illness.",
+      "author": "Эдвард Стэнли",
+      "author_en": "Edward Stanley"
     },
-    {
-      "id": 91,
-      "text": "Счастье — это не что иное, как хорошее здоровье и плохая память.",
-      "author": "Альберт Швейцер"
-    },
-    {
-      "id": 92,
-      "text": "Величайшее богатство — это здоровье.",
-      "author": "Вирджил"
-    },
-    {
-      "id": 93,
-      "text": "Отдых — это не безделие.",
-      "author": "Народная мудрость"
-    },
-    {
-      "id": 94,
-      "text": "Спокойный ум приносит внутреннюю силу и уверенность в себе.",
-      "author": "Народная мудрость"
-    },
-    {
-      "id": 95,
-      "text": "Утренние бризы хранят секреты для вас. Не возвращайтесь ко сну.",
-      "author": "Руми"
-    },
-    {
-      "id": 96,
-      "text": "Почти все снова заработает, если отключить его на несколько минут, включая вас.",
-      "author": "Народная мудрость"
-    },
+
     {
       "id": 97,
       "text": "Если можешь мечтать об этом, можешь это сделать.",
-      "author": "Уолт Дисней"
+      "text_en": "If you can dream it, you can do it.",
+      "author": "Уолт Дисней",
+      "author_en": "Walt Disney"
     },
     {
       "id": 98,
       "text": "Будущее принадлежит тем, кто верит в красоту своих мечтаний.",
-      "author": "Элеонора Рузвельт"
+      "text_en": "The future belongs to those who believe in the beauty of their dreams.",
+      "author": "Элеонора Рузвельт",
+      "author_en": "Eleanor Roosevelt"
     },
     {
       "id": 99,
       "text": "Всё, чего ты когда-либо хотел, находится по другую сторону страха.",
-      "author": "Джордж Аддэйр"
+      "text_en": "Everything you've ever wanted is on the other side of fear.",
+      "author": "Джордж Аддэйр",
+      "author_en": "George Addair"
     },
     {
       "id": 100,
       "text": "Никогда не отказывайся от мечты только из-за времени, которое потребуется для её осуществления. Время всё равно пройдёт.",
-      "author": "Эрл Найтингейл"
+      "text_en": "Never give up on a dream just because of the time it will take to accomplish it. The time will pass anyway.",
+      "author": "Эрл Найтингейл",
+      "author_en": "Earl Nightingale"
     },
-    {
-      "id": 101,
-      "text": "Где-то что-то невероятное ждёт, чтобы быть познанным.",
-      "author": "Карл Саган"
-    },
+
     {
       "id": 102,
       "text": "Если это заставляет тебя нервничать, ты делаешь всё правильно.",
-      "author": "Народная мудрость"
+      "text_en": "If it makes you nervous, you are doing it right.",
+      "author": "Эван Рэйчел Вуд",
+      "author_en": "Evan Rachel Wood"
     },
     {
       "id": 103,
       "text": "Люди, которые достаточно сумасшедшие, чтобы думать, что они могут изменить мир — это те, кто действительно на это способен.",
-      "author": "Стив Джобс"
+      "text_en": "The people who are crazy enough to think they can change the world are the ones who do.",
+      "author": "Стив Джобс",
+      "author_en": "Steve Jobs"
     },
     {
       "id": 104,
       "text": "Следуй за своим вдохновением, и Вселенная распахнет вам навстречу двери там, где раньше были одни лишь стены!",
-      "author": "Джозеф Кэмпбелл"
+      "text_en": "Follow your bliss and the universe will open doors where there were only walls.",
+      "author": "Джозеф Кэмпбелл",
+      "author_en": "Joseph Campbell"
     },
     {
       "id": 105,
       "text": "Не стоит ждать вдохновения, за ним надо гоняться с дубинкой.",
-      "author": "Народная мудрость / Джек Лондон"
+      "text_en": "You can't wait for inspiration. You have to go after it with a club.",
+      "author": "Джек Лондон",
+      "author_en": "Jack London"
     },
     {
       "id": 106,
       "text": "Всего одна маленькая позитивная мысль утром может изменить весь твой день.",
-      "author": "Неизвестный автор"
+      "text_en": "Just one small positive thought in the morning can change your whole day.",
+      "author": "Далай-ламы XIV",
+      "author_en": "Dalai Lama XIV"
     },
     {
       "id": 107,
       "text": "Пессимист видит трудность в каждой возможности. Оптимист видит возможность в каждой трудности.",
-      "author": "Уинстон Черчилль"
+      "text_en": "A pessimist sees the difficulty in every opportunity; an optimist sees the opportunity in every difficulty.",
+      "author": "Уинстон Черчилль",
+      "author_en": "Winston Churchill"
     },
-    {
-      "id": 108,
-      "text": "Оптимизм — это вера, которая ведёт к достижению.",
-      "author": "Неизвестный автор"
-    },
+
     {
       "id": 109,
       "text": "Держи глаза на звёздах, а ноги на земле.",
-      "author": "Теодор Рузвельт"
+      "text_en": "Keep your eyes on the stars, and your feet on the ground.",
+      "author": "Теодор Рузвельт",
+      "author_en": "Theodore Roosevelt"
     },
     {
       "id": 110,
       "text": "Если изменишь то, как смотришь на вещи, вещи, на которые смотришь, изменятся.",
-      "author": "Уэйн Дайер"
+      "text_en": "When you change the way you look at things, the things you look at change.",
+      "author": "Уэйн Дайер",
+      "author_en": "Wayne Dyer"
     },
     {
       "id": 111,
       "text": "Держи лицо к солнцу, и тени упадут позади тебя.",
-      "author": "Уолт Дисней"
+      "text_en": "Keep your face to the sunshine and you cannot see the shadow.",
+      "author": "Уолт Дисней",
+      "author_en": "Walt Disney"
     },
     {
       "id": 112,
       "text": "Не позволяй вчерашнему дню занимать слишком много места в сегодняшнем.",
-      "author": "Уилл Роджерс"
+      "text_en": "Don't let yesterday take up too much of today.",
+      "author": "Уилл Роджерс",
+      "author_en": "Will Rogers"
     },
     {
       "id": 113,
       "text": "Реки знают это: спешить некуда. Мы когда-нибудь доберёмся туда.",
-      "author": "А.А. Милн"
+      "text_en": "Rivers know this: there is no hurry. We shall get there some day.",
+      "author": "А.А. Милн",
+      "author_en": "A.A. Milne"
     },
-    {
-      "id": 114,
-      "text": "Магия начинается, когда вы перестаете винить внешние обстоятельства.",
-      "author": "Неизвестный автор"
-    },
-    {
-      "id": 115,
-      "text": "Ваше время ограничено, не тратьте его, живя чужой жизнью.",
-      "author": "Стив Джобс"
-    },
+
     {
       "id": 116,
       "text": "На всю жизнь возьмите себе привычку делать то, чего боитесь. Если вы сделаете то, чего страшитесь, ваш страх наверняка умрёт.",
-      "author": "Сенека Младший"
+      "text_en": "Make it a habit throughout your life to do the things you fear. If you do the thing you fear, the death of fear is certain.",
+      "author": "Сенека Младший",
+      "author_en": "Seneca the Younger"
     },
     {
       "id": 117,
       "text": "Мужество как мышца. Мы укрепляем его использованием.",
-      "author": "Барак Обама"
+      "text_en": "Courage is like a muscle. We strengthen it by use.",
+      "author": "Барак Обама",
+      "author_en": "Barack Obama"
     },
     {
       "id": 118,
       "text": "Мужество — это не обладание силой, чтобы продолжать; а продолжать, когда у тебя уже нет сил.",
-      "author": "Сенека Младший"
+      "text_en": "Courage is not having the strength to go on; it is going on when you don't have the strength.",
+      "author": "Сенека Младший",
+      "author_en": "Seneca the Younger"
     },
-    {
-      "id": 119,
-      "text": "Мужество справедливо ценится как первое человеческое качество, ибо оно есть гарантия всех остальных.",
-      "author": "Уинстон Черчилль"
-    },
-    {
-      "id": 120,
-      "text": "Один человек с мужеством составляет большинство.",
-      "author": "Эндрю Джексон"
-    },
-    {
-      "id": 121,
-      "text": "Мужество — это то, что заставляет встать и высказать свое мнение; мужество также – это то, что заставляет сесть и выслушать.",
-      "author": "Уинстон Черчилль"
-    },
+
     {
       "id": 122,
       "text": "Мужество – это не отсутствие страха, это действие несмотря на страх.",
-      "author": "Нельсон Мандела"
+      "text_en": "Courage is not the absence of fear, but taking action in spite of it.",
+      "author": "Нельсон Мандела",
+      "author_en": "Nelson Mandela"
     },
-    {
-      "id": 123,
-      "text": "Если хочешь ничего не бояться то помни что бояться можно всего.",
-      "author": "Сенека Младший"
-    },
-    {
-      "id": 124,
-      "text": "Детка, главный урок жизни — никого и ничего не боятся.",
-      "author": "Фрэнк Синатра"
-    },
-    {
-      "id": 125,
-      "text": "Самый благородный из известных людям видов страха — страх за судьбу другого.",
-      "author": "Редьярд Киплинг"
-    },
-    {
-      "id": 126,
-      "text": "Работай, пока твой банковский счёт не будет выглядеть как номер телефона.",
-      "author": "Народная мудрость"
-    },
+
     {
       "id": 127,
       "text": "Сосредоточь все свои мысли на работе, которая у тебя в руках.",
-      "author": "Альберт Эйнштейн"
+      "text_en": "Concentrate all your thoughts upon the work at hand.",
+      "author": "Альберт Эйнштейн",
+      "author_en": "Albert Einstein"
     },
-    {
-      "id": 128,
-      "text": "Либо ты управляешь днём, либо день управляет тобой.",
-      "author": "Джим Рон"
-    },
+
     {
       "id": 129,
       "text": "Большинство людей упускают возможности, потому что они одеты в рабочую одежду и выглядят как работа.",
-      "author": "Томас Эдисон"
+      "text_en": "Opportunity is missed by most people because it is dressed in overalls and looks like work.",
+      "author": "Томас Эдисон",
+      "author_en": "Thomas Edison"
     },
-    {
-      "id": 130,
-      "text": "Постановка целей — первый шаг в превращении невидимого в видимое.",
-      "author": "Тони Роббинс"
-    },
+
     {
       "id": 131,
       "text": "Будьте готовы работать умнее, а не только тяжелее.",
-      "author": "Джим Рон"
+      "text_en": "Be willing to work smarter, not just harder.",
+      "author": "Джим Рон",
+      "author_en": "Jim Rohn"
     },
     {
       "id": 132,
       "text": "Усердие побеждает талант, когда талант не усердствует.",
-      "author": "Ти. Уильямс"
+      "text_en": "Hard work beats talent when talent doesn't work hard.",
+      "author": "Ти. Уильямс",
+      "author_en": "Tim Williams"
     },
-    {
-      "id": 133,
-      "text": "Единственный способ делать великую работу — любить то, что ты делаешь.",
-      "author": "Стив Джобс"
-    },
+
     {
       "id": 134,
       "text": "Все, что стоит того, чтобы иметь его в жизни, заслуживает того, чтобы ради него поработать.",
-      "author": "Эндрю Карнеги"
+      "text_en": "Anything in life worth having is worth working for.",
+      "author": "Эндрю Карнеги",
+      "author_en": "Andrew Carnegie"
     },
-    {
-      "id": 135,
-      "text": "Я учу, что упорный труд нужен для успеха. Мудрость нужна для успеха.",
-      "author": "Неизвестный автор"
-    },
+
     {
       "id": 136,
       "text": "Вы не поднимаетесь до уровня своих целей. Вы падаете до уровня своих систем.",
-      "author": "Джеймс Клир"
+      "text_en": "You do not rise to the level of your goals. You fall to the level of your systems.",
+      "author": "Джеймс Клир",
+      "author_en": "James Clear"
     },
     {
       "id": 137,
       "text": "Мотивация — это то, что заставляет вас начать. Привычка — это то, что заставляет вас продолжать.",
-      "author": "Джеймс Клир"
+      "text_en": "Motivation is what gets you started. Habit is what keeps you going.",
+      "author": "Джеймс Клир",
+      "author_en": "James Clear"
     },
     {
       "id": 138,
       "text": "Успешные люди — это просто те, у кого успешные привычки.",
-      "author": "Народная мудрость"
+      "text_en": "Successful people are simply those with successful habits.",
+      "author": "Брайан Трейси",
+      "author_en": "Brian Tracy"
     },
     {
       "id": 139,
       "text": "Легче предотвратить плохие привычки, чем избавиться от них.",
-      "author": "Бенджамин Франклин"
+      "text_en": "It is easier to prevent bad habits than to break them.",
+      "author": "Бенджамин Франклин",
+      "author_en": "Benjamin Franklin"
     },
     {
       "id": 140,
       "text": "Плохие привычки похожи на удобную кровать: легко лечь, но трудно встать.",
-      "author": "Народная мудрость"
+      "text_en": "Bad habits are like a comfortable bed: easy to get into, but hard to get out of.",
+      "author": "Прайс Причард",
+      "author_en": "Price Pritchett"
     },
-    {
-      "id": 141,
-      "text": "Рутина у умного человека — признак амбиции.",
-      "author": "Народная мудрость"
-    },
-    {
-      "id": 142,
-      "text": "Главное — это держать главное главным.",
-      "author": "Стивен Кови"
-    },
+
     {
       "id": 143,
       "text": "Остерегайтесь бесплодности занятой жизни.",
-      "author": "Сократ"
+      "text_en": "Beware the barrenness of a busy life.",
+      "author": "Сократ",
+      "author_en": "Socrates"
     },
-    {
-      "id": 144,
-      "text": "Тот, кто везде, нигде.",
-      "author": "Сенека Младший"
-    },
+
     {
       "id": 145,
       "text": "Окружение — это король.",
-      "author": "Джеймс Клир"
+      "text_en": "Environment is the invisible hand that shapes human behavior.",
+      "author": "Джеймс Клир",
+      "author_en": "James Clear"
     },
     {
       "id": 146,
       "text": "Никогда не поздно стать тем, кем ты мог бы быть.",
-      "author": "Джордж Элиот"
+      "text_en": "It is never too late to be what you might have been.",
+      "author": "Джордж Элиот",
+      "author_en": "George Eliot"
     },
     {
       "id": 147,
       "text": "Я не продукт своих обстоятельств. Я продукт своих решений.",
-      "author": "Стивен Кови"
+      "text_en": "I am not a product of my circumstances. I am a product of my decisions.",
+      "author": "Стивен Кови",
+      "author_en": "Stephen Covey"
     },
     {
       "id": 148,
       "text": "Делай лучшее, что можешь. Никто не может сделать больше.",
-      "author": "Народная мудрость"
+      "text_en": "Do the best you can. No one can do more than that.",
+      "author": "Джон Вуден",
+      "author_en": "John Wooden"
     },
     {
       "id": 149,
       "text": "Не позволяй чужому мнению о тебе стать твоей реальностью.",
-      "author": "Лес Браун"
+      "text_en": "Don't let someone else's opinion of you become your reality.",
+      "author": "Лес Браун",
+      "author_en": "Les Brown"
     },
     {
       "id": 150,
       "text": "Возможности не случаются, ты их создаёшь.",
-      "author": "Крис Гроссер"
+      "text_en": "Opportunities don't happen. You create them.",
+      "author": "Крис Гроссер",
+      "author_en": "Chris Grosser"
     },
-    {
-      "id": 151,
-      "text": "Люди не будут помнить, что ты говорил или ты делал, но никогда не забудут, что ты заставил их почувствовать.",
-      "author": "Майя Анджелоу"
-    },
+
     {
       "id": 152,
       "text": "Если хотите построить корабль, не надо собирать людей, планировать, вынимать инструменты. Нужно заразить людей идеей бесконечного моря.",
-      "author": "Антуан де Сент-Экзюпери"
+      "text_en": "If you want to build a ship, don't drum up people to collect wood and don't assign them tasks and work, but rather teach them to long for the endless immensity of the sea.",
+      "author": "Антуан де Сент-Экзюпери",
+      "author_en": "Antoine de Saint-Exupéry"
     },
-    {
-      "id": 153,
-      "text": "Неважно, насколько медленно ты движешься, важно, что ты не останавливаешься.",
-      "author": "Конфуций"
-    },
+
     {
       "id": 154,
       "text": "Чтобы повести людей за собой, иди за ними.",
-      "author": "Лао Цзы / Конфуций"
+      "text_en": "To lead people, walk behind them.",
+      "author": "Лао Цзы",
+      "author_en": "Lao Tzu"
     },
     {
       "id": 155,
       "text": "Отношение — это мелочь, которая, однако, существенно меняет картину.",
-      "author": "Уинстон Черчилль"
+      "text_en": "Attitude is a little thing that makes a big difference.",
+      "author": "Уинстон Черчилль",
+      "author_en": "Winston Churchill"
     },
     {
       "id": 156,
       "text": "Чем больше ты узнаёшь о том, что работает для тебя, тем лучше ты становишься.",
-      "author": "Неизвестный автор"
+      "text_en": "The more you learn about what works for you, the better you become.",
+      "author": "Тим Феррисс",
+      "author_en": "Tim Ferriss"
     },
     {
       "id": 157,
       "text": "Удовлетворённость приходит не от достижения целей, а от процесса совершенствования.",
-      "author": "Джеймс Клир"
+      "text_en": "Satisfaction comes not from achieving goals, but from the process of becoming better.",
+      "author": "Джеймс Клир",
+      "author_en": "James Clear"
     },
     {
       "id": 158,
       "text": "Каждый день — это новая возможность.",
-      "author": "Ральф Уолдо Эмерсон"
+      "text_en": "Every day is a new opportunity.",
+      "author": "Ральф Уолдо Эмерсон",
+      "author_en": "Ralph Waldo Emerson"
     },
     {
       "id": 159,
       "text": "Всё может заставить меня остановиться, посмотреть и удивиться, а иногда и научиться.",
-      "author": "Курт Воннегут"
+      "text_en": "Anything can make me stop and look and wonder, and sometimes learn.",
+      "author": "Курт Воннегут",
+      "author_en": "Kurt Vonnegut"
     },
     {
       "id": 160,
       "text": "Живи так, как будто умрёшь завтра. Учись так, как будто будешь жить вечно.",
-      "author": "Махатма Ганди"
+      "text_en": "Live as if you were to die tomorrow. Learn as if you were to live forever.",
+      "author": "Махатма Ганди",
+      "author_en": "Mahatma Gandhi"
     },
     {
       "id": 161,
       "text": "Ставь цели высоко и не останавливайся, пока не достигнешь их.",
-      "author": "Бо Джексон"
+      "text_en": "Set your goals high, and don't stop until you get there.",
+      "author": "Бо Джексон",
+      "author_en": "Bo Jackson"
     },
     {
       "id": 162,
       "text": "Человек живет настоящей жизнью, когда происходят маленькие изменения.",
-      "author": "Лев Толстой"
+      "text_en": "A man lives a real life when small changes are happening.",
+      "author": "Лев Толстой",
+      "author_en": "Leo Tolstoy"
     },
-    {
-      "id": 163,
-      "text": "Вспыльчивость очень скоро сделает из тебя дурака.",
-      "author": "Народная мудрость"
-    },
+
     {
       "id": 164,
       "text": "Величайший изъян жизни — вечная её незавершенность из-за нашей привычки откладывать все со дня на день.",
-      "author": "Сенека Младший"
+      "text_en": "The greatest flaw in life is its perpetual incompleteness, due to our habit of postponing everything from day to day.",
+      "author": "Сенека Младший",
+      "author_en": "Seneca the Younger"
     },
-    {
-      "id": 165,
-      "text": "Где-то в глубине нас самих есть нечто большее, нежели то, что мы предполагали о себе.",
-      "author": "Неизвестный автор"
-    },
+
     {
       "id": 166,
       "text": "Прогресс невозможен без изменений, и те, кто не может изменить своё мнение, не могут изменить ничего вообще.",
-      "author": "Джордж Бернард Шоу"
+      "text_en": "Progress is impossible without change, and those who cannot change their minds cannot change anything.",
+      "author": "Джордж Бернард Шоу",
+      "author_en": "George Bernard Shaw"
     },
     {
       "id": 167,
       "text": "Если ты хочешь перемену в будущем, стань этой переменой в настоящем.",
-      "author": "Махатма Ганди"
+      "text_en": "Be the change you wish to see in the world.",
+      "author": "Махатма Ганди",
+      "author_en": "Mahatma Gandhi"
     },
     {
       "id": 168,
       "text": "Если знать 'зачем', то всегда найдется 'как'.",
-      "author": "Фридрих Ницше"
+      "text_en": "He who has a why to live can bear almost any how.",
+      "author": "Фридрих Ницше",
+      "author_en": "Friedrich Nietzsche"
     },
-    {
-      "id": 169,
-      "text": "То, как мы видим проблему, является проблемой.",
-      "author": "Стивен Кови"
-    },
-    {
-      "id": 170,
-      "text": "Если ты не можешь изменить мир, измени отношение к этому миру.",
-      "author": "Народная мудрость"
-    },
-    {
-      "id": 171,
-      "text": "К улучшению способен всякий, но не всякий это делает.",
-      "author": "Народная мудрость"
-    },
+
     {
       "id": 172,
       "text": "Изменение – самый трудный процесс, но и самый необходимый.",
-      "author": "Неизвестный автор"
+      "text_en": "Change is the hardest process, but also the most necessary.",
+      "author": "Лео Бускалье",
+      "author_en": "Leo Buscaglia"
     },
-    {
-      "id": 173,
-      "text": "Великие дела в бизнесе никогда не делаются одним человеком; они делаются командой людей.",
-      "author": "Стив Джобс"
-    },
-    {
-      "id": 174,
-      "text": "Чтобы совершить прорыв, иногда нужно сломать всё, что было раньше.",
-      "author": "Народная мудрость"
-    },
+
     {
       "id": 175,
       "text": "Успех состоит в том, чтобы делать обычные дела необычным образом.",
-      "author": "Народная мудрость"
+      "text_en": "The secret of success is to do the common thing uncommonly well.",
+      "author": "Джон Д. Рокфеллер",
+      "author_en": "John D. Rockefeller"
     },
     {
       "id": 176,
       "text": "Единственный человек, кто стоит на твоём пути — это ты сам.",
-      "author": "Народная мудрость"
+      "text_en": "The only person standing in your way is you.",
+      "author": "Дик Фосбери",
+      "author_en": "Dick Fosbury"
     },
-    {
-      "id": 177,
-      "text": "Если хочешь ничего не бояться, то помни, что можно бояться всего.",
-      "author": "Сенека Младший"
-    },
+
     {
       "id": 178,
       "text": "Цель без плана — это просто желание.",
-      "author": "Антуан де Сент-Экзюпери"
+      "text_en": "A goal without a plan is just a wish.",
+      "author": "Антуан де Сент-Экзюпери",
+      "author_en": "Antoine de Saint-Exupéry"
     },
     {
       "id": 179,
       "text": "Делать две вещи одновременно — значит не делать ни одной.",
-      "author": "Лао Цзы"
+      "text_en": "To do two things at once is to do neither.",
+      "author": "Лао Цзы",
+      "author_en": "Lao Tzu"
     },
-    {
-      "id": 180,
-      "text": "Зависимым людям нужны другие, чтобы добиться того, чего они хотят. Независимые люди могут добиться всего необходимого своими силами.",
-      "author": "Стивен Кови"
-    },
-    {
-      "id": 181,
-      "text": "Любовь к Истине — вот что ведет к достижениям. Истина есть пища каждой истинно героической души.",
-      "author": "Джордано Бруно"
-    },
-    {
-      "id": 182,
-      "text": "Здесь и сейчас — это единственное, что у нас есть.",
-      "author": "Народная мудрость"
-    },
+
     {
       "id": 183,
       "text": "Не проживай один и тот же год 75 раз и называй это жизнью.",
-      "author": "Робин Шарма"
+      "text_en": "Don't live the same year 75 times and call it a life.",
+      "author": "Робин Шарма",
+      "author_en": "Robin Sharma"
     },
-    {
-      "id": 184,
-      "text": "Давайте говорить то что думаем, думать то что говорим.",
-      "author": "Сенека Младший"
-    },
-    {
-      "id": 185,
-      "text": "Жизнь — это не проблема, но дар, как блаженство, как благословение.",
-      "author": "Народная мудрость"
-    },
+
     {
       "id": 186,
       "text": "Качество намного важнее, чем количество.",
-      "author": "Стив Джобс"
+      "text_en": "Quality is much more important than quantity.",
+      "author": "Стив Джобс",
+      "author_en": "Steve Jobs"
     },
-    {
-      "id": 187,
-      "text": "Единственный способ делать великую работу — любить то, что ты делаешь.",
-      "author": "Стив Джобс"
-    },
+
     {
       "id": 188,
       "text": "Профессиональный писатель — любитель, который не ушел.",
-      "author": "Народная мудрость"
+      "text_en": "A professional writer is an amateur who didn't quit.",
+      "author": "Народная мудрость",
+      "author_en": "Folk wisdom"
     },
-    {
-      "id": 189,
-      "text": "В любой науке, в любом искусстве лучший учитель — опыт.",
-      "author": "Неизвестный автор"
-    },
+
     {
       "id": 190,
       "text": "Секрет великих людей — любовь и любопытство к каждому аспекту жизни.",
-      "author": "Фрэнк Синатра"
+      "text_en": "The secret of great people is their love and curiosity for every aspect of life.",
+      "author": "Фрэнк Синатра",
+      "author_en": "Frank Sinatra"
     },
     {
       "id": 191,
       "text": "Мастерство приходит от практики, а не от теории.",
-      "author": "Народная мудрость"
+      "text_en": "Mastery comes from practice, not from theory.",
+      "author": "Вивекананда",
+      "author_en": "Swami Vivekananda"
     },
-    {
-      "id": 192,
-      "text": "Если ты знаешь себя и знаешь своего врага, тебе не нужно бояться результата сотни сражений.",
-      "author": "Сунь Цзы"
-    },
+
     {
       "id": 193,
       "text": "В жизни встречается очень немного легких успехов и окончательных неудач.",
-      "author": "Уинстон Черчилль"
+      "text_en": "In life there are very few easy successes and final failures.",
+      "author": "Уинстон Черчилль",
+      "author_en": "Winston Churchill"
     },
     {
       "id": 194,
       "text": "Как пчела собирает нектар с самых разных цветов, ищи учение повсюду!",
-      "author": "Будда"
+      "text_en": "As a bee gathers nectar from all kinds of flowers, seek knowledge everywhere!",
+      "author": "Будда",
+      "author_en": "Buddha"
     },
     {
       "id": 195,
       "text": "Если вы думаете, что сможете, и если вы думаете, что не сможете – вы правы и в том, и в другом случае.",
-      "author": "Генри Форд"
-    },
-    {
-      "id": 196,
-      "text": "Жизнь любого занята завтрашним днем люди не живут а только собираются жить.",
-      "author": "Сенека Младший"
-    },
-    {
-      "id": 197,
-      "text": "Груз будущего, прибавленный к грузу прошлого, который вы взваливаете на себя в настоящем, заставляет спотыкаться на пути даже самых сильных.",
-      "author": "Дейл Карнеги"
-    },
-    {
-      "id": 198,
-      "text": "Каждое поколение думает, что оно живет в самые тяжелые времена.",
-      "author": "Народная мудрость"
-    },
-    {
-      "id": 199,
-      "text": "Человеку нужны общие убеждения и идеи, которые придают смысл его жизни.",
-      "author": "Карл Густав Юнг"
-    },
-    {
-      "id": 200,
-      "text": "Единственный момент, который у вас есть — это сейчас. Живите им на полную.",
-      "author": "Народная мудрость"
+      "text_en": "Whether you think you can, or you think you can't — you're right.",
+      "author": "Генри Форд",
+      "author_en": "Henry Ford"
     }
   ],
   "version": "1.0",
-  "total": 200
+  "total": 137
 }
