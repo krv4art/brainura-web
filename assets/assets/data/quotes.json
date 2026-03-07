@@ -993,8 +993,15 @@
       "text_en": "Whether you think you can, or you think you can't — you're right.",
       "author": "Генри Форд",
       "author_en": "Henry Ford"
+    },
+    {
+      "id": 196,
+      "text": "Жизнь состоит не в том, чтобы найти себя. Жизнь состоит в том, чтобы создать себя.",
+      "text_en": "Life is not about finding yourself. Life is about creating yourself.",
+      "author": "Бернард Шоу",
+      "author_en": "George Bernard Shaw"
     }
   ],
   "version": "1.0",
-  "total": 137
+  "total": 138
 }
