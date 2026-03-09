@@ -34,4 +34,7 @@ merge_json_files('en.json', 'en')
 # Merge Russian translations
 merge_json_files('ru.json', 'ru')
 
+# Merge Ukrainian translations
+merge_json_files('uk.json', 'uk')
+
 print("Translation files merged successfully!")

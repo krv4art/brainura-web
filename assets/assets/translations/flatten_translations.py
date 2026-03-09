@@ -40,6 +40,11 @@ def main():
     ru_count = flatten_json_file(ru_file)
     print(f"Flattened {ru_count} Russian keys -> ru.json")
 
+    # Flatten Ukrainian translations
+    uk_file = os.path.join(base_dir, 'uk.json')
+    uk_count = flatten_json_file(uk_file)
+    print(f"Flattened {uk_count} Ukrainian keys -> uk.json")
+
     print("\nTranslation files flattened successfully!")
     print("Don't forget to hot restart your app (press 'R' in Flutter console)")
 
