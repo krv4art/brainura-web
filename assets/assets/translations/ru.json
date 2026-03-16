@@ -1337,5 +1337,16 @@
   "training_program.session_complete": "Сессия завершена!",
   "training_program.back_to_home": "На главную",
   "training_program.session_title": "Тренировочная сессия",
-  "training_program.lets_go": "Поехали!"
+  "training_program.lets_go": "Поехали!",
+  "training_program.daily_protocol": "Протокол дня",
+  "training_program.complete_today": "Выполните сегодняшние упражнения",
+  "training_program.x_of_y_completed": "{completed} ИЗ {total} ВЫПОЛНЕНО",
+  "training_program.min_left": "~{min} МИН. ОСТАЛОСЬ",
+  "training_program.todays_exercises": "УПРАЖНЕНИЯ НА СЕГОДНЯ",
+  "training_program.start_exercise": "Начать",
+  "training_program.locked": "Заблокировано",
+  "training_program.complete_previous": "Сначала выполните предыдущее",
+  "training_program.completed": "Выполнено",
+  "training_program.training_tip_title": "Совет",
+  "training_program.training_tip_text": "Выполняйте упражнения по порядку для лучшего эффекта когнитивной тренировки. Каждое упражнение дополняет предыдущее."
 }

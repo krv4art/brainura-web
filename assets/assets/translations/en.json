@@ -1337,5 +1337,16 @@
   "training_program.session_complete": "Session Complete!",
   "training_program.back_to_home": "Back to Home",
   "training_program.session_title": "Training Session",
-  "training_program.lets_go": "Let's Go!"
+  "training_program.lets_go": "Let's Go!",
+  "training_program.daily_protocol": "Daily Protocol",
+  "training_program.complete_today": "Complete today's exercises",
+  "training_program.x_of_y_completed": "{completed} OF {total} COMPLETED",
+  "training_program.min_left": "~{min} MIN LEFT",
+  "training_program.todays_exercises": "TODAY'S EXERCISES",
+  "training_program.start_exercise": "Start Exercise",
+  "training_program.locked": "Locked",
+  "training_program.complete_previous": "Complete previous first",
+  "training_program.completed": "Completed",
+  "training_program.training_tip_title": "Training Tip",
+  "training_program.training_tip_text": "Complete exercises in order for the best cognitive training effect. Each exercise builds on the previous one."
 }

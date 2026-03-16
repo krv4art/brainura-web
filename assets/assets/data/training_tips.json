@@ -1,0 +1,214 @@
+{
+  "tips": [
+    {
+      "id": 1,
+      "text": "Выпейте стакан воды за 15 минут до начала — обезвоживание значительно снижает внимание и концентрацию.",
+      "text_en": "Drink a glass of water 15 minutes before starting — dehydration significantly reduces attention and concentration.",
+      "text_uk": "Випийте склянку води за 15 хвилин до початку — зневоднення значно знижує увагу та концентрацію."
+    },
+    {
+      "id": 2,
+      "text": "Тренируйтесь в одно и то же время каждый день — стабильный контекст помогает формировать привычку.",
+      "text_en": "Train at the same time every day — a consistent context helps build habits.",
+      "text_uk": "Тренуйтесь в один і той самий час щодня — стабільний контекст допомагає формувати звичку."
+    },
+    {
+      "id": 3,
+      "text": "Уберите отвлекающие факторы: уведомления, шум, лишние вкладки. Фокус — ключ к эффективной тренировке.",
+      "text_en": "Remove distractions: notifications, noise, extra tabs. Focus is key to effective training.",
+      "text_uk": "Приберіть відволікаючі фактори: сповіщення, шум, зайві вкладки. Фокус — ключ до ефективного тренування."
+    },
+    {
+      "id": 4,
+      "text": "Сделайте 3 глубоких вдоха перед началом — это снижает кортизол и улучшает фокус.",
+      "text_en": "Take 3 deep breaths before starting — this lowers cortisol and improves focus.",
+      "text_uk": "Зробіть 3 глибоких вдихи перед початком — це знижує кортизол та покращує фокус."
+    },
+    {
+      "id": 5,
+      "text": "Лёгкая разминка или прогулка перед тренировкой повышает приток крови к мозгу.",
+      "text_en": "A light warm-up or walk before training increases blood flow to the brain.",
+      "text_uk": "Легка розминка або прогулянка перед тренуванням підвищує приплив крові до мозку."
+    },
+    {
+      "id": 6,
+      "text": "Не торопитесь — точность важнее скорости, особенно когда осваиваете новое упражнение.",
+      "text_en": "Don't rush — accuracy matters more than speed, especially when learning a new exercise.",
+      "text_uk": "Не поспішайте — точність важливіша за швидкість, особливо коли освоюєте нову вправу."
+    },
+    {
+      "id": 7,
+      "text": "Полностью сосредоточьтесь на задаче — переключение между делами снижает продуктивность до 40%.",
+      "text_en": "Fully focus on the task — switching between activities can reduce productivity by up to 40%.",
+      "text_uk": "Повністю зосередьтеся на завданні — перемикання між справами знижує продуктивність до 40%."
+    },
+    {
+      "id": 8,
+      "text": "Если упражнение кажется лёгким — это знак прогресса. Мозг готов к повышению сложности.",
+      "text_en": "If an exercise feels easy — that's a sign of progress. Your brain is ready for a higher difficulty.",
+      "text_uk": "Якщо вправа здається легкою — це знак прогресу. Мозок готовий до підвищення складності."
+    },
+    {
+      "id": 9,
+      "text": "Ошибки — это часть обучения. Мозг формирует новые связи именно при преодолении трудностей.",
+      "text_en": "Mistakes are part of learning. The brain forms new connections precisely when overcoming challenges.",
+      "text_uk": "Помилки — це частина навчання. Мозок формує нові зв'язки саме при подоланні труднощів."
+    },
+    {
+      "id": 10,
+      "text": "Визуализируйте задание перед началом — это активирует те же нейронные сети, что и реальное выполнение.",
+      "text_en": "Visualize the task before starting — this activates the same neural networks as actual performance.",
+      "text_uk": "Візуалізуйте завдання перед початком — це активує ті самі нейронні мережі, що й реальне виконання."
+    },
+    {
+      "id": 11,
+      "text": "Старайтесь побить свой предыдущий результат — прогрессивная нагрузка работает и для мозга.",
+      "text_en": "Try to beat your previous score — progressive overload works for the brain too.",
+      "text_uk": "Намагайтеся побити свій попередній результат — прогресивне навантаження працює і для мозку."
+    },
+    {
+      "id": 12,
+      "text": "Тренируйтесь каждый день — даже 5 минут лучше, чем час раз в неделю.",
+      "text_en": "Train every day — even 5 minutes is better than an hour once a week.",
+      "text_uk": "Тренуйтесь щодня — навіть 5 хвилин краще, ніж година раз на тиждень."
+    },
+    {
+      "id": 13,
+      "text": "Несколько дней подряд дают больший эффект для мозга, чем тренировки через день.",
+      "text_en": "Training several days in a row has a greater effect on the brain than every other day.",
+      "text_uk": "Кілька днів поспіль дають більший ефект для мозку, ніж тренування через день."
+    },
+    {
+      "id": 14,
+      "text": "Формирование привычки занимает в среднем 66 дней. Каждый день тренировок приближает вас к автоматизму.",
+      "text_en": "Habit formation takes an average of 66 days. Each training day brings you closer to automaticity.",
+      "text_uk": "Формування звички займає в середньому 66 днів. Кожен день тренувань наближає вас до автоматизму."
+    },
+    {
+      "id": 15,
+      "text": "Привяжите тренировку к существующей привычке — после утреннего кофе или перед обедом.",
+      "text_en": "Attach training to an existing habit — after morning coffee or before lunch.",
+      "text_uk": "Прив'яжіть тренування до існуючої звички — після ранкової кави або перед обідом."
+    },
+    {
+      "id": 16,
+      "text": "Спите 7–9 часов — мозг консолидирует новые навыки и очищается от метаболических отходов во сне.",
+      "text_en": "Sleep 7–9 hours — the brain consolidates new skills and clears metabolic waste during sleep.",
+      "text_uk": "Спіть 7–9 годин — мозок консолідує нові навички та очищується від метаболічних відходів уві сні."
+    },
+    {
+      "id": 17,
+      "text": "Короткий дневной сон в 20 минут после тренировки может усилить эффект запоминания.",
+      "text_en": "A short 20-minute nap after training can enhance memory consolidation.",
+      "text_uk": "Короткий денний сон у 20 хвилин після тренування може підсилити ефект запам'ятовування."
+    },
+    {
+      "id": 18,
+      "text": "Мозг обрабатывает и укрепляет навыки даже когда вы отдыхаете. Отдых — часть тренировки.",
+      "text_en": "The brain processes and strengthens skills even when you rest. Rest is part of training.",
+      "text_uk": "Мозок обробляє та зміцнює навички навіть коли ви відпочиваєте. Відпочинок — частина тренування."
+    },
+    {
+      "id": 19,
+      "text": "Физическая активность усиливает эффект когнитивных тренировок — белок BDNF растёт при нагрузке.",
+      "text_en": "Physical activity enhances cognitive training effects — BDNF protein increases with exercise.",
+      "text_uk": "Фізична активність підсилює ефект когнітивних тренувань — білок BDNF зростає при навантаженні."
+    },
+    {
+      "id": 20,
+      "text": "30 минут ходьбы в день улучшают память и концентрацию. Мозг любит движение.",
+      "text_en": "30 minutes of walking a day improves memory and concentration. The brain loves movement.",
+      "text_uk": "30 хвилин ходьби на день покращують пам'ять та концентрацію. Мозок любить рух."
+    },
+    {
+      "id": 21,
+      "text": "Средиземноморская диета снижает воспаление и поддерживает метаболизм нейронов.",
+      "text_en": "The Mediterranean diet reduces inflammation and supports neuron metabolism.",
+      "text_uk": "Середземноморська дієта знижує запалення та підтримує метаболізм нейронів."
+    },
+    {
+      "id": 22,
+      "text": "Хронический стресс повреждает гиппокамп — центр памяти. Медитация и дыхание помогают его защитить.",
+      "text_en": "Chronic stress damages the hippocampus — the memory center. Meditation and breathing help protect it.",
+      "text_uk": "Хронічний стрес пошкоджує гіпокамп — центр пам'яті. Медитація та дихання допомагають його захистити."
+    },
+    {
+      "id": 23,
+      "text": "Социальное общение тренирует мозг не хуже специальных упражнений.",
+      "text_en": "Social interaction trains the brain just as well as dedicated exercises.",
+      "text_uk": "Соціальне спілкування тренує мозок не гірше за спеціальні вправи."
+    },
+    {
+      "id": 24,
+      "text": "Отмечайте свой прогресс — видимые улучшения мотивируют продолжать тренировки.",
+      "text_en": "Track your progress — visible improvements motivate you to keep training.",
+      "text_uk": "Відзначайте свій прогрес — видимі покращення мотивують продовжувати тренування."
+    },
+    {
+      "id": 25,
+      "text": "Не сравнивайте себя с другими — ваш мозг уникален и развивается в своём темпе.",
+      "text_en": "Don't compare yourself to others — your brain is unique and develops at its own pace.",
+      "text_uk": "Не порівнюйте себе з іншими — ваш мозок унікальний і розвивається у своєму темпі."
+    },
+    {
+      "id": 26,
+      "text": "Маленькие победы каждый день формируют уверенность и укрепляют дофаминовые пути мозга.",
+      "text_en": "Small daily victories build confidence and strengthen the brain's dopamine pathways.",
+      "text_uk": "Маленькі перемоги щодня формують впевненість та зміцнюють дофамінові шляхи мозку."
+    },
+    {
+      "id": 27,
+      "text": "Разнообразие важно — мозг адаптируется к однотипным задачам и перестаёт расти.",
+      "text_en": "Variety matters — the brain adapts to repetitive tasks and stops growing.",
+      "text_uk": "Різноманітність важлива — мозок адаптується до однотипних завдань і перестає рости."
+    },
+    {
+      "id": 28,
+      "text": "Сложность должна расти постепенно — это называется «зона ближайшего развития».",
+      "text_en": "Difficulty should increase gradually — this is called the 'zone of proximal development'.",
+      "text_uk": "Складність має зростати поступово — це називається «зона найближчого розвитку»."
+    },
+    {
+      "id": 29,
+      "text": "Нейропластичность работает в любом возрасте — мозг способен формировать новые связи всю жизнь.",
+      "text_en": "Neuroplasticity works at any age — the brain can form new connections throughout life.",
+      "text_uk": "Нейропластичність працює у будь-якому віці — мозок здатний формувати нові зв'язки все життя."
+    },
+    {
+      "id": 30,
+      "text": "Когнитивные тренировки создают «когнитивный резерв» — запас прочности для вашего мозга.",
+      "text_en": "Cognitive training builds 'cognitive reserve' — a resilience buffer for your brain.",
+      "text_uk": "Когнітивні тренування створюють «когнітивний резерв» — запас міцності для вашого мозку."
+    },
+    {
+      "id": 31,
+      "text": "Комбинация разных типов упражнений эффективнее, чем повторение одного и того же.",
+      "text_en": "Combining different types of exercises is more effective than repeating the same one.",
+      "text_uk": "Комбінація різних типів вправ ефективніша, ніж повторення одного й того самого."
+    },
+    {
+      "id": 32,
+      "text": "Тренировка внимания может улучшить и другие когнитивные функции — это называется эффект переноса.",
+      "text_en": "Attention training can improve other cognitive functions too — this is called the transfer effect.",
+      "text_uk": "Тренування уваги може покращити й інші когнітивні функції — це називається ефект переносу."
+    },
+    {
+      "id": 33,
+      "text": "Регулярные когнитивные тренировки помогают замедлить возрастное снижение когнитивных функций.",
+      "text_en": "Regular cognitive training helps slow age-related cognitive decline.",
+      "text_uk": "Регулярні когнітивні тренування допомагають уповільнити вікове зниження когнітивних функцій."
+    },
+    {
+      "id": 34,
+      "text": "Лучшее время для тренировки мозга зависит от вашего хронотипа — экспериментируйте и найдите своё.",
+      "text_en": "The best time for brain training depends on your chronotype — experiment and find yours.",
+      "text_uk": "Найкращий час для тренування мозку залежить від вашого хронотипу — експериментуйте і знайдіть свій."
+    },
+    {
+      "id": 35,
+      "text": "Каждая завершённая сессия — это инвестиция в здоровье вашего мозга на годы вперёд.",
+      "text_en": "Every completed session is an investment in your brain health for years to come.",
+      "text_uk": "Кожна завершена сесія — це інвестиція в здоров'я вашого мозку на роки вперед."
+    }
+  ]
+}
