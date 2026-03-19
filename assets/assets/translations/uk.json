@@ -152,6 +152,8 @@
   "brain_training.exercises.anagrams.next_word": "Наступне слово",
   "brain_training.exercises.anagrams.finish": "Завершити",
   "brain_training.exercises.anagrams.score": "Результат",
+  "brain_training.exercises.anagrams.extra_letters_warning": "{count} зайвих літер додано!",
+  "brain_training.exercises.anagrams.reshuffled": "Літери перемішано!",
   "brain_training.exercises.anagrams.words.easy": [
     "СЕРЦЕ",
     "МОЗОК",
