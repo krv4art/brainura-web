@@ -1258,8 +1258,17 @@
       "author": "Бернард Шоу",
       "author_en": "George Bernard Shaw",
       "author_uk": "Бернард Шоу"
+    },
+    {
+      "id": 197,
+      "text": "Чтобы достичь своей мечты, нужна не скорость и не расстояние. Нужно постоянство и дисциплина.",
+      "text_en": "To reach your dream, you don't need speed or distance. You need consistency and discipline.",
+      "text_uk": "Щоб досягти своєї мрії, потрібна не швидкість і не відстань. Потрібні постійність і дисципліна.",
+      "author": "Харуки Мураками",
+      "author_en": "Haruki Murakami",
+      "author_uk": "Харукі Муракамі"
     }
   ],
   "version": "1.0",
-  "total": 138
+  "total": 139
 }
