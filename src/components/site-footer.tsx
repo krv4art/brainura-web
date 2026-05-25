@@ -24,10 +24,10 @@ export function SiteFooter() {
             Support
           </Link>
           <a
-            href="mailto:support@brainura.app"
+            href="mailto:krv4art.dev@gmail.com"
             className="hover:text-[var(--color-text)]"
           >
-            support@brainura.app
+            krv4art.dev@gmail.com
           </a>
         </nav>
       </div>

@@ -12,7 +12,7 @@ const FAQ = [
   },
   {
     q: "I purchased premium but it's not active in the app.",
-    a: "Open Brainura → Settings → Restore Purchases. If that doesn't help, force-quit the app and reopen. If still no luck, email support@brainura.app with your purchase receipt — we'll investigate within 24 hours.",
+    a: "Open Brainura → Settings → Restore Purchases. If that doesn't help, force-quit the app and reopen. If still no luck, email krv4art.dev@gmail.com with your purchase receipt — we'll investigate within 24 hours.",
   },
   {
     q: "Can I sync progress between iPhone and Android?",
@@ -20,7 +20,7 @@ const FAQ = [
   },
   {
     q: "What happens to my data if I uninstall?",
-    a: "Local data on the device is removed when you uninstall. Cloud-synced data (account, progress, achievements) is kept on our servers until you request deletion. To delete cloud data, contact support@brainura.app from your account email.",
+    a: "Local data on the device is removed when you uninstall. Cloud-synced data (account, progress, achievements) is kept on our servers until you request deletion. To delete cloud data, contact krv4art.dev@gmail.com from your account email.",
   },
   {
     q: "How do I request a refund?",
@@ -70,10 +70,10 @@ export default function SupportPage() {
               Reach us anytime at the address below — we read every message.
             </p>
             <a
-              href="mailto:support@brainura.app"
+              href="mailto:krv4art.dev@gmail.com"
               className="mt-3 inline-flex items-center gap-2 rounded-full bg-[var(--color-text)] px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
             >
-              support@brainura.app
+              krv4art.dev@gmail.com
             </a>
           </div>
         </div>

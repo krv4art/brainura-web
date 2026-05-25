@@ -27,9 +27,9 @@ const FEATURES = [
     body: "Each exercise has 80 levels with auto-progression. Always challenged, never overwhelmed.",
   },
   {
-    icon: "🌐",
-    title: "English · Русский · Українська",
-    body: "Full localisation including exercise content. Train in the language that feels natural.",
+    icon: "🚫",
+    title: "No Ads, Ever",
+    body: "Premium training experience without interruption. Your focus stays on the exercise, not on a banner.",
   },
 ] as const;
 
@@ -66,7 +66,7 @@ export default function HomePage() {
 
             <div
               id="download"
-              className="mt-10 flex flex-wrap items-center justify-center gap-4"
+              className="mt-10 flex flex-wrap items-center justify-center gap-4 scroll-mt-24"
             >
               <a
                 href="https://apps.apple.com/app/id6761497811"
@@ -110,7 +110,10 @@ export default function HomePage() {
       </section>
 
       {/* FEATURES */}
-      <section id="features" className="mx-auto max-w-6xl px-6 py-20 sm:py-28">
+      <section
+        id="features"
+        className="mx-auto max-w-6xl px-6 py-20 sm:py-28 scroll-mt-24"
+      >
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-4xl font-extrabold tracking-tight text-[var(--color-text)] sm:text-5xl">
             Built for adults who care about{" "}
