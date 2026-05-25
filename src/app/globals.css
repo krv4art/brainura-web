@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brainura brand palette (mirrors BrainuraDesignSystem in the Flutter app) */
+  --color-primary: #4A90E2;
+  --color-secondary: #7B68EE;
+  --color-success: #27AE60;
+  --color-warning: #F39C12;
+  --color-danger: #E74C3C;
+
+  --color-text: #0E141A;
+  --color-text-secondary: #516F94;
+  --color-muted: #94A3B8;
+  --color-border: #D1DAE6;
+  --color-surface: #F1F5F9;
+  --color-background: #F5F7FA;
+
+  --color-gradient-purple-start: #667EEA;
+  --color-gradient-purple-end: #764BA2;
+
+  --font-sans: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #FFFFFF;
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-feature-settings: 'cv11', 'ss01';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.gradient-hero {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(123, 104, 238, 0.18), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(74, 144, 226, 0.20), transparent 65%),
+    linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 100%);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btn-gradient {
+  background: linear-gradient(135deg, var(--color-gradient-purple-start) 0%, var(--color-gradient-purple-end) 100%);
+}
