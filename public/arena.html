@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brainura</title>
+<meta name="robots" content="noindex">
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: system-ui, sans-serif; margin: 0; min-height: 100vh; display: flex;
+         align-items: center; justify-content: center; text-align: center; padding: 24px;
+         background: linear-gradient(#667eea, #764ba2); color: #fff; }
+  .card { max-width: 360px; }
+  h1 { font-size: 28px; margin: 0 0 8px; }
+  p { margin: 0 0 20px; opacity: .9; }
+  a.btn { display: block; margin: 10px 0; padding: 14px 18px; border-radius: 12px;
+          background: #fff; color: #4a3f9f; font-weight: 700; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Brainura</h1>
+  <p id="text">Opening the challenge…</p>
+  <a class="btn" id="open" href="#">Open in the app</a>
+  <a class="btn" id="play" href="#">Get it on Google Play</a>
+</div>
+<script>
+  // Страница-переходник ссылок Арены (ТЗ: временное/TZ_ARENA.md §5.7).
+  // /d/<КОД>  → дуэль,   /c/<номер> → вызов дня.
+  // Android + установленное приложение: intent:// открывает brainura://arena/...
+  // Нет приложения / не Android: уходим в Play с referrer-разметкой.
+  var m = location.pathname.match(/^\/(d|c)\/([A-Za-z0-9]+)/);
+  var kind = m ? m[1] : null, id = m ? m[2].toUpperCase() : '';
+  var medium = new URLSearchParams(location.search).get('s') || 'arena_link';
+  var referrer = encodeURIComponent('utm_source=arena&utm_medium=' + medium +
+                 '&utm_campaign=' + (kind || 'x') + id);
+  var play = 'https://play.google.com/store/apps/details?id=com.brainura.app&referrer=' + referrer;
+  document.getElementById('play').href = play;
+
+  var isAndroid = /android/i.test(navigator.userAgent);
+  var path = kind ? 'arena/' + kind + '/' + id : 'arena';
+  var intent = 'intent://' + path + '#Intent;scheme=brainura;package=com.brainura.app;' +
+               'S.browser_fallback_url=' + encodeURIComponent(play) + ';end';
+  var open = document.getElementById('open');
+  if (isAndroid) {
+    open.href = intent;
+    // Автопереход: приложение откроется само, если оно есть; иначе сработает fallback в Play.
+    setTimeout(function () { location.href = intent; }, 150);
+  } else {
+    open.style.display = 'none';
+    document.getElementById('text').textContent = 'Open this link on your Android phone.';
+  }
+</script>
+</body>
+</html>
