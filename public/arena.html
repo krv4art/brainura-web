@@ -26,10 +26,10 @@
 </div>
 <script>
   // Страница-переходник ссылок Арены (ТЗ: временное/TZ_ARENA.md §5.7).
-  // /d/<КОД>  → дуэль,   /c/<номер> → вызов дня.
+  // /d/<КОД>  → дуэль,   /c/<номер> → вызов дня,   /f/<КОД> → приглашение в друзья.
   // Android + установленное приложение: intent:// открывает brainura://arena/...
   // Нет приложения / не Android: уходим в Play с referrer-разметкой.
-  var m = location.pathname.match(/^\/(d|c)\/([A-Za-z0-9]+)/);
+  var m = location.pathname.match(/^\/(d|c|f)\/([A-Za-z0-9]+)/);
   var kind = m ? m[1] : null, id = m ? m[2].toUpperCase() : '';
   var medium = new URLSearchParams(location.search).get('s') || 'arena_link';
   var referrer = encodeURIComponent('utm_source=arena&utm_medium=' + medium +
