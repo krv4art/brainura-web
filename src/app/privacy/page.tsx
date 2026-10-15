@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <LegalShell title="Privacy Policy" updated="May 25, 2026">
+    <LegalShell title="Privacy Policy" updated="October 15, 2026">
       <p>
         This Privacy Policy explains how Brainura (&quot;Brainura&quot;,
         &quot;we&quot;, &quot;us&quot;, &quot;our&quot;) collects, uses, shares,
@@ -223,7 +223,40 @@ export default function PrivacyPage() {
         website.
       </p>
 
-      <h2>13. Changes to this policy</h2>
+      <h2>13. Brainura extension for Chrome</h2>
+      <p>
+        The Brainura extension for Google Chrome (the &quot;Extension&quot;) is
+        a separate product with a smaller set of free brain games and optional
+        break reminders. It follows a stricter rule than the app: the Extension
+        does not collect, transmit, or sell any data.
+      </p>
+      <ul>
+        <li>
+          No account, no sign-in, no analytics, no crash reporting, and no
+          advertising identifiers.
+        </li>
+        <li>
+          Reminder settings (days, hours, times per day, session length), the
+          time of your last session, exercise levels and results are stored
+          only in your browser (chrome.storage and IndexedDB) and are never
+          sent to us or to third parties.
+        </li>
+        <li>
+          Permissions: <strong>alarms</strong> &mdash; to schedule reminders;{" "}
+          <strong>notifications</strong> &mdash; to show them;{" "}
+          <strong>storage</strong> &mdash; to keep your settings. The Extension
+          does not read the pages you visit and requests no access to
+          websites.
+        </li>
+        <li>
+          To display text, the browser may download standard font files from
+          Google Fonts (fonts.gstatic.com). No personal data is sent with these
+          requests beyond what any web browser sends when loading a file.
+        </li>
+        <li>Removing the Extension from Chrome deletes all of its data.</li>
+      </ul>
+
+      <h2>14. Changes to this policy</h2>
       <p>
         We may update this Privacy Policy from time to time. Material changes
         will be announced inside the app and at the top of this page at least
@@ -231,7 +264,7 @@ export default function PrivacyPage() {
         the top of this page reflects the latest revision.
       </p>
 
-      <h2>14. Contact</h2>
+      <h2>15. Contact</h2>
       <p>
         For any privacy question, data request, or complaint, please email{" "}
         <a href="mailto:krv4art.dev@gmail.com">krv4art.dev@gmail.com</a>. We
