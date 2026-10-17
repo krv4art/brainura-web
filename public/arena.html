@@ -3,52 +3,125 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Brainura</title>
+<title>Brainura — вызов на дуэль · duel challenge</title>
 <meta name="robots" content="noindex">
+<!-- Превью ссылки в Telegram / WhatsApp / VK (прожарка Арены №2, п. 3). Краулеры
+     не выполняют JS и не знают языка получателя — поэтому текст двуязычный
+     (основная аудитория говорит по-русски), а картинка без слов. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Brainura">
+<meta property="og:title" content="⚔️ Вызов на дуэль в Brainura · Brainura duel">
+<meta property="og:description" content="Одно поле на двоих — кто быстрее? · Same puzzle for both of you — who's faster?">
+<meta property="og:image" content="https://brainura.vercel.app/arena-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <style>
   :root { color-scheme: light dark; }
   body { font-family: system-ui, sans-serif; margin: 0; min-height: 100vh; display: flex;
          align-items: center; justify-content: center; text-align: center; padding: 24px;
          background: linear-gradient(#667eea, #764ba2); color: #fff; }
   .card { max-width: 360px; }
-  h1 { font-size: 28px; margin: 0 0 8px; }
-  p { margin: 0 0 20px; opacity: .9; }
+  img.logo { width: 72px; height: 72px; border-radius: 18px; background: #fff; }
+  h1 { font-size: 26px; margin: 12px 0 8px; }
+  p { margin: 0 0 20px; opacity: .9; line-height: 1.4; }
   a.btn { display: block; margin: 10px 0; padding: 14px 18px; border-radius: 12px;
           background: #fff; color: #4a3f9f; font-weight: 700; text-decoration: none; }
+  a.btn.secondary { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.7); }
 </style>
 </head>
 <body>
 <div class="card">
-  <h1>Brainura</h1>
-  <p id="text">Opening the challenge…</p>
-  <a class="btn" id="open" href="#">Open in the app</a>
-  <a class="btn" id="play" href="#">Get it on Google Play</a>
+  <img class="logo" src="/logo-512.png" alt="">
+  <h1 id="title">Brainura</h1>
+  <p id="text"></p>
+  <a class="btn" id="open" href="#"></a>
+  <a class="btn secondary" id="play" href="#"></a>
 </div>
 <script>
   // Страница-переходник ссылок Арены (ТЗ: временное/TZ_ARENA.md §5.7).
   // /d/<КОД>  → дуэль,   /c/<номер> → вызов дня,   /f/<КОД> → приглашение в друзья.
   // Android + установленное приложение: intent:// открывает brainura://arena/...
-  // Нет приложения / не Android: уходим в Play с referrer-разметкой.
+  // Нет приложения: уходим в Play с referrer-разметкой — приложение после
+  // установки прочитает её (Install Referrer) и откроет ту самую дуэль.
+  //
+  // Язык — по языку устройства (прожарка Арены №2, п. 3). en/ru/uk сейчас;
+  // остальные языки — вместе с переводом Арены (docs/localization/STATUS_arena.md).
+  var T = {
+    en: {
+      d: 'You got a duel challenge', c: "Today's challenge in Brainura", f: 'A friend invites you',
+      d_text: 'Same puzzle for both of you. Play it and see who is faster.',
+      c_text: 'One puzzle for everyone today. See how many players you beat.',
+      f_text: "Add each other as friends and compare results in the daily challenge.",
+      opening: 'Opening Brainura…',
+      open: 'Open in the app', play: 'Get it on Google Play',
+      iphone: 'Brainura is Android-only for now. Open this link on an Android phone — the iPhone version is on its way.'
+    },
+    ru: {
+      d: 'Вас вызвали на дуэль', c: 'Вызов дня в Brainura', f: 'Друг зовёт Вас в друзья',
+      d_text: 'Одно поле на двоих. Сыграйте и узнайте, кто быстрее.',
+      c_text: 'Сегодня одно поле на всех. Узнайте, скольких игроков Вы обойдёте.',
+      f_text: 'Добавьте друг друга и сравнивайте результаты в вызове дня.',
+      opening: 'Открываем Brainura…',
+      open: 'Открыть в приложении', play: 'Установить из Google Play',
+      iphone: 'Brainura пока есть только на Android. Откройте ссылку на телефоне с Android — версия для iPhone скоро будет.'
+    },
+    uk: {
+      d: 'Вас викликали на дуель', c: 'Виклик дня в Brainura', f: 'Друг кличе Вас у друзі',
+      d_text: 'Одне поле на двох. Зіграйте й дізнайтеся, хто швидший.',
+      c_text: 'Сьогодні одне поле для всіх. Дізнайтеся, скількох гравців Ви обійдете.',
+      f_text: 'Додайте одне одного й порівнюйте результати у виклику дня.',
+      opening: 'Відкриваємо Brainura…',
+      open: 'Відкрити в застосунку', play: 'Встановити з Google Play',
+      iphone: 'Brainura поки є лише на Android. Відкрийте посилання на телефоні з Android — версія для iPhone скоро буде.'
+    }
+  };
+  var langs = (navigator.languages || [navigator.language || 'en']).map(function (l) {
+    return String(l).toLowerCase().split('-')[0];
+  });
+  var lang = langs.filter(function (l) { return T[l]; })[0] || 'en';
+  var t = T[lang];
+  document.documentElement.lang = lang;
+
   var m = location.pathname.match(/^\/(d|c|f)\/([A-Za-z0-9]+)/);
   var kind = m ? m[1] : null, id = m ? m[2].toUpperCase() : '';
   var medium = new URLSearchParams(location.search).get('s') || 'arena_link';
   var referrer = encodeURIComponent('utm_source=arena&utm_medium=' + medium +
                  '&utm_campaign=' + (kind || 'x') + id);
   var play = 'https://play.google.com/store/apps/details?id=com.brainura.app&referrer=' + referrer;
-  document.getElementById('play').href = play;
 
+  var k = kind || 'd';
+  document.getElementById('title').textContent = t[k];
+  document.title = t[k] + ' · Brainura';
+  var text = document.getElementById('text');
+  text.textContent = t[k + '_text'];
+  var open = document.getElementById('open');
+  var playBtn = document.getElementById('play');
+  open.textContent = t.open;
+  playBtn.textContent = t.play;
+  playBtn.href = play;
+
+  // Адрес веб-игры (flutter build web -t lib/main_arena_web.dart, см. WEB_GAME.md).
+  // Пусто → веб-игра не развёрнута: на не-Android показываем объяснение. Задан →
+  // человек без приложения играет то же поле в браузере: /<PLAY_URL>/#/d/<КОД>.
+  var PLAY_URL = '';
   var isAndroid = /android/i.test(navigator.userAgent);
+  var isApple = /iphone|ipad|ipod|macintosh/i.test(navigator.userAgent);
   var path = kind ? 'arena/' + kind + '/' + id : 'arena';
   var intent = 'intent://' + path + '#Intent;scheme=brainura;package=com.brainura.app;' +
                'S.browser_fallback_url=' + encodeURIComponent(play) + ';end';
-  var open = document.getElementById('open');
   if (isAndroid) {
     open.href = intent;
     // Автопереход: приложение откроется само, если оно есть; иначе сработает fallback в Play.
     setTimeout(function () { location.href = intent; }, 150);
+  } else if (PLAY_URL && kind) {
+    location.replace(PLAY_URL.replace(/\/$/, '') + '/#/' + kind + '/' + id);
   } else {
     open.style.display = 'none';
-    document.getElementById('text').textContent = 'Open this link on your Android phone.';
+    if (isApple) {
+      playBtn.style.display = 'none';
+      text.textContent = t.iphone;
+    }
   }
 </script>
 </body>
