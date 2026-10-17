@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.brainura.app",
+      "sha256_cert_fingerprints": [
+        "48:EC:53:19:DA:B6:5D:63:11:62:F0:59:DF:CB:C5:EA:14:15:BC:FE:31:25:AA:AA:F9:68:31:D1:52:87:47:20",
+        "24:D9:9E:4A:7C:4B:39:B4:BA:FA:16:CB:0A:B7:92:74:20:A2:6D:CD:09:6C:17:3E:1D:A3:3C:A5:82:63:86:3F"
+      ]
+    }
+  }
+]
