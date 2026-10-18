@@ -45,8 +45,9 @@
   // Нет приложения: уходим в Play с referrer-разметкой — приложение после
   // установки прочитает её (Install Referrer) и откроет ту самую дуэль.
   //
-  // Язык — по языку устройства (прожарка Арены №2, п. 3). en/ru/uk сейчас;
-  // остальные языки — вместе с переводом Арены (docs/localization/STATUS_arena.md).
+  // Язык — по языку устройства (прожарка Арены №2, п. 3): все 32 языка приложения,
+  // тексты и регистр — как в `assets/translations/<язык>/social.json`. Иврит
+  // старые браузеры отдают устаревшим кодом `iw` — отсюда `T.iw`.
   var T = {
     en: {
       d: 'You got a duel challenge', c: "Today's challenge in Brainura", f: 'A friend invites you',
@@ -74,14 +75,278 @@
       opening: 'Відкриваємо Brainura…',
       open: 'Відкрити в застосунку', play: 'Встановити з Google Play',
       iphone: 'Brainura поки є лише на Android. Відкрийте посилання на телефоні з Android — версія для iPhone скоро буде.'
-    }
+    },
+    be: {
+      d: "Цябе выклікалі на дуэль", c: "Выклік дня ў Brainura", f: "Сябар кліча цябе ў сябры",
+      d_text: "Адно поле на дваіх. Згуляй і даведайся, хто хутчэйшы.",
+      c_text: "Сёння адно поле для ўсіх. Даведайся, колькі гульцоў ты абыйдзеш.",
+      f_text: "Дадайце адно аднаго і параўноўвайце вынікі ў выкліку дня.",
+      opening: "Адкрываем Brainura…",
+      open: "Адкрыць у праграме", play: "Усталяваць з Google Play",
+      iphone: "Brainura пакуль ёсць толькі на Android. Адкрый спасылку на тэлефоне з Android — версія для iPhone хутка будзе."
+    },
+    kk: {
+      d: "Сізді жекпе-жекке шақырды", c: "Brainura-дағы күн сынағы", f: "Досыңыз Сізді достыққа шақырады",
+      d_text: "Екеуіңізге бір алаң. Ойнап, кім жылдам екенін біліңіз.",
+      c_text: "Бүгін барлығына бір алаң. Қанша ойыншыдан озатыныңызды біліңіз.",
+      f_text: "Бір-біріңізді досқа қосып, күн сынағының нәтижелерін салыстырыңыз.",
+      opening: "Brainura ашылуда…",
+      open: "Қолданбада ашу", play: "Google Play-ден орнату",
+      iphone: "Brainura әзірге тек Android-та бар. Сілтемені Android телефонында ашыңыз — iPhone нұсқасы жақында шығады."
+    },
+    de: {
+      d: "Sie wurden zum Duell herausgefordert", c: "Challenge des Tages in Brainura", f: "Ein Freund lädt Sie ein",
+      d_text: "Dasselbe Feld für beide. Spielen Sie und sehen Sie, wer schneller ist.",
+      c_text: "Heute ein Feld für alle. Sehen Sie, wie viele Spieler Sie hinter sich lassen.",
+      f_text: "Fügen Sie sich gegenseitig als Freunde hinzu und vergleichen Sie Ihre Ergebnisse in der Challenge des Tages.",
+      opening: "Brainura wird geöffnet…",
+      open: "In der App öffnen", play: "Jetzt bei Google Play",
+      iphone: "Brainura gibt es vorerst nur für Android. Öffnen Sie diesen Link auf einem Android-Handy – die iPhone-Version kommt bald."
+    },
+    es: {
+      d: "Te retaron a un duelo", c: "Reto del día en Brainura", f: "Un amigo te invita",
+      d_text: "El mismo tablero para los dos. Juega y descubre quién es más rápido.",
+      c_text: "Hoy, un tablero para todos. Descubre a cuántos jugadores superas.",
+      f_text: "Agréguense como amigos y comparen sus resultados en el Reto del día.",
+      opening: "Abriendo Brainura…",
+      open: "Abrir en la app", play: "Disponible en Google Play",
+      iphone: "Por ahora Brainura solo está en Android. Abre este enlace en un teléfono Android: la versión para iPhone llegará pronto."
+    },
+    pt: {
+      d: "Você foi desafiado para um duelo", c: "Desafio do dia no Brainura", f: "Um amigo convida você",
+      d_text: "O mesmo tabuleiro para os dois. Jogue e descubra quem é mais rápido.",
+      c_text: "Hoje, um tabuleiro para todos. Descubra quantos jogadores você supera.",
+      f_text: "Adicionem-se como amigos e comparem os resultados no Desafio do dia.",
+      opening: "Abrindo o Brainura…",
+      open: "Abrir no app", play: "Disponível no Google Play",
+      iphone: "Por enquanto o Brainura só está no Android. Abra este link em um celular Android — a versão para iPhone chega em breve."
+    },
+    fr: {
+      d: "Vous êtes défié en duel", c: "Défi du jour dans Brainura", f: "Un ami vous invite",
+      d_text: "La même grille pour vous deux. Jouez et voyez qui est le plus rapide.",
+      c_text: "Aujourd’hui, une grille pour tous. Voyez combien de joueurs vous dépassez.",
+      f_text: "Ajoutez-vous en amis et comparez vos résultats au Défi du jour.",
+      opening: "Ouverture de Brainura…",
+      open: "Ouvrir dans l’app", play: "Disponible sur Google Play",
+      iphone: "Brainura n’existe pour l’instant que sur Android. Ouvrez ce lien sur un téléphone Android — la version iPhone arrive bientôt."
+    },
+    it: {
+      d: "Sei stato sfidato a duello", c: "Sfida del giorno su Brainura", f: "Un amico ti invita",
+      d_text: "Lo stesso schema per entrambi. Gioca e scopri chi è più veloce.",
+      c_text: "Oggi uno schema per tutti. Scopri quanti giocatori superi.",
+      f_text: "Aggiungetevi agli amici e confrontate i risultati nella Sfida del giorno.",
+      opening: "Apertura di Brainura…",
+      open: "Apri nell’app", play: "Disponibile su Google Play",
+      iphone: "Per ora Brainura è solo su Android. Apri questo link su un telefono Android: la versione per iPhone arriverà presto."
+    },
+    pl: {
+      d: "Ktoś wyzywa Cię na pojedynek", c: "Wyzwanie dnia w Brainura", f: "Znajomy Cię zaprasza",
+      d_text: "Ta sama plansza dla was obojga. Zagraj i sprawdź, kto jest szybszy.",
+      c_text: "Dziś jedna plansza dla wszystkich. Sprawdź, ilu graczy wyprzedzisz.",
+      f_text: "Dodajcie się do znajomych i porównujcie wyniki w Wyzwaniu dnia.",
+      opening: "Otwieramy Brainura…",
+      open: "Otwórz w aplikacji", play: "Pobierz z Google Play",
+      iphone: "Brainura jest na razie tylko na Androida. Otwórz ten link na telefonie z Androidem — wersja na iPhone’a już wkrótce."
+    },
+    tr: {
+      d: "Düelloya davet edildin", c: "Brainura’da günün meydan okuması", f: "Bir arkadaşın seni davet ediyor",
+      d_text: "İkiniz için aynı alan. Oyna ve kimin daha hızlı olduğunu gör.",
+      c_text: "Bugün herkese tek alan. Kaç oyuncuyu geçtiğini gör.",
+      f_text: "Birbirinizi arkadaş olarak ekleyin ve günün meydan okumasındaki sonuçları karşılaştırın.",
+      opening: "Brainura açılıyor…",
+      open: "Uygulamada aç", play: "Google Play’den indir",
+      iphone: "Brainura şimdilik yalnızca Android’de. Bu bağlantıyı bir Android telefonda aç — iPhone sürümü yakında geliyor."
+    },
+    id: {
+      d: "Anda ditantang berduel", c: "Tantangan hari ini di Brainura", f: "Teman mengundang Anda",
+      d_text: "Papan yang sama untuk kalian berdua. Mainkan dan lihat siapa yang lebih cepat.",
+      c_text: "Hari ini satu papan untuk semua. Lihat berapa banyak pemain yang Anda kalahkan.",
+      f_text: "Saling tambahkan sebagai teman dan bandingkan hasil di Tantangan hari ini.",
+      opening: "Membuka Brainura…",
+      open: "Buka di aplikasi", play: "Temukan di Google Play",
+      iphone: "Brainura saat ini hanya tersedia di Android. Buka tautan ini di ponsel Android — versi iPhone segera hadir."
+    },
+    vi: {
+      d: "Bạn được mời đấu tay đôi", c: "Thử thách hôm nay trên Brainura", f: "Một người bạn mời bạn",
+      d_text: "Cùng một bàn chơi cho cả hai. Chơi và xem ai nhanh hơn.",
+      c_text: "Hôm nay một bàn chơi cho tất cả. Xem bạn vượt được bao nhiêu người chơi.",
+      f_text: "Kết bạn với nhau và so sánh kết quả trong Thử thách hôm nay.",
+      opening: "Đang mở Brainura…",
+      open: "Mở trong ứng dụng", play: "Tải trên Google Play",
+      iphone: "Hiện Brainura chỉ có trên Android. Hãy mở liên kết này trên điện thoại Android — phiên bản iPhone sắp ra mắt."
+    },
+    nl: {
+      d: "Je bent uitgedaagd voor een duel", c: "Uitdaging van de dag in Brainura", f: "Een vriend nodigt je uit",
+      d_text: "Hetzelfde veld voor jullie allebei. Speel en zie wie er sneller is.",
+      c_text: "Vandaag één veld voor iedereen. Zie hoeveel spelers je verslaat.",
+      f_text: "Voeg elkaar toe als vrienden en vergelijk jullie resultaten in de Uitdaging van de dag.",
+      opening: "Brainura wordt geopend…",
+      open: "Openen in de app", play: "Ontdek het op Google Play",
+      iphone: "Brainura is voorlopig alleen voor Android. Open deze link op een Android-telefoon — de iPhone-versie komt eraan."
+    },
+    sv: {
+      d: "Du har utmanats till duell", c: "Dagens utmaning i Brainura", f: "En vän bjuder in dig",
+      d_text: "Samma plan för er båda. Spela och se vem som är snabbast.",
+      c_text: "I dag en plan för alla. Se hur många spelare du slår.",
+      f_text: "Lägg till varandra som vänner och jämför resultaten i Dagens utmaning.",
+      opening: "Öppnar Brainura…",
+      open: "Öppna i appen", play: "Ladda ned på Google Play",
+      iphone: "Brainura finns än så länge bara för Android. Öppna länken på en Android-telefon – iPhone-versionen kommer snart."
+    },
+    ar: {
+      d: "تلقيت دعوة إلى مبارزة", c: "تحدي اليوم في Brainura", f: "صديق يدعوك",
+      d_text: "اللوحة نفسها لكليكما. العب واعرف من الأسرع.",
+      c_text: "اليوم لوحة واحدة للجميع. اعرف كم لاعبًا تتفوق عليه.",
+      f_text: "أضيفا بعضكما صديقين وقارنا نتائجكما في تحدي اليوم.",
+      opening: "جارٍ فتح Brainura…",
+      open: "افتح في التطبيق", play: "احصل عليه من Google Play",
+      iphone: "Brainura متاح حاليًا على Android فقط. افتح هذا الرابط على هاتف Android — نسخة iPhone قادمة قريبًا."
+    },
+    he: {
+      d: "הוזמנת לדו־קרב", c: "אתגר היום ב־Brainura", f: "חבר מזמין אותך",
+      d_text: "אותו לוח לשניכם. שחקו ותראו מי מהיר יותר.",
+      c_text: "היום לוח אחד לכולם. בואו לראות כמה שחקנים תעקפו.",
+      f_text: "הוסיפו זה את זה כחברים והשוו תוצאות באתגר היום.",
+      opening: "פותחים את Brainura…",
+      open: "פתיחה באפליקציה", play: "זמין ב־Google Play",
+      iphone: "Brainura זמינה כרגע רק ל־Android. פתחו את הקישור בטלפון Android — גרסת ה־iPhone בדרך."
+    },
+    cs: {
+      d: "Někdo vás vyzval na souboj", c: "Výzva dne v Brainura", f: "Přítel vás zve",
+      d_text: "Stejné pole pro oba. Zahrajte si a uvidíte, kdo je rychlejší.",
+      c_text: "Dnes jedno pole pro všechny. Podívejte se, kolik hráčů předstihnete.",
+      f_text: "Přidejte se navzájem do přátel a porovnávejte výsledky ve Výzvě dne.",
+      opening: "Otevíráme Brainura…",
+      open: "Otevřít v aplikaci", play: "Nyní na Google Play",
+      iphone: "Brainura je zatím jen pro Android. Otevřete tento odkaz v telefonu s Androidem — verze pro iPhone brzy dorazí."
+    },
+    sk: {
+      d: "Niekto vás vyzval na súboj", c: "Výzva dňa v Brainura", f: "Priateľ vás pozýva",
+      d_text: "Rovnaké pole pre oboch. Zahrajte si a uvidíte, kto je rýchlejší.",
+      c_text: "Dnes jedno pole pre všetkých. Pozrite sa, koľkých hráčov predbehnete.",
+      f_text: "Pridajte sa navzájom do priateľov a porovnávajte výsledky vo Výzve dňa.",
+      opening: "Otvárame Brainura…",
+      open: "Otvoriť v aplikácii", play: "Teraz na Google Play",
+      iphone: "Brainura je zatiaľ len pre Android. Otvorte tento odkaz v telefóne s Androidom — verzia pre iPhone čoskoro príde."
+    },
+    hu: {
+      d: "Párbajra hívták", c: "A nap kihívása a Brainurában", f: "Egy barátja meghívja",
+      d_text: "Ugyanaz a pálya mindkettőjüknek. Játsszon, és kiderül, ki a gyorsabb.",
+      c_text: "Ma egy pálya mindenkinek. Nézze meg, hány játékost előz meg.",
+      f_text: "Jelöljék egymást barátnak, és vessék össze az eredményeiket A nap kihívásában.",
+      opening: "A Brainura megnyitása…",
+      open: "Megnyitás az alkalmazásban", play: "Letöltés a Google Playről",
+      iphone: "A Brainura egyelőre csak Androidra érhető el. Nyissa meg ezt a linket egy androidos telefonon — az iPhone-verzió hamarosan érkezik."
+    },
+    ro: {
+      d: "Ați fost provocat la duel", c: "Provocarea zilei în Brainura", f: "Un prieten vă invită",
+      d_text: "Același teren pentru amândoi. Jucați și aflați cine e mai rapid.",
+      c_text: "Azi, un teren pentru toți. Vedeți pe câți jucători îi depășiți.",
+      f_text: "Adăugați-vă reciproc la prieteni și comparați rezultatele la Provocarea zilei.",
+      opening: "Se deschide Brainura…",
+      open: "Deschideți în aplicație", play: "Descărcați de pe Google Play",
+      iphone: "Deocamdată Brainura există doar pe Android. Deschideți acest link pe un telefon Android — versiunea pentru iPhone vine în curând."
+    },
+    el: {
+      d: "Σας προκάλεσαν σε μονομαχία", c: "Πρόκληση της ημέρας στο Brainura", f: "Ένας φίλος σας προσκαλεί",
+      d_text: "Το ίδιο πεδίο και για τους δύο. Παίξτε και δείτε ποιος είναι πιο γρήγορος.",
+      c_text: "Σήμερα ένα πεδίο για όλους. Δείτε πόσους παίκτες θα ξεπεράσετε.",
+      f_text: "Προσθέστε ο ένας τον άλλον στους φίλους και συγκρίνετε τα αποτελέσματα στην Πρόκληση της ημέρας.",
+      opening: "Άνοιγμα του Brainura…",
+      open: "Άνοιγμα στην εφαρμογή", play: "Διαθέσιμο στο Google Play",
+      iphone: "Το Brainura είναι προς το παρόν μόνο για Android. Ανοίξτε αυτόν τον σύνδεσμο σε τηλέφωνο Android — η έκδοση για iPhone έρχεται σύντομα."
+    },
+    bg: {
+      d: "Предизвикаха Ви на дуел", c: "Предизвикателство на деня в Brainura", f: "Приятел Ви кани",
+      d_text: "Едно и също поле за двамата. Изиграйте и вижте кой е по-бърз.",
+      c_text: "Днес едно поле за всички. Вижте колко играчи ще изпреварите.",
+      f_text: "Добавете се като приятели и сравнявайте резултатите в Предизвикателството на деня.",
+      opening: "Отваряме Brainura…",
+      open: "Отваряне в приложението", play: "Изтеглете от Google Play",
+      iphone: "Засега Brainura е само за Android. Отворете този линк на телефон с Android — версията за iPhone идва скоро."
+    },
+    hr: {
+      d: "Izazvani ste na dvoboj", c: "Izazov dana u Brainuri", f: "Prijatelj vas poziva",
+      d_text: "Isto polje za oboje. Odigrajte i saznajte tko je brži.",
+      c_text: "Danas jedno polje za sve. Pogledajte koliko ćete igrača prestići.",
+      f_text: "Dodajte se međusobno za prijatelje i usporedite rezultate u Izazovu dana.",
+      opening: "Otvaramo Brainuru…",
+      open: "Otvori u aplikaciji", play: "Preuzmite na Google Playu",
+      iphone: "Brainura je zasad samo za Android. Otvorite ovu poveznicu na Android telefonu — verzija za iPhone stiže uskoro."
+    },
+    sr: {
+      d: "Изазвани сте на дуел", c: "Изазов дана у апликацији Brainura", f: "Пријатељ вас позива",
+      d_text: "Исто поље за обоје. Одиграјте и сазнајте ко је бржи.",
+      c_text: "Данас једно поље за све. Погледајте колико ћете играча престићи.",
+      f_text: "Додајте се међусобно за пријатеље и упоредите резултате у Изазову дана.",
+      opening: "Отварамо Brainura…",
+      open: "Отвори у апликацији", play: "Преузмите на Google Play",
+      iphone: "Brainura је засад само за Android. Отворите овај линк на Android телефону — верзија за iPhone стиже ускоро."
+    },
+    ja: {
+      d: "対戦を申し込まれました", c: "Brainura の今日のチャレンジ", f: "フレンドからの招待",
+      d_text: "2人とも同じステージ。プレイして、どちらが速いか確かめましょう。",
+      c_text: "今日は全員に同じステージ。何人を上回れるか確かめましょう。",
+      f_text: "お互いをフレンドに追加して、今日のチャレンジの結果を比べましょう。",
+      opening: "Brainura を開いています…",
+      open: "アプリで開く", play: "Google Play で手に入れよう",
+      iphone: "Brainura は現在 Android 専用です。Android スマホでこのリンクを開いてください。iPhone 版も準備中です。"
+    },
+    ko: {
+      d: "대결 신청이 왔어요", c: "Brainura 오늘의 챌린지", f: "친구가 초대했어요",
+      d_text: "둘 다 같은 판이에요. 플레이하고 누가 더 빠른지 확인하세요.",
+      c_text: "오늘은 모두에게 같은 판이에요. 몇 명을 앞지르는지 확인하세요.",
+      f_text: "서로 친구로 추가하고 오늘의 챌린지 결과를 비교해 보세요.",
+      opening: "Brainura 여는 중…",
+      open: "앱에서 열기", play: "Google Play에서 다운로드",
+      iphone: "Brainura는 아직 Android 전용이에요. Android 휴대폰에서 이 링크를 여세요. iPhone 버전도 곧 나와요."
+    },
+    zh: {
+      d: "有人向你發起對決", c: "Brainura 今日挑戰", f: "朋友邀請你",
+      d_text: "你們兩個玩同一個關卡。玩一次，看看誰比較快。",
+      c_text: "今天所有人同一個關卡。看看你能贏過多少玩家。",
+      f_text: "互相加為好友，比較今日挑戰的成績。",
+      opening: "正在開啟 Brainura…",
+      open: "在 App 中開啟", play: "在 Google Play 下載",
+      iphone: "Brainura 目前只有 Android 版。請在 Android 手機上開啟這個連結，iPhone 版即將推出。"
+    },
+    th: {
+      d: "มีคนท้าคุณดวล", c: "ชาเลนจ์ประจำวันใน Brainura", f: "เพื่อนชวนคุณ",
+      d_text: "ด่านเดียวกันทั้งสองคน เล่นแล้วดูว่าใครเร็วกว่า",
+      c_text: "วันนี้ทุกคนได้ด่านเดียวกัน มาดูว่าคุณแซงผู้เล่นได้กี่คน",
+      f_text: "เพิ่มกันเป็นเพื่อน แล้วเทียบผลชาเลนจ์ประจำวัน",
+      opening: "กำลังเปิด Brainura…",
+      open: "เปิดในแอป", play: "ดาวน์โหลดบน Google Play",
+      iphone: "ตอนนี้ Brainura มีเฉพาะบน Android เปิดลิงก์นี้บนโทรศัพท์ Android ได้เลย เวอร์ชัน iPhone กำลังจะมา"
+    },
+    ms: {
+      d: "Anda dicabar berduel", c: "Cabaran hari ini di Brainura", f: "Rakan menjemput anda",
+      d_text: "Padang yang sama untuk berdua. Main dan lihat siapa lebih pantas.",
+      c_text: "Hari ini satu padang untuk semua. Lihat berapa ramai pemain yang anda atasi.",
+      f_text: "Tambah satu sama lain sebagai rakan dan bandingkan keputusan dalam Cabaran hari ini.",
+      opening: "Membuka Brainura…",
+      open: "Buka dalam aplikasi", play: "Dapatkan di Google Play",
+      iphone: "Buat masa ini Brainura hanya ada di Android. Buka pautan ini pada telefon Android — versi iPhone akan datang tidak lama lagi."
+    },
+    fi: {
+      d: "Sinut haastettiin kaksintaisteluun", c: "Päivän haaste Brainurassa", f: "Kaveri kutsuu sinut",
+      d_text: "Sama kenttä teille molemmille. Pelaa ja katso, kumpi on nopeampi.",
+      c_text: "Tänään yksi kenttä kaikille. Katso, kuinka monen pelaajan ohi menet.",
+      f_text: "Lisätkää toisenne kavereiksi ja vertailkaa tuloksia Päivän haasteessa.",
+      opening: "Avataan Brainura…",
+      open: "Avaa sovelluksessa", play: "Lataa Google Playsta",
+      iphone: "Brainura on toistaiseksi vain Androidille. Avaa tämä linkki Android-puhelimessa – iPhone-versio on tulossa."
+    },
   };
+  T.iw = T.he;
   var langs = (navigator.languages || [navigator.language || 'en']).map(function (l) {
     return String(l).toLowerCase().split('-')[0];
   });
   var lang = langs.filter(function (l) { return T[l]; })[0] || 'en';
   var t = T[lang];
+  if (lang === 'iw') lang = 'he';
   document.documentElement.lang = lang;
+  document.documentElement.dir = (lang === 'ar' || lang === 'he') ? 'rtl' : 'ltr';
 
   var m = location.pathname.match(/^\/(d|c|f)\/([A-Za-z0-9]+)/);
   var kind = m ? m[1] : null, id = m ? m[2].toUpperCase() : '';
