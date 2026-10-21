@@ -135,18 +135,18 @@ export default function HomePage() {
                 </span>
               </a>
 
-              <div
-                className="inline-flex items-center gap-3 rounded-2xl border border-[var(--color-border)] bg-white px-6 py-3 text-[var(--color-text)] shadow-sm"
-                aria-label="iOS coming soon"
+              <a
+                href="https://apps.apple.com/app/brain-training-games-brainura/id6793506406"
+                className="inline-flex items-center gap-3 rounded-2xl border border-[var(--color-border)] bg-white px-6 py-3 text-[var(--color-text)] shadow-sm transition hover:scale-[1.02]"
               >
                 <AppleStore className="h-7 w-7" />
                 <span className="flex flex-col text-left leading-tight">
                   <span className="text-[10px] uppercase tracking-wide text-[var(--color-muted)]">
-                    Coming to
+                    Download on the
                   </span>
                   <span className="text-lg font-semibold">App Store</span>
                 </span>
-              </div>
+              </a>
             </div>
 
             <p className="mt-4 text-xs text-[var(--color-muted)]">
@@ -298,13 +298,13 @@ export default function HomePage() {
                 <Play className="h-5 w-5" />
                 Get on Google Play
               </a>
-              <div
-                className="inline-flex items-center gap-2 rounded-full bg-white/15 px-6 py-3 text-sm font-semibold text-white backdrop-blur"
-                aria-label="iOS coming soon"
+              <a
+                href="https://apps.apple.com/app/brain-training-games-brainura/id6793506406"
+                className="inline-flex items-center gap-2 rounded-full bg-white/15 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:scale-[1.02]"
               >
                 <AppleStore className="h-5 w-5" />
-                App Store · Coming soon
-              </div>
+                Download on the App Store
+              </a>
             </div>
             <p className="mt-6 text-xs text-white/70">
               Need help?{" "}
