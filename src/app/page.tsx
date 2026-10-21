@@ -113,8 +113,10 @@ export default function HomePage() {
 
             <h1 className="mt-8 text-balance text-5xl font-extrabold tracking-tight text-[var(--color-text)] sm:text-6xl">
               Give your brain a{" "}
-              <span className="gradient-text">5-minute workout</span> every
-              day.
+              <span className="gradient-text">
+                <span className="whitespace-nowrap">5-minute</span> workout
+              </span>{" "}
+              every day.
             </h1>
 
             <p className="mt-6 max-w-2xl text-balance text-lg text-[var(--color-text-secondary)] sm:text-xl">
@@ -213,7 +215,7 @@ export default function HomePage() {
                     className="object-cover"
                   />
                 </div>
-                <span className="mt-3 text-xs font-medium text-[var(--color-text-secondary)]">
+                <span className="mt-3 text-center text-xs font-medium text-[var(--color-text-secondary)]">
                   {shot.caption}
                 </span>
               </div>
