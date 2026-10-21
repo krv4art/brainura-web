@@ -297,6 +297,13 @@ export default function PrivacyPage() {
       </p>
       <h3>Pages on this website opened by the Extension</h3>
       <p>
+        When you install the Extension, Chrome opens a welcome page on this
+        website that shows how to pin the Extension to the toolbar. The page
+        counts visits with aggregate, cookieless web analytics (Vercel Web
+        Analytics): no cookies, no advertising identifiers, and no profile of
+        you is built. The Extension itself sends nothing to it.
+      </p>
+      <p>
         When you remove the Extension, Chrome opens a short survey page on this
         website. The Extension sends nothing to it. If you type an answer and
         press the send button, the same information as described above (text,
