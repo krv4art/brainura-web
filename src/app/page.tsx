@@ -19,7 +19,7 @@ const FEATURES = [
     Icon: BrainCircuit,
     title: "26 Brain Games",
     body:
-      "Stroop Test, Schulte Tables, Memory Matrix, Sudoku, Anagrams, Mood Swipe and more. Each one trains memory, attention, speed or logic. 13 are free and stay free; the rest are Premium.",
+      "Stroop Test, Schulte Tables, Memory Matrix, Sudoku, Anagrams, Mood Swipe and more. Each one trains memory, attention, speed, logic or emotional intelligence. 13 are free and stay free; the rest are Premium.",
   },
   {
     Icon: Timer,
@@ -58,6 +58,7 @@ const COGNITIVE_AREAS = [
   { name: "Attention", color: "from-[#7B68EE] to-[#6353D8]" },
   { name: "Processing Speed", color: "from-[#F39C12] to-[#E08D0F]" },
   { name: "Logic", color: "from-[#27AE60] to-[#1F8C4E]" },
+  { name: "Emotional Intelligence", color: "from-[#EC4899] to-[#DB2777]" },
 ] as const;
 
 const SCREENSHOTS = [
@@ -236,7 +237,7 @@ export default function HomePage() {
           </h2>
           <p className="mt-4 text-lg text-[var(--color-text-secondary)]">
             Short games built on classic cognitive tasks and sorted by the
-            skill they train: memory, attention, processing speed and logic.
+            skill they train: memory, attention, processing speed, logic and emotional intelligence.
           </p>
         </div>
 
