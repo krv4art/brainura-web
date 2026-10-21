@@ -153,6 +153,17 @@ export default function HomePage() {
               Free to install · From $0.99/week · Cancel anytime
             </p>
 
+            <p className="mt-3 text-sm text-[var(--color-text-secondary)]">
+              On a computer?{" "}
+              <a
+                href="https://chromewebstore.google.com/detail/gkdlnpllacgajhhhicnhbgonemjjdcod"
+                className="font-semibold underline underline-offset-2 hover:text-[var(--color-text)]"
+              >
+                Take a brain break in Chrome
+              </a>{" "}
+              — free extension, no sign-up.
+            </p>
+
             <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
               {COGNITIVE_AREAS.map((area) => (
                 <span
@@ -306,6 +317,15 @@ export default function HomePage() {
                 Download on the App Store
               </a>
             </div>
+            <p className="mt-6 text-sm text-white/90">
+              On a computer?{" "}
+              <a
+                href="https://chromewebstore.google.com/detail/gkdlnpllacgajhhhicnhbgonemjjdcod"
+                className="font-semibold underline underline-offset-2"
+              >
+                Get the Chrome extension
+              </a>
+            </p>
             <p className="mt-6 text-xs text-white/70">
               Need help?{" "}
               <Link href="/support" className="underline">
