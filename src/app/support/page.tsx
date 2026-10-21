@@ -16,7 +16,7 @@ const FAQ = [
   },
   {
     q: "Can I sync progress between iPhone and Android?",
-    a: "Yes — sign in with the same Brainura account on both devices. Exercise scores, brain age, achievements, and subscription status sync automatically. Local-only data (recent in-memory state) does not sync.",
+    a: "Not yet. Brainura has no accounts, so progress stays on the device where you earned it. Subscriptions are bought through Apple or Google, so a purchase on one platform does not carry over to the other automatically.",
   },
   {
     q: "What happens to my data if I uninstall?",

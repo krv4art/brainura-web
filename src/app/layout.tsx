@@ -19,14 +19,13 @@ export const metadata: Metadata = {
     template: "%s | Brainura",
   },
   description:
-    "Train your brain in 5 minutes a day. 15 science-backed exercises for memory, focus, processing speed, and logic. Track your Brain Age and beat your personal best.",
+    "Train your brain in 5 minutes a day. 26 short games for memory, focus, processing speed and logic. Daily plan, streaks, no ads.",
   applicationName: "Brainura",
   keywords: [
     "brain training",
     "memory",
     "focus",
     "cognitive games",
-    "brain age",
     "mental exercises",
     "stroop test",
     "anagrams",
@@ -37,14 +36,14 @@ export const metadata: Metadata = {
     url: siteUrl,
     title: "Brainura — Brain Training in 5 Minutes a Day",
     description:
-      "15 science-backed exercises for memory, focus, processing speed, and logic.",
+      "26 short games for memory, focus, processing speed and logic. No ads.",
     siteName: "Brainura",
   },
   twitter: {
     card: "summary_large_image",
     title: "Brainura — Brain Training in 5 Minutes a Day",
     description:
-      "15 science-backed exercises for memory, focus, processing speed, and logic.",
+      "26 short games for memory, focus, processing speed and logic. No ads.",
   },
   robots: {
     index: true,

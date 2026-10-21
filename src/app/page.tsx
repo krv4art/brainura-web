@@ -3,7 +3,7 @@ import Link from "next/link";
 import {
   BrainCircuit,
   Timer,
-  TrendingUp,
+  Users,
   Trophy,
   Target,
   ShieldOff,
@@ -17,39 +17,39 @@ import {
 const FEATURES = [
   {
     Icon: BrainCircuit,
-    title: "15 Science-Backed Exercises",
+    title: "26 Brain Games",
     body:
-      "Stroop Test, Memory Matrix, Schulte Tables, Anagrams and more — each targets a specific cognitive skill from peer-reviewed research.",
+      "Stroop Test, Schulte Tables, Memory Matrix, Sudoku, Anagrams, Mood Swipe and more. Each one trains memory, attention, speed or logic. 13 are free and stay free; the rest are Premium.",
   },
   {
     Icon: Timer,
-    title: "5 Minutes a Day",
+    title: "A Daily Plan, Five Minutes",
     body:
-      "Short, focused sessions built for busy adults. Less than the time it takes to make coffee, with measurable impact over weeks.",
+      "Short sessions, a daily program and reminders you control. Build a streak without giving up your evening.",
   },
   {
-    Icon: TrendingUp,
-    title: "Track Your Brain Age",
+    Icon: Users,
+    title: "Duel Your Friends",
     body:
-      "Personalised brain-age estimate updates after every session. Watch your cognitive trajectory bend in the right direction.",
-  },
-  {
-    Icon: Trophy,
-    title: "200+ Achievements",
-    body:
-      "Bronze, silver, gold and platinum tiers. Build streaks, master skills, unlock rare badges that mark real progress.",
+      "The daily Arena challenge puts everyone on the same board, and live duels let you race a friend head-to-head. Available on Android.",
   },
   {
     Icon: Target,
-    title: "Adaptive Difficulty",
+    title: "Difficulty That Adapts",
     body:
-      "Each exercise has 80 levels with auto-progression. Always challenged, never overwhelmed — the sweet spot for cognitive growth.",
+      "Most games have up to 80 levels. Play well and the level rises, struggle and it eases off: hard enough to stay interesting, never a wall.",
+  },
+  {
+    Icon: Trophy,
+    title: "Streaks, XP & Achievements",
+    body:
+      "Over 100 achievements, daily streaks and XP make your consistency something you can actually see.",
   },
   {
     Icon: ShieldOff,
-    title: "No Ads, Ever",
+    title: "No Ads, 32 Languages",
     body:
-      "Premium training experience without interruption. Your focus stays on the exercise, never on a banner or pop-up.",
+      "No ads between your games. The app speaks 32 languages, from English and Spanish to Finnish and Thai.",
   },
 ] as const;
 
@@ -61,36 +61,41 @@ const COGNITIVE_AREAS = [
 ] as const;
 
 const SCREENSHOTS = [
-  { src: "/screenshots/1.jpg", caption: "Daily training session" },
-  { src: "/screenshots/2.jpg", caption: "15 science-backed exercises" },
-  { src: "/screenshots/3.jpg", caption: "Track your Brain Age" },
-  { src: "/screenshots/4.jpg", caption: "Earn 200+ achievements" },
+  { src: "/screenshots/shot-1.jpg", caption: "Your daily 5-minute workout" },
+  { src: "/screenshots/shot-2.jpg", caption: "Duel your friends live" },
+  { src: "/screenshots/shot-3.jpg", caption: "26 games, one for every skill" },
+  { src: "/screenshots/shot-4.jpg", caption: "Levels that adapt as you improve" },
+  { src: "/screenshots/shot-5.jpg", caption: "Earn XP, unlock achievements" },
 ] as const;
 
 const FAQ = [
   {
-    q: "Do I need to commit a lot of time?",
-    a: "No. A complete session is around 5 minutes. Brainura is built for people who can&apos;t afford to lose an hour a day to an app — but want consistent, measurable cognitive gains.",
+    q: "How much time does it take?",
+    a: "A session is about five minutes: pick any game or follow the daily plan. Play more whenever you feel like it.",
   },
   {
     q: "Is this actually based on science?",
-    a: "Each of the 15 exercises maps to a well-studied cognitive task (Stroop, Schulte tables, n-back-style memory matrix, etc.). Brainura doesn&apos;t claim to cure or prevent any condition — but the underlying tests are decades-old standards used in cognitive psychology.",
+    a: "The games are built on classic tasks from cognitive psychology: the Stroop test, Schulte tables, reaction-time and working-memory exercises. Brainura is a training and entertainment app, not a medical device, and we don&apos;t claim that it diagnoses, treats or prevents any condition.",
   },
   {
     q: "How much does it cost?",
-    a: "The app is free to install. Premium unlocks all features for $0.99/week or $7.99/year (regional pricing — US: $3.99/week or $33/year). A one-time introductory offer is available for new subscribers during onboarding.",
+    a: "Free to install. 13 games are free and stay free. New users get 7 days of every Premium game with no card needed. After that, Premium on Android is a monthly or yearly subscription: in the US $5.99/month or $21.99/year, with prices adjusted by country. The iPhone app is free for now.",
   },
   {
-    q: "Can I use it without creating an account?",
-    a: "Yes. Sign-in is optional and only needed if you want progress to sync across devices. The full experience works offline and anonymously.",
+    q: "Do I need an account?",
+    a: "No. There is no sign-up: open the app and play. Most games work offline; the Arena and some other features need an internet connection.",
   },
   {
     q: "Will my progress sync between iPhone and Android?",
-    a: "Yes — sign in with the same Brainura account on both devices. Exercise scores, Brain Age, achievements and subscription status sync automatically.",
+    a: "Not yet. Brainura has no accounts, so progress stays on the device where you earned it. Subscriptions are bought through Apple or Google, so a purchase on one platform does not carry over to the other automatically.",
   },
   {
-    q: "What ages is Brainura designed for?",
-    a: "Brainura is rated 4+ on the App Store but is designed primarily for adults aged 35-55 who want to stay cognitively sharp. The exercises scale from easy (level 1) to brutal (level 80).",
+    q: "Who is it for?",
+    a: "Anyone who wants a quick daily mental workout. Difficulty runs from easy to very hard, so beginners and puzzle fans both find a level.",
+  },
+  {
+    q: "What is the Chrome extension?",
+    a: "A free extension with 6 of the games for a quick brain break while you work. Get it from the Chrome Web Store using the button above.",
   },
 ] as const;
 
@@ -103,20 +108,19 @@ export default function HomePage() {
           <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)] shadow-sm">
               <Sparkles className="h-3.5 w-3.5 text-[var(--color-primary)]" />
-              Built on cognitive science · No ads
+              26 brain games · No ads
             </span>
 
             <h1 className="mt-8 text-balance text-5xl font-extrabold tracking-tight text-[var(--color-text)] sm:text-6xl">
-              Memory slipping at 40?{" "}
-              <span className="gradient-text">Sharpen it in 5 minutes</span> a
+              Give your brain a{" "}
+              <span className="gradient-text">5-minute workout</span> every
               day.
             </h1>
 
             <p className="mt-6 max-w-2xl text-balance text-lg text-[var(--color-text-secondary)] sm:text-xl">
-              Brainura is a focused training routine for adults who notice
-              themselves forgetting names, losing focus, or thinking slower than
-              they used to. 15 science-backed exercises, your personal Brain
-              Age, and zero advertising.
+              Brainura is a collection of short brain games for memory,
+              attention, speed and logic. Play solo, follow a daily plan and
+              watch your streak grow. No ads.
             </p>
 
             <div
@@ -164,7 +168,7 @@ export default function HomePage() {
             </div>
 
             <p className="mt-4 text-xs text-[var(--color-muted)]">
-              Free to install · From $0.99/week · Cancel anytime
+              Free to install · 7 days of Premium games free, no card needed
             </p>
 
             <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
@@ -189,23 +193,23 @@ export default function HomePage() {
               See it in action
             </h2>
             <p className="mt-3 text-base text-[var(--color-text-secondary)]">
-              Designed for one-handed daily use. Premium UI, zero clutter, no
-              dark patterns.
+              A look inside the Android app: your daily workout, the Arena, the
+              game catalog and your rewards.
             </p>
           </div>
 
-          <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
+          <div className="mt-12 flex flex-wrap justify-center gap-4 sm:gap-6">
             {SCREENSHOTS.map((shot) => (
               <div
                 key={shot.src}
-                className="group flex flex-col items-center"
+                className="group flex w-[calc(50%-0.5rem)] flex-col items-center sm:w-[calc(20%-1.2rem)]"
               >
-                <div className="relative aspect-[667/1440] w-full overflow-hidden rounded-2xl border border-[var(--color-border)]/60 bg-white shadow-md transition group-hover:-translate-y-1 group-hover:shadow-xl">
+                <div className="relative aspect-[704/1520] w-full overflow-hidden rounded-2xl border border-[var(--color-border)]/60 bg-white shadow-md transition group-hover:-translate-y-1 group-hover:shadow-xl">
                   <Image
                     src={shot.src}
                     alt={shot.caption}
                     fill
-                    sizes="(max-width: 640px) 50vw, 25vw"
+                    sizes="(max-width: 640px) 50vw, 20vw"
                     className="object-cover"
                   />
                 </div>
@@ -225,12 +229,12 @@ export default function HomePage() {
       >
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-4xl font-extrabold tracking-tight text-[var(--color-text)] sm:text-5xl">
-            Six reasons it{" "}
-            <span className="gradient-text">actually works</span>
+            What&apos;s{" "}
+            <span className="gradient-text">inside</span>
           </h2>
           <p className="mt-4 text-lg text-[var(--color-text-secondary)]">
-            Not another puzzle dump. Brainura&apos;s exercises map to formal
-            cognitive-skill categories and adapt as you improve.
+            Short games built on classic cognitive tasks and sorted by the
+            skill they train: memory, attention, processing speed and logic.
           </p>
         </div>
 
@@ -301,8 +305,8 @@ export default function HomePage() {
               Start your first 5-minute session today
             </h2>
             <p className="mt-4 text-lg text-white/90">
-              Free to install. Premium from $0.99/week. Most users notice
-              improved focus within two weeks.
+              Free to install. 7 days of every Premium game on us, no card
+              needed.
             </p>
             <div className="mx-auto mt-8 flex w-full max-w-xs flex-col items-stretch gap-4 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
               <a
