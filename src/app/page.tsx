@@ -9,6 +9,7 @@ import {
   ShieldOff,
   Apple as AppleStore,
   Play,
+  Puzzle,
   ChevronDown,
   Sparkles,
 } from "lucide-react";
@@ -147,21 +148,23 @@ export default function HomePage() {
                   <span className="text-lg font-semibold">App Store</span>
                 </span>
               </a>
+
+              <a
+                href="https://chromewebstore.google.com/detail/gkdlnpllacgajhhhicnhbgonemjjdcod"
+                className="inline-flex items-center gap-3 rounded-2xl border border-[var(--color-border)] bg-white px-6 py-3 text-[var(--color-text)] shadow-sm transition hover:scale-[1.02]"
+              >
+                <Puzzle className="h-7 w-7" />
+                <span className="flex flex-col text-left leading-tight">
+                  <span className="text-[10px] uppercase tracking-wide text-[var(--color-muted)]">
+                    Add to Chrome
+                  </span>
+                  <span className="text-lg font-semibold">Browser extension</span>
+                </span>
+              </a>
             </div>
 
             <p className="mt-4 text-xs text-[var(--color-muted)]">
               Free to install · From $0.99/week · Cancel anytime
-            </p>
-
-            <p className="mt-3 text-sm text-[var(--color-text-secondary)]">
-              On a computer?{" "}
-              <a
-                href="https://chromewebstore.google.com/detail/gkdlnpllacgajhhhicnhbgonemjjdcod"
-                className="font-semibold underline underline-offset-2 hover:text-[var(--color-text)]"
-              >
-                Take a brain break in Chrome
-              </a>{" "}
-              — free extension, no sign-up.
             </p>
 
             <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
@@ -316,16 +319,14 @@ export default function HomePage() {
                 <AppleStore className="h-5 w-5" />
                 Download on the App Store
               </a>
-            </div>
-            <p className="mt-6 text-sm text-white/90">
-              On a computer?{" "}
               <a
                 href="https://chromewebstore.google.com/detail/gkdlnpllacgajhhhicnhbgonemjjdcod"
-                className="font-semibold underline underline-offset-2"
+                className="inline-flex items-center gap-2 rounded-full bg-white/15 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:scale-[1.02]"
               >
-                Get the Chrome extension
+                <Puzzle className="h-5 w-5" />
+                Add to Chrome
               </a>
-            </p>
+            </div>
             <p className="mt-6 text-xs text-white/70">
               Need help?{" "}
               <Link href="/support" className="underline">
