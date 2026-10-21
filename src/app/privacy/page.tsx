@@ -43,8 +43,12 @@ export default function PrivacyPage() {
           personalise your training programme.
         </li>
         <li>
-          <strong>Support messages</strong> &mdash; if you write to us, we keep
-          the conversation so we can follow up.
+          <strong>Support messages</strong> &mdash; if you write to us, in the
+          app or in the chat on our website, we keep the conversation so we can
+          follow up. Messages reach our support team through Telegram. In the
+          website chat we also keep a random identifier in your browser&apos;s
+          local storage (so you can see our replies), your browser type and
+          the page you wrote from. We do not ask for your name or email there.
         </li>
         <li>
           <strong>Arena profile (optional)</strong> &mdash; if you join the
@@ -152,9 +156,13 @@ export default function PrivacyPage() {
           <strong>OneSignal</strong> &mdash; push notification delivery.
         </li>
         <li>
-          <strong>Groq</strong> &mdash; AI inference for the optional in-app
-          support chat. Your support messages are sent to Groq only when you
-          use that feature.
+          <strong>Groq</strong> &mdash; AI translation of support messages
+          (in the app and in the website chat). Your support messages are sent
+          to Groq only when you use that feature.
+        </li>
+        <li>
+          <strong>Telegram</strong> &mdash; delivery of support messages to our
+          support team and of our replies back to you.
         </li>
       </ul>
 

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { SupportChat } from "@/components/support-chat";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -62,6 +63,7 @@ export default function RootLayout({
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />
+        <SupportChat />
       </body>
     </html>
   );
