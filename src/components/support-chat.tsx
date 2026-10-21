@@ -36,6 +36,8 @@ function deviceId(create: boolean): string | null {
 
 export function SupportChat() {
   const [enabled, setEnabled] = useState(false);
+  // Есть ли у посетителя беседа: от этого зависит, нужен ли опрос ответов.
+  const [started, setStarted] = useState(false);
   const [open, setOpen] = useState(false);
   const [msgs, setMsgs] = useState<Msg[]>([]);
   const [text, setText] = useState("");
@@ -68,6 +70,10 @@ export function SupportChat() {
   }, []);
 
   useEffect(() => {
+    setStarted(deviceId(false) !== null);
+  }, []);
+
+  useEffect(() => {
     fetch("/api/support/status")
       .then((r) => (r.ok ? r.json() : { enabled: false }))
       .then((d: { enabled: boolean }) => setEnabled(d.enabled))
@@ -76,11 +82,11 @@ export function SupportChat() {
 
   // Опрос: часто, пока чат открыт; редко — чтобы показать точку «есть ответ».
   useEffect(() => {
-    if (!deviceId(false)) return;
+    if (!started) return;
     load();
     const t = setInterval(load, open ? 5000 : 60000);
     return () => clearInterval(t);
-  }, [open, load]);
+  }, [started, open, load]);
 
   const lastSupport = [...msgs].reverse().find((m) => m.from === "support");
   useEffect(() => {
@@ -128,7 +134,9 @@ export function SupportChat() {
           { id: `p-${Date.now()}`, from: "user", text: value, at: "" },
         ]);
         setText("");
-        load();
+        // Беседа началась: с этого момента опрашиваем ответы (иначе у нового
+        // посетителя ответ был бы виден только после перезагрузки).
+        setStarted(true);
       }
     } catch {
       setError("No connection. Please try again.");
