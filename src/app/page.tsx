@@ -121,11 +121,11 @@ export default function HomePage() {
 
             <div
               id="download"
-              className="mt-10 flex flex-wrap items-center justify-center gap-4 scroll-mt-24"
+              className="mx-auto mt-10 flex w-full max-w-xs flex-col items-stretch gap-4 scroll-mt-24 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:justify-center"
             >
               <a
                 href="https://play.google.com/store/apps/details?id=com.brainura.app"
-                className="inline-flex items-center gap-3 rounded-2xl bg-black px-6 py-3 text-white shadow-lg transition hover:scale-[1.02]"
+                className="inline-flex items-center justify-center gap-3 rounded-2xl bg-black px-6 py-3 text-white shadow-lg transition hover:scale-[1.02]"
               >
                 <Play className="h-7 w-7" />
                 <span className="flex flex-col text-left leading-tight">
@@ -138,7 +138,7 @@ export default function HomePage() {
 
               <a
                 href="https://apps.apple.com/app/brain-training-games-brainura/id6793506406"
-                className="inline-flex items-center gap-3 rounded-2xl border border-[var(--color-border)] bg-white px-6 py-3 text-[var(--color-text)] shadow-sm transition hover:scale-[1.02]"
+                className="inline-flex items-center justify-center gap-3 rounded-2xl border border-[var(--color-border)] bg-white px-6 py-3 text-[var(--color-text)] shadow-sm transition hover:scale-[1.02]"
               >
                 <AppleStore className="h-7 w-7" />
                 <span className="flex flex-col text-left leading-tight">
@@ -151,7 +151,7 @@ export default function HomePage() {
 
               <a
                 href="https://chromewebstore.google.com/detail/gkdlnpllacgajhhhicnhbgonemjjdcod"
-                className="inline-flex items-center gap-3 rounded-2xl border border-[var(--color-border)] bg-white px-6 py-3 text-[var(--color-text)] shadow-sm transition hover:scale-[1.02]"
+                className="inline-flex items-center justify-center gap-3 rounded-2xl border border-[var(--color-border)] bg-white px-6 py-3 text-[var(--color-text)] shadow-sm transition hover:scale-[1.02]"
               >
                 <Puzzle className="h-7 w-7" />
                 <span className="flex flex-col text-left leading-tight">
@@ -304,24 +304,24 @@ export default function HomePage() {
               Free to install. Premium from $0.99/week. Most users notice
               improved focus within two weeks.
             </p>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+            <div className="mx-auto mt-8 flex w-full max-w-xs flex-col items-stretch gap-4 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
               <a
                 href="https://play.google.com/store/apps/details?id=com.brainura.app"
-                className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-[var(--color-text)] shadow-md transition hover:scale-[1.02]"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-[var(--color-text)] shadow-md transition hover:scale-[1.02]"
               >
                 <Play className="h-5 w-5" />
                 Get on Google Play
               </a>
               <a
                 href="https://apps.apple.com/app/brain-training-games-brainura/id6793506406"
-                className="inline-flex items-center gap-2 rounded-full bg-white/15 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:scale-[1.02]"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white/15 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:scale-[1.02]"
               >
                 <AppleStore className="h-5 w-5" />
                 Download on the App Store
               </a>
               <a
                 href="https://chromewebstore.google.com/detail/gkdlnpllacgajhhhicnhbgonemjjdcod"
-                className="inline-flex items-center gap-2 rounded-full bg-white/15 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:scale-[1.02]"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white/15 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:scale-[1.02]"
               >
                 <Puzzle className="h-5 w-5" />
                 Add to Chrome
