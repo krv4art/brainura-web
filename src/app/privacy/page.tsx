@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <LegalShell title="Privacy Policy" updated="October 18, 2026">
+    <LegalShell title="Privacy Policy" updated="October 21, 2026">
       <p>
         This Privacy Policy explains how Brainura (&quot;Brainura&quot;,
         &quot;we&quot;, &quot;us&quot;, &quot;our&quot;) collects, uses, shares,
@@ -249,7 +249,9 @@ export default function PrivacyPage() {
         The Brainura extension for Google Chrome (the &quot;Extension&quot;) is
         a separate product with a smaller set of free brain games and optional
         break reminders. It follows a stricter rule than the app: the Extension
-        does not collect, transmit, or sell any data.
+        collects no data automatically and sells nothing. The only thing it
+        ever sends is a feedback message that you write yourself and send by
+        pressing the send button.
       </p>
       <ul>
         <li>
@@ -258,9 +260,11 @@ export default function PrivacyPage() {
         </li>
         <li>
           Reminder settings (days, hours, times per day, session length), the
-          time of your last session, exercise levels and results are stored
-          only in your browser (chrome.storage and IndexedDB) and are never
-          sent to us or to third parties.
+          time of your last session, exercise levels and results, and a few
+          small flags and counters (whether the &quot;pin the icon&quot; tip was
+          shown, how many games you have finished, when to ask you for a
+          rating) are stored only in your browser (chrome.storage and
+          IndexedDB) and are never sent to us or to third parties.
         </li>
         <li>
           Permissions: <strong>alarms</strong> &mdash; to schedule reminders;{" "}
@@ -276,6 +280,29 @@ export default function PrivacyPage() {
         </li>
         <li>Removing the Extension from Chrome deletes all of its data.</li>
       </ul>
+      <h3>Feedback you choose to send</h3>
+      <p>
+        After you have played a few games, the Extension may ask whether you
+        enjoy it. If you answer that you do not, or give a low rating, you can
+        write what could be improved. Only when you press the send button, the
+        following is sent to our support inbox (the same channel as the chat on
+        this website and in the app): the text you wrote, the rating you tapped
+        (if any), a random identifier generated in your browser, your interface
+        language and the technical information your browser sends with any
+        request (such as its type and your IP address, which is used only to
+        limit abuse and is not stored by us). We use this only to read your
+        feedback and, if you ask a question, to answer you. Nothing is sent if
+        you do not press the button. To have a message deleted, email the
+        address in section 15.
+      </p>
+      <h3>Pages on this website opened by the Extension</h3>
+      <p>
+        When you remove the Extension, Chrome opens a short survey page on this
+        website. The Extension sends nothing to it. If you type an answer and
+        press the send button, the same information as described above (text,
+        random identifier, language, browser type) is sent to our support
+        inbox.
+      </p>
 
       <h2>14. Changes to this policy</h2>
       <p>

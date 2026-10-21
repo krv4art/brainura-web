@@ -2,18 +2,40 @@ import {
   UUID_RE,
   callFunction,
   clientIp,
-  notConfigured,
   rateLimited,
 } from "../_proxy";
 
 const MAX_TEXT = 2000;
+
+// Форма «Что улучшить?» в расширении Chrome шлёт сюда со страницы
+// chrome-extension://<id>: без CORS браузер откажет. Разрешаем только такие
+// источники (id расширения в Web Store и у распакованной копии разные).
+function corsHeaders(request: Request): Record<string, string> {
+  const origin = request.headers.get("origin") ?? "";
+  if (!/^chrome-extension:\/\/[a-p]{32}$/.test(origin)) return {};
+  return {
+    "Access-Control-Allow-Origin": origin,
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Max-Age": "86400",
+    Vary: "Origin",
+  };
+}
+
+export function OPTIONS(request: Request) {
+  return new Response(null, { status: 204, headers: corsHeaders(request) });
+}
+
+function reply(request: Request, body: unknown, status = 200) {
+  return Response.json(body, { status, headers: corsHeaders(request) });
+}
 
 export async function POST(request: Request) {
   let body: Record<string, unknown>;
   try {
     body = await request.json();
   } catch {
-    return Response.json({ error: "bad_request" }, { status: 400 });
+    return reply(request, { error: "bad_request" }, 400);
   }
 
   const deviceId = typeof body.deviceId === "string" ? body.deviceId : "";
@@ -26,14 +48,14 @@ export async function POST(request: Request) {
 
   // Приманка для ботов: поле невидимо для людей.
   if (typeof body.website === "string" && body.website !== "") {
-    return Response.json({ ok: true });
+    return reply(request, { ok: true });
   }
   if (!UUID_RE.test(deviceId) || text.length < 1 || text.length > MAX_TEXT) {
-    return Response.json({ error: "bad_request" }, { status: 400 });
+    return reply(request, { error: "bad_request" }, 400);
   }
   const ip = clientIp(request);
   if (rateLimited(`m:${ip}`, 5, 60_000) || rateLimited(`h:${ip}`, 40, 3_600_000)) {
-    return Response.json({ error: "rate_limited" }, { status: 429 });
+    return reply(request, { error: "rate_limited" }, 429);
   }
 
   const res = await callFunction("support-send-message", {
@@ -47,9 +69,9 @@ export async function POST(request: Request) {
       Browser: (request.headers.get("user-agent") ?? "").slice(0, 160),
     },
   });
-  if (!res) return notConfigured();
+  if (!res) return reply(request, { error: "not_configured" }, 503);
   if (!res.ok) {
-    return Response.json({ error: "upstream" }, { status: 502 });
+    return reply(request, { error: "upstream" }, 502);
   }
-  return Response.json({ ok: true });
+  return reply(request, { ok: true });
 }
