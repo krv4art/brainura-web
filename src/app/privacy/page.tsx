@@ -33,9 +33,10 @@ export default function PrivacyPage() {
       <h3>2.1 Information you provide</h3>
       <ul>
         <li>
-          <strong>Account information</strong> &mdash; if you sign in, we store
-          your email address and the display name you choose. Sign-in is
-          optional; the app can be used anonymously.
+          <strong>No account required</strong> &mdash; the app has no sign-up
+          and never asks for your email address or real name. Your progress is
+          tied to an anonymous ID created on your device (see Identifiers
+          below).
         </li>
         <li>
           <strong>Onboarding answers</strong> &mdash; goals, focus areas, age
@@ -69,7 +70,7 @@ export default function PrivacyPage() {
       <ul>
         <li>
           <strong>Exercise results</strong> &mdash; scores, accuracy, duration,
-          per-exercise details, streaks and Brain Age estimates.
+          per-exercise details, streaks and skill levels.
         </li>
         <li>
           <strong>App interactions</strong> &mdash; which screens you visit,
@@ -101,7 +102,7 @@ export default function PrivacyPage() {
       <h2>3. How we use this data</h2>
       <ul>
         <li>To provide and personalise the training experience.</li>
-        <li>To track your progress and estimate your Brain Age.</li>
+        <li>To track your progress and adjust difficulty to your level.</li>
         <li>To deliver push notifications you have explicitly opted in to.</li>
         <li>To detect, investigate and fix crashes and performance problems.</li>
         <li>To process subscriptions and prevent fraudulent purchases.</li>
@@ -121,8 +122,8 @@ export default function PrivacyPage() {
           security, anonymised analytics, and fraud prevention.
         </li>
         <li>
-          <strong>Consent</strong> &mdash; push notifications, optional account
-          creation, and any feature requiring an explicit opt-in.
+          <strong>Consent</strong> &mdash; push notifications and any feature
+          requiring an explicit opt-in.
         </li>
         <li>
           <strong>Legal obligation</strong> &mdash; tax records related to
@@ -177,8 +178,8 @@ export default function PrivacyPage() {
 
       <h2>7. Data retention</h2>
       <p>
-        We keep your data while your account is active and for as long as
-        needed to provide the Service. After deletion, anonymised aggregate
+        We keep your data while you use the Service and for as long as
+        needed to provide it. After deletion, anonymised aggregate
         statistics may be retained indefinitely for product improvement; they
         cannot be linked back to you. Crash logs are deleted after 90 days.
         Purchase records are retained for the period required by tax law
