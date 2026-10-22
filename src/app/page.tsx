@@ -165,7 +165,7 @@ export default function HomePage() {
                   <span className="text-[10px] uppercase tracking-wide text-[var(--color-muted)]">
                     Add to Chrome
                   </span>
-                  <span className="text-lg font-semibold">Browser extension</span>
+                  <span className="text-lg font-semibold">Chrome extension</span>
                 </span>
               </a>
             </div>
@@ -331,7 +331,7 @@ export default function HomePage() {
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-white/15 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:scale-[1.02]"
               >
                 <Puzzle className="h-5 w-5" />
-                Add to Chrome
+                Add Chrome extension
               </a>
             </div>
             <p className="mt-6 text-xs text-white/70">
