@@ -122,8 +122,8 @@ export default function HomePage() {
 
             <p className="mt-6 max-w-2xl text-balance text-lg text-[var(--color-text-secondary)] sm:text-xl">
               Brainura is a collection of short brain games for memory,
-              attention, speed and logic. Play solo, follow a daily plan and
-              watch your streak grow. No ads.
+              attention, speed and logic. Play solo or challenge a friend,
+              follow a daily plan and watch your streak grow. No ads.
             </p>
 
             <div
