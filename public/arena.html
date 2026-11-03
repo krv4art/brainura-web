@@ -384,8 +384,10 @@
   } else {
     open.style.display = 'none';
     if (isApple) {
-      playBtn.style.display = 'none';
-      text.textContent = t.iphone;
+      // iPhone/iPad с приложением открывает Universal Link, не доходя до страницы;
+      // без приложения — App Store.
+      playBtn.textContent = 'App Store';
+      playBtn.href = 'https://apps.apple.com/app/id6793506406';
     }
   }
 </script>

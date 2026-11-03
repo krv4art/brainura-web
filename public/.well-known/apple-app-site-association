@@ -1,0 +1,14 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["ALJ8FX4U9P.com.brainura.braintraining"],
+        "components": [
+          { "/": "/d/*" },
+          { "/": "/f/*" },
+          { "/": "/c/*" }
+        ]
+      }
+    ]
+  }
+}

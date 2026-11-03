@@ -11,6 +11,16 @@ const nextConfig: NextConfig = {
       { source: "/f/:code", destination: "/arena.html" },
     ];
   },
+  // Universal Links iOS: файл без расширения Next отдал бы как octet-stream,
+  // а Apple ждёт JSON. Team ID и bundle ID — в docs/arena_web/README.md приложения.
+  async headers() {
+    return [
+      {
+        source: "/.well-known/apple-app-site-association",
+        headers: [{ key: "Content-Type", value: "application/json" }],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
