@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { LegalShell } from "@/components/legal-shell";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/privacy" },
   title: "Privacy Policy",
   description:
     "How Brainura collects, uses, and protects your personal information.",
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <LegalShell title="Privacy Policy" updated="October 21, 2026">
+    <LegalShell title="Privacy Policy" updated="November 11, 2026">
       <p>
         This Privacy Policy explains how Brainura (&quot;Brainura&quot;,
         &quot;we&quot;, &quot;us&quot;, &quot;our&quot;) collects, uses, shares,
@@ -243,6 +244,15 @@ export default function PrivacyPage() {
         for hosting (load balancing, security). We do not use analytics
         cookies, advertising cookies, or any cross-site tracking on the
         website.
+      </p>
+      <p>
+        To know which pages of the website are useful, we count page views
+        with Vercel Web Analytics. It is cookieless: it records the page
+        address, the referring site, and the browser, operating system,
+        device type and country derived from the request, and it does not
+        store your IP address or build a profile of you. Results of the
+        brain tests on the website (for example, your best reaction time)
+        stay in your browser&apos;s local storage and are never sent to us.
       </p>
 
       <h2>13. Brainura extension for Chrome</h2>

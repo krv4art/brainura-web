@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/support" },
   title: "Support",
   description: "Get help with Brainura. Contact us by email or read the FAQ.",
 };

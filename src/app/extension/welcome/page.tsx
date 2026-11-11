@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Analytics } from "@vercel/analytics/next";
 import { Pin, Puzzle } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -15,6 +14,7 @@ export const metadata: Metadata = {
 // просмотров ≈ число установок. Vercel Web Analytics считает просмотры без
 // cookie и без идентификаторов посетителя; включается в дашборде проекта
 // (Analytics → Enable). Расширение само ничего сюда не отправляет.
+// Компонент <Analytics /> подключён в корневом layout на весь сайт (с 11.11.2026).
 export default function ExtensionWelcomePage() {
   return (
     <div className="mx-auto max-w-2xl px-6 py-16 sm:py-24">
@@ -92,7 +92,6 @@ export default function ExtensionWelcomePage() {
         </a>
         .
       </p>
-      <Analytics />
     </div>
   );
 }

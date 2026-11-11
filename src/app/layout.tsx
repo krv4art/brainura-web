@@ -3,6 +3,7 @@ import { Manrope } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { SupportChat } from "@/components/support-chat";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
     template: "%s | Brainura",
   },
   description:
-    "Train your brain in 5 minutes a day. 26 short games for memory, focus, processing speed and logic. Daily plan, streaks, no ads.",
+    "Train your brain in 5 minutes a day. 26 short games for memory, focus, processing speed and logic. 41 languages, daily plan, streaks, no ads.",
   applicationName: "Brainura",
   keywords: [
     "brain training",
@@ -64,6 +65,8 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <SiteFooter />
         <SupportChat />
+        {/* Просмотры страниц без cookie (Vercel Web Analytics) — SEO_PLAN шаг 0.5, Privacy §12. */}
+        <Analytics />
       </body>
     </html>
   );

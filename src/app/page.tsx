@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import Image from "next/image";
+import { playUrl } from "@/lib/site";
 import Link from "next/link";
 import {
   BrainCircuit,
@@ -13,6 +15,11 @@ import {
   ChevronDown,
   Sparkles,
 } from "lucide-react";
+
+// Канонический адрес главной (title/description — из корневого layout).
+export const metadata: Metadata = {
+  alternates: { canonical: "/", languages: { en: "/", "x-default": "/" } },
+};
 
 const FEATURES = [
   {
@@ -47,9 +54,9 @@ const FEATURES = [
   },
   {
     Icon: ShieldOff,
-    title: "No Ads, 32 Languages",
+    title: "No Ads, 41 Languages",
     body:
-      "No ads between your games. The app speaks 32 languages, from English and Spanish to Finnish and Thai.",
+      "No ads between your games. The app speaks 41 languages, from English and Spanish to Finnish, Hindi and Thai.",
   },
 ] as const;
 
@@ -131,7 +138,7 @@ export default function HomePage() {
               className="mx-auto mt-10 flex w-full max-w-xs flex-col items-stretch gap-4 scroll-mt-24 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:justify-center"
             >
               <a
-                href="https://play.google.com/store/apps/details?id=com.brainura.app"
+                href={playUrl("home-hero", "website")}
                 className="inline-flex items-center justify-center gap-3 rounded-2xl bg-black px-6 py-3 text-white shadow-lg transition hover:scale-[1.02]"
               >
                 <Play className="h-7 w-7" />
@@ -313,7 +320,7 @@ export default function HomePage() {
             </p>
             <div className="mx-auto mt-8 flex w-full max-w-xs flex-col items-stretch gap-4 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
               <a
-                href="https://play.google.com/store/apps/details?id=com.brainura.app"
+                href={playUrl("home-cta", "website")}
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-[var(--color-text)] shadow-md transition hover:scale-[1.02]"
               >
                 <Play className="h-5 w-5" />

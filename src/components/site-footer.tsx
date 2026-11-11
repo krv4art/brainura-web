@@ -14,6 +14,15 @@ export function SiteFooter() {
         </div>
 
         <nav className="flex flex-wrap items-center justify-center gap-6 text-sm text-[var(--color-text-secondary)]">
+          <Link href="/games" className="hover:text-[var(--color-text)]">
+            Brain games
+          </Link>
+          <Link href="/tests" className="hover:text-[var(--color-text)]">
+            Brain tests
+          </Link>
+          <Link href="/learn" className="hover:text-[var(--color-text)]">
+            Learn
+          </Link>
           <Link href="/privacy" className="hover:text-[var(--color-text)]">
             Privacy Policy
           </Link>

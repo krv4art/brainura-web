@@ -27,6 +27,18 @@ export function SiteHeader() {
             Features
           </Link>
           <Link
+            href="/games"
+            className="hidden sm:block rounded-full px-3 py-2 hover:bg-[var(--color-surface)] hover:text-[var(--color-text)]"
+          >
+            Games
+          </Link>
+          <Link
+            href="/tests"
+            className="rounded-full px-3 py-2 hover:bg-[var(--color-surface)] hover:text-[var(--color-text)]"
+          >
+            Tests
+          </Link>
+          <Link
             href="/support"
             className="hidden sm:block rounded-full px-3 py-2 hover:bg-[var(--color-surface)] hover:text-[var(--color-text)]"
           >
