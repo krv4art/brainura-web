@@ -8,7 +8,7 @@ import { ArticlePage, GamePage, ToolPage } from "./templates";
 import { BlockSections, Inline } from "./blocks";
 import { Breadcrumbs, DownloadBlock, JsonLd } from "./parts";
 import { breadcrumbLd } from "@/lib/schema";
-import { absoluteUrl, alternatesFor, type Locale } from "@/lib/i18n";
+import { absoluteUrl, alternatesFor, sectionPath, type Locale } from "@/lib/i18n";
 import { UI } from "@/lib/ui";
 import type { Article } from "@/content/articles";
 import type { Game, GamePageContent } from "@/content/games";
@@ -19,7 +19,7 @@ import { ToolFor } from "@/components/tools/tool-for";
 // ─────────────── статьи ───────────────
 
 export function articleMetadata(a: Article, lang: Locale): Metadata {
-  const path = `/learn/${a.slug}`;
+  const path = `${sectionPath(lang, "learn")}/${a.slug}`;
   return {
     title: { absolute: a.title },
     description: a.description,
@@ -37,14 +37,14 @@ export function articleMetadata(a: Article, lang: Locale): Metadata {
 
 export function ArticleView({ a, lang }: { a: Article; lang: Locale }) {
   const ui = UI[lang];
-  const path = `/learn/${a.slug}`;
+  const path = `${sectionPath(lang, "learn")}/${a.slug}`;
   return (
     <ArticlePage
       lang={lang}
       path={path}
       crumbs={[
         { name: ui.nav.home, path: "/" },
-        { name: ui.nav.learn, path: "/learn" },
+        { name: ui.nav.learn, path: sectionPath(lang, "learn") },
         { name: a.name, path },
       ]}
       h1={a.h1}
@@ -68,7 +68,7 @@ export function ArticleView({ a, lang }: { a: Article; lang: Locale }) {
 // ─────────────── игры ───────────────
 
 export function gameMetadata(slug: string, key: string, p: GamePageContent, lang: Locale): Metadata {
-  const path = `/games/${slug}`;
+  const path = `${sectionPath(lang, "games")}/${slug}`;
   return {
     title: { absolute: p.title },
     description: p.description,
@@ -93,14 +93,14 @@ export function GameView({
   related: { href: string; title: string; body: string }[];
 }) {
   const ui = UI[lang];
-  const path = `/games/${slug}`;
+  const path = `${sectionPath(lang, "games")}/${slug}`;
   return (
     <GamePage
       lang={lang}
       path={path}
       crumbs={[
         { name: ui.nav.home, path: "/" },
-        { name: ui.nav.games, path: "/games" },
+        { name: ui.nav.games, path: sectionPath(lang, "games") },
         { name, path },
       ]}
       h1={p.h1}
@@ -136,7 +136,7 @@ export function GameView({
 // ─────────────── тесты (языковые версии; английские — свои файлы в (en)/tests) ───────────────
 
 export function testMetadata(t: TestPageContent, lang: Locale): Metadata {
-  const path = `/tests/${t.slug}`;
+  const path = `${sectionPath(lang, "tests")}/${t.slug}`;
   return {
     title: { absolute: t.title },
     description: t.description,
@@ -147,17 +147,17 @@ export function testMetadata(t: TestPageContent, lang: Locale): Metadata {
 
 export function TestView({ t, lang }: { t: TestPageContent; lang: Locale }) {
   const ui = UI[lang];
-  const path = `/tests/${t.slug}`;
+  const path = `${sectionPath(lang, "tests")}/${t.slug}`;
   const related = pagesOf("tests", lang)
     .filter((p) => p.key !== t.key)
-    .map((p) => ({ href: `/tests/${p.slug}`, title: p.name, body: p.blurb }));
+    .map((p) => ({ href: `${sectionPath(lang, "tests")}/${p.slug}`, title: p.name, body: p.blurb }));
   return (
     <ToolPage
       lang={lang}
       path={path}
       crumbs={[
         { name: ui.nav.home, path: "/" },
-        { name: ui.nav.tests, path: "/tests" },
+        { name: ui.nav.tests, path: sectionPath(lang, "tests") },
         { name: t.name, path },
       ]}
       h1={t.h1}
@@ -193,12 +193,12 @@ export function hubMetadata(section: SectionKey, lang: Locale): Metadata {
   return {
     title: { absolute: `${t.title} | Brainura` },
     description: t.lead,
-    alternates: alternatesFor(lang, SECTIONS[section].path, hubVersions(section)),
+    alternates: alternatesFor(lang, sectionPath(lang, section), hubVersions(section)),
   };
 }
 
 function Cards({ section, lang }: { section: SectionKey; lang: Locale }) {
-  const base = SECTIONS[section].path;
+  const base = sectionPath(lang, section);
   const cta = HUB_TEXT(lang)[section].cta;
   return (
     <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -224,7 +224,7 @@ export function HubView({ section, lang }: { section: SectionKey; lang: Locale }
   const t = HUB_TEXT(lang)[section];
   const crumbs = [
     { name: ui.nav.home, path: "/" },
-    { name: t.title, path: SECTIONS[section].path },
+    { name: t.title, path: sectionPath(lang, section) },
   ];
   return (
     <div className="mx-auto max-w-5xl px-4 pb-20 pt-8 sm:px-6 sm:pt-12">
@@ -251,7 +251,7 @@ export function LangHomeView({ lang }: { lang: Locale }) {
       {sections.map((s) => (
         <section key={s} className="mt-14">
           <h2 className="text-2xl font-bold text-[var(--color-text)] sm:text-3xl">
-            <Link href={SECTIONS[s].path} className="hover:text-[var(--color-primary)]">{HUB_TEXT(lang)[s].title}</Link>
+            <Link href={sectionPath(lang, s)} className="hover:text-[var(--color-primary)]">{HUB_TEXT(lang)[s].title}</Link>
           </h2>
           <Cards section={s} lang={lang} />
         </section>

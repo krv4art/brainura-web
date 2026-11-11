@@ -62,6 +62,8 @@ interface Strings {
   again: string;
   explain: string;
   smallest: string;
+  /** «ms» / «мс» */
+  ms: string;
 }
 
 const EN: Strings = {
@@ -84,9 +86,34 @@ const EN: Strings = {
   again: "Try again",
   explain: "The Stroop effect is how much slower you answer when the word and the ink disagree. Only correct answers count.",
   smallest: "Your smallest effect so far:",
+  ms: "ms",
 };
 
-const STRINGS: Record<Locale, Strings> = { en: EN, qa: EN };
+// Клавиши 1–4, а не буквы: буквенные зависят от раскладки (на английской «к/з/с/ж» не сработали бы).
+const RU: Strings = {
+  colors: {
+    red: { label: "Красный", hotkey: "1" },
+    green: { label: "Зелёный", hotkey: "2" },
+    blue: { label: "Синий", hotkey: "3" },
+    yellow: { label: "Жёлтый", hotkey: "4" },
+  },
+  intro: (n, keys) => [
+    "Слово, обозначающее цвет, написано цветными чернилами. Нажмите на ",
+    "цвет чернил",
+    `, а не на само слово. ${n} слов — отвечайте быстро и точно. Клавиатура: ${keys}.`,
+  ],
+  start: "Начать тест Струпа",
+  effect: "Ваш эффект Струпа",
+  matching: "Совпадают",
+  mismatched: "Не совпадают",
+  accuracy: "Точность",
+  again: "Ещё раз",
+  explain: "Эффект Струпа — на сколько медленнее вы отвечаете, когда слово и цвет чернил не совпадают. Учитываются только верные ответы.",
+  smallest: "Ваш наименьший эффект на сегодня:",
+  ms: "мс",
+};
+
+const STRINGS: Record<Locale, Strings> = { en: EN, ru: RU, qa: EN };
 
 export function StroopTest({ lang = "en" }: { lang?: Locale }) {
   const tx = STRINGS[lang];
@@ -188,10 +215,10 @@ export function StroopTest({ lang = "en" }: { lang?: Locale }) {
         {phase === "done" && (
           <div className="w-full max-w-md text-white">
             <p className="text-sm uppercase tracking-wide text-white/60">{tx.effect}</p>
-            <p className="mt-1 text-5xl font-extrabold tabular-nums">{incongruentMs - congruentMs} ms</p>
+            <p className="mt-1 text-5xl font-extrabold tabular-nums">{incongruentMs - congruentMs} {tx.ms}</p>
             <div className="mt-5 grid grid-cols-3 gap-3 text-sm">
-              <div><p className="text-white/60">{tx.matching}</p><p className="text-lg font-bold tabular-nums">{congruentMs} ms</p></div>
-              <div><p className="text-white/60">{tx.mismatched}</p><p className="text-lg font-bold tabular-nums">{incongruentMs} ms</p></div>
+              <div><p className="text-white/60">{tx.matching}</p><p className="text-lg font-bold tabular-nums">{congruentMs} {tx.ms}</p></div>
+              <div><p className="text-white/60">{tx.mismatched}</p><p className="text-lg font-bold tabular-nums">{incongruentMs} {tx.ms}</p></div>
               <div><p className="text-white/60">{tx.accuracy}</p><p className="text-lg font-bold tabular-nums">{accuracy}%</p></div>
             </div>
             <button type="button" onClick={start} className="mt-6 rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-[var(--color-text)]">
@@ -220,7 +247,7 @@ export function StroopTest({ lang = "en" }: { lang?: Locale }) {
       {phase === "done" && (
         <p className="mt-3 text-sm text-[var(--color-text-secondary)]">
           {tx.explain}
-          {best !== null && <> {tx.smallest} <strong className="text-[var(--color-text)]">{best} ms</strong>.</>}
+          {best !== null && <> {tx.smallest} <strong className="text-[var(--color-text)]">{best} {tx.ms}</strong>.</>}
         </p>
       )}
     </div>

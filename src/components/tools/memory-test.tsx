@@ -9,6 +9,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { Locale } from "@/lib/i18n";
+import { pluralRu } from "@/lib/plural-ru";
 import { loadBest, saveBest } from "./storage";
 
 type Mode = "digits" | "backwards" | "grid";
@@ -108,7 +109,47 @@ const EN: Strings = {
     `Each correct answer adds one more ${m === "grid" ? "cell" : "digit"}. You get two tries at every length; the test ends after two misses in a row. Your best span is saved on this device.`,
 };
 
-const STRINGS: Record<Locale, Strings> = { en: EN, qa: EN };
+const ruUnit = (m: Mode, n: number) =>
+  m === "grid" ? pluralRu(n, "позиция", "позиции", "позиций") : pluralRu(n, "цифра", "цифры", "цифр");
+
+const RU: Strings = {
+  modes: { digits: "Цифры", backwards: "Цифры наоборот", grid: "Клетки на сетке" },
+  modeGroup: "Режим теста",
+  best: "Рекорд:",
+  length: "Длина",
+  lastTry: " · последняя попытка",
+  unit: (m, n) => `${n} ${ruUnit(m, n)}`,
+  unitWord: (m, n) => ruUnit(m, n),
+  cell: (n) => `Клетка ${n}`,
+  typeInOrder: "Введите цифры в том же порядке",
+  typeReverse: "Введите цифры в обратном порядке",
+  check: "Проверить",
+  tapInOrder: (d, t) => `Нажимайте клетки в том же порядке (${d}/${t})`,
+  intro: {
+    grid: "Клетки подсвечиваются по одной. Затем нажмите на них в том же порядке.",
+    backwards: "Цифры появляются по одной. Затем введите их наоборот: 4 7 1 превращается в 174.",
+    digits: "Цифры появляются по одной. Затем введите их в том же порядке.",
+  },
+  start: "Начать",
+  correct: "Верно!",
+  notQuite: "Не совсем",
+  next: (w) => `Дальше: ${w}.`,
+  sequenceWas: "Это была последовательность",
+  cellsOrder: " (клетки считаются слева направо и сверху вниз)",
+  oneMore: (w) => `. Ещё одна попытка: ${w}.`,
+  cont: "Дальше",
+  yourSpan: "Ваш объём",
+  tryAgain: "Ещё раз",
+  typical: {
+    digits: "Большинство взрослых повторяют от 6 до 8 цифр подряд.",
+    backwards: "Наоборот сложнее: большинство взрослых справляются с 4–6 цифрами.",
+    grid: "В заданиях на последовательность большинство взрослых повторяют 5–7 позиций.",
+  },
+  note: (m) =>
+    `Каждый верный ответ добавляет ${m === "grid" ? "ещё одну клетку" : "ещё одну цифру"}. На каждой длине две попытки: тест заканчивается после двух ошибок подряд. Рекорд хранится на вашем устройстве.`,
+};
+
+const STRINGS: Record<Locale, Strings> = { en: EN, ru: RU, qa: EN };
 
 export function MemoryTest({ lang = "en" }: { lang?: Locale }) {
   const t = STRINGS[lang];

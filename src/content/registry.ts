@@ -3,7 +3,7 @@
 // версии — src/content/l10n/<код>.ts. Карта страниц с кластерами и статусами —
 // docs/growth/seo/page_map.md, ядро каждой страницы — docs/growth/seo/pages/ (репо приложения).
 
-import { DEFAULT_LOCALE, subdomainLocales, type LangVersion, type Locale } from "@/lib/i18n";
+import { DEFAULT_LOCALE, sectionPath, subdomainLocales, type LangVersion, type Locale } from "@/lib/i18n";
 import { GAME_PAGES } from "./games";
 import { ARTICLES_ALL } from "./articles";
 import { TESTS_EN } from "./tests";
@@ -84,7 +84,7 @@ export function versionsOf(section: SectionKey, key: string): LangVersion[] {
   const out: LangVersion[] = [];
   for (const lang of builtLocales()) {
     const p = pagesOf(section, lang).find((x) => x.key === key);
-    if (p) out.push({ lang, path: `${SECTIONS[section].path}/${p.slug}` });
+    if (p) out.push({ lang, path: `${sectionPath(lang, section)}/${p.slug}` });
   }
   return out;
 }
@@ -93,7 +93,7 @@ export function versionsOf(section: SectionKey, key: string): LangVersion[] {
 export function hubVersions(section: SectionKey): LangVersion[] {
   return builtLocales()
     .filter((l) => pagesOf(section, l).length > 0)
-    .map((lang) => ({ lang, path: SECTIONS[section].path }));
+    .map((lang) => ({ lang, path: sectionPath(lang, section) }));
 }
 
 /** Какие разделы есть на языке — для шапки и подвала. */
@@ -113,8 +113,7 @@ export function entry(section: SectionKey, slug: string): PageEntry {
 
 /** «Попробуйте ещё» — остальные страницы раздела на языке. */
 export function siblings(section: SectionKey, key: string, lang: Locale = DEFAULT_LOCALE) {
-  const s = SECTIONS[section];
   return pagesOf(section, lang)
     .filter((p) => p.key !== key)
-    .map((p) => ({ href: `${s.path}/${p.slug}`, title: p.name, body: p.blurb }));
+    .map((p) => ({ href: `${sectionPath(lang, section)}/${p.slug}`, title: p.name, body: p.blurb }));
 }

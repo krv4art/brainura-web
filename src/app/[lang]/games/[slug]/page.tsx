@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { GameView, gameMetadata } from "@/components/seo/views";
-import { isLocale, subdomainLocales, type Locale } from "@/lib/i18n";
+import { isLocale, sectionPath, subdomainLocales, type Locale } from "@/lib/i18n";
 import { L10N } from "@/content/l10n";
 import { GAMES_ALL } from "@/content/games";
 
@@ -35,6 +35,6 @@ export default async function Page({ params }: { params: Promise<{ lang: string;
     .filter((o) => o.key !== g.key)
     .filter((o) => GAMES_ALL.find((x) => x.slug === o.key)?.skills.some((s) => game.skills.includes(s)))
     .slice(0, 4)
-    .map((o) => ({ href: `/games/${o.slug}`, title: o.name, body: o.blurb }));
+    .map((o) => ({ href: `${sectionPath(lang, "games")}/${o.slug}`, title: o.name, body: o.blurb }));
   return <GameView game={game} slug={g.slug} name={g.name} page={g.page} lang={lang} related={related} />;
 }

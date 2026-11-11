@@ -14,6 +14,7 @@ import type { Locale } from "@/lib/i18n";
 import type { Article } from "../articles";
 import type { GamePageContent } from "../games";
 import { QA } from "./qa";
+import { RU } from "./ru";
 
 /** Инструменты в браузере — у каждого свой словарь строк по языкам. */
 export type ToolKey = "memory-test" | "reading-speed-test" | "reaction-time-test" | "schulte-table" | "stroop-test";
@@ -51,5 +52,6 @@ export interface LocaleContent {
 }
 
 export const L10N: Partial<Record<Locale, LocaleContent>> = {
+  ru: RU,
   qa: QA,
 };

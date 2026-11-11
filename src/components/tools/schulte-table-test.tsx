@@ -6,6 +6,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { Locale } from "@/lib/i18n";
+import { pluralRu } from "@/lib/plural-ru";
 import { loadBest, saveBest } from "./storage";
 
 const SIZES = [3, 4, 5, 6, 7] as const;
@@ -28,6 +29,8 @@ interface Strings {
   result: (secs: string, errors: number) => string;
   start: (size: number) => string;
   hint: (total: number) => string;
+  /** «с» — единица секунд в строке состояния */
+  sec: string;
 }
 
 const EN: Strings = {
@@ -39,9 +42,22 @@ const EN: Strings = {
   start: (n) => `Start ${n}×${n}`,
   hint: (total) =>
     `Click the numbers from 1 to ${total} in order. Try to keep your eyes on the center of the grid and find the next number with your side vision.`,
+  sec: "s",
 };
 
-const STRINGS: Record<Locale, Strings> = { en: EN, qa: EN };
+const RU: Strings = {
+  grid: "Таблица:",
+  find: "Найдите",
+  errors: (n) => `${pluralRu(n, "ошибка", "ошибки", "ошибок")}: ${n}`,
+  best: (n) => `Рекорд ${n}×${n}:`,
+  result: (secs, e) => `${secs} с · ${e} ${pluralRu(e, "ошибка", "ошибки", "ошибок")} — ещё раз`,
+  start: (n) => `Начать ${n}×${n}`,
+  hint: (total) =>
+    `Нажимайте числа от 1 до ${total} по порядку. Держите взгляд в центре таблицы и ищите следующее число боковым зрением.`,
+  sec: "с",
+};
+
+const STRINGS: Record<Locale, Strings> = { en: EN, ru: RU, qa: EN };
 
 export function SchulteTableTest({ lang = "en" }: { lang?: Locale }) {
   const tx = STRINGS[lang];
@@ -112,7 +128,7 @@ export function SchulteTableTest({ lang = "en" }: { lang?: Locale }) {
           </button>
         ))}
         <span className="ml-auto text-sm tabular-nums text-[var(--color-text-secondary)]" aria-live="polite">
-          {running ? <>{tx.find} <strong className="text-[var(--color-text)]">{next}</strong> · {secs} s · {tx.errors(errors)}</> : best !== null ? <>{tx.best(size)} <strong className="text-[var(--color-text)]">{best} s</strong></> : null}
+          {running ? <>{tx.find} <strong className="text-[var(--color-text)]">{next}</strong> · {secs} {tx.sec} · {tx.errors(errors)}</> : best !== null ? <>{tx.best(size)} <strong className="text-[var(--color-text)]">{best} {tx.sec}</strong></> : null}
         </span>
       </div>
 

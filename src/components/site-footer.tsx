@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { absoluteUrl, LOCALES, type Locale } from "@/lib/i18n";
+import { absoluteUrl, LOCALES, sectionPath, type Locale } from "@/lib/i18n";
 import { UI } from "@/lib/ui";
 
 /**
@@ -23,9 +23,9 @@ export function SiteFooter({ lang = "en", sections }: { lang?: Locale; sections?
         </div>
 
         <nav className="flex flex-wrap items-center justify-center gap-6 text-sm text-[var(--color-text-secondary)]">
-          {has.games && <Link href="/games" className="hover:text-[var(--color-text)]">{t.brainGames}</Link>}
-          {has.tests && <Link href="/tests" className="hover:text-[var(--color-text)]">{t.brainTests}</Link>}
-          {has.learn && <Link href="/learn" className="hover:text-[var(--color-text)]">{t.learn}</Link>}
+          {has.games && <Link href={sectionPath(lang, "games")} className="hover:text-[var(--color-text)]">{t.brainGames}</Link>}
+          {has.tests && <Link href={sectionPath(lang, "tests")} className="hover:text-[var(--color-text)]">{t.brainTests}</Link>}
+          {has.learn && <Link href={sectionPath(lang, "learn")} className="hover:text-[var(--color-text)]">{t.learn}</Link>}
           <a href={main("/privacy")} className="hover:text-[var(--color-text)]">{t.privacy}</a>
           <a href={main("/terms")} className="hover:text-[var(--color-text)]">{t.terms}</a>
           <a href={main("/support")} className="hover:text-[var(--color-text)]">{t.support}</a>

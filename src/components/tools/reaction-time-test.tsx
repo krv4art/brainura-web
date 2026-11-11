@@ -24,6 +24,8 @@ interface Strings {
   fastest: string;
   slowest: string;
   deviceNote: string;
+  /** единица миллисекунд: «ms» / «мс» */
+  ms: string;
 }
 
 const EN: Strings = {
@@ -38,9 +40,25 @@ const EN: Strings = {
   fastest: "Fastest:",
   slowest: "slowest:",
   deviceNote: "Your device adds its own delay, so compare your scores on the same device rather than with other people.",
+  ms: "ms",
 };
 
-const STRINGS: Record<Locale, Strings> = { en: EN, qa: EN };
+const RU: Strings = {
+  idle: ["Тест на реакцию", "Нажмите сюда (или клавишу «пробел»), чтобы начать. Дождитесь зелёного цвета и нажмите как можно быстрее."],
+  wait: "Ждите зелёного…",
+  go: "ЖМИТЕ!",
+  early: ["Слишком рано!", "Вы нажали до того, как стало зелёным. Нажмите, чтобы повторить этот раунд."],
+  shown: (a, t) => `Попытка ${a} из ${t}. Нажмите, чтобы продолжить.`,
+  doneTitle: (avg) => `В среднем ${avg} мс`,
+  doneSub: "Нажмите, чтобы пройти ещё раз.",
+  bestAvg: "Лучшее среднее:",
+  fastest: "Быстрее всего:",
+  slowest: "медленнее всего:",
+  deviceNote: "Устройство вносит свою задержку, поэтому сравнивайте результаты на одном и том же устройстве, а не с другими людьми.",
+  ms: "мс",
+};
+
+const STRINGS: Record<Locale, Strings> = { en: EN, ru: RU, qa: EN };
 
 export function ReactionTimeTest({ lang = "en" }: { lang?: Locale }) {
   const tx = STRINGS[lang];
@@ -108,7 +126,7 @@ export function ReactionTimeTest({ lang = "en" }: { lang?: Locale }) {
     wait: { bg: "bg-[#C0392B]", title: tx.wait, sub: "" },
     go: { bg: "bg-[#27AE60]", title: tx.go, sub: "" },
     early: { bg: "bg-[#E67E22]", title: tx.early[0], sub: tx.early[1] },
-    shown: { bg: "bg-[#4A90E2]", title: `${last} ms`, sub: tx.shown(times.length, TRIALS) },
+    shown: { bg: "bg-[#4A90E2]", title: `${last} ${tx.ms}`, sub: tx.shown(times.length, TRIALS) },
     done: { bg: "bg-[#4A90E2]", title: tx.doneTitle(avg), sub: tx.doneSub },
   };
   const l = look[phase];
@@ -133,15 +151,15 @@ export function ReactionTimeTest({ lang = "en" }: { lang?: Locale }) {
             key={i}
             className={`rounded-full border px-3 py-1 tabular-nums ${times[i] ? "border-[var(--color-primary)] text-[var(--color-text)]" : "border-[var(--color-border)]"}`}
           >
-            {times[i] ? `${times[i]} ms` : `#${i + 1}`}
+            {times[i] ? `${times[i]} ${tx.ms}` : `#${i + 1}`}
           </span>
         ))}
-        {best !== null && <span className="ml-auto">{tx.bestAvg} <strong className="text-[var(--color-text)]">{best} ms</strong></span>}
+        {best !== null && <span className="ml-auto">{tx.bestAvg} <strong className="text-[var(--color-text)]">{best} {tx.ms}</strong></span>}
       </div>
       {phase === "done" && (
         <p className="mt-3 text-sm text-[var(--color-text-secondary)]">
-          {tx.fastest} <strong className="text-[var(--color-text)]">{Math.min(...times)} ms</strong> · {tx.slowest}{" "}
-          <strong className="text-[var(--color-text)]">{Math.max(...times)} ms</strong>. {tx.deviceNote}
+          {tx.fastest} <strong className="text-[var(--color-text)]">{Math.min(...times)} {tx.ms}</strong> · {tx.slowest}{" "}
+          <strong className="text-[var(--color-text)]">{Math.max(...times)} {tx.ms}</strong>. {tx.deviceNote}
         </p>
       )}
     </div>

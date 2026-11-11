@@ -1,6 +1,8 @@
 // Маршрутизация языковых поддоменов (Next 16: proxy = бывший middleware).
 //
 //   de.brainura.app/tests/x      → внутри /de/tests/x   (src/app/[lang]/…)
+//   de.brainura.app/testy/x      → /de/tests/x          (локализованный раздел → внутренний, SECTION_SLUGS)
+//   de.brainura.app/tests/x      → 308 на /testy/x       (внутреннее имя раздела снаружи не отдаём)
 //   de.brainura.app/sitemap.xml  → /de/sitemap-xml       (свой sitemap у поддомена)
 //   brainura.app/de/tests/x      → 308 на de.brainura.app/tests/x (без дублей)
 //   brainura.app/…               → как есть (английский, src/app/(en)/…)
@@ -9,7 +11,7 @@
 // Статика, картинки, /_next, /api и служебные файлы мимо прокси.
 
 import { NextResponse, type NextRequest } from "next/server";
-import { absoluteUrl, isLocale, localeFromHost, subdomainLocales } from "@/lib/i18n";
+import { absoluteUrl, isLocale, localeFromHost, sectionFromSegment, SECTION_SLUGS, subdomainLocales, type SectionName } from "@/lib/i18n";
 
 export function proxy(req: NextRequest) {
   const { pathname, search } = req.nextUrl;
@@ -18,7 +20,18 @@ export function proxy(req: NextRequest) {
   if (lang) {
     const url = req.nextUrl.clone();
     // Служебные файлы — во внутренние маршруты без точки в имени (см. [lang]/sitemap-xml).
-    const inner = pathname === "/sitemap.xml" ? "/sitemap-xml" : pathname === "/robots.txt" ? "/robots-txt" : pathname;
+    let inner = pathname === "/sitemap.xml" ? "/sitemap-xml" : pathname === "/robots.txt" ? "/robots-txt" : pathname;
+    // Раздел: локализованный сегмент → внутренний (tests/games/learn).
+    const [, seg = "", ...rest] = inner.split("/");
+    const section = sectionFromSegment(lang, seg);
+    if (section) {
+      inner = "/" + [section, ...rest].join("/");
+    } else if ((["tests", "games", "learn", "compare"] as SectionName[]).includes(seg as SectionName) && SECTION_SLUGS[lang][seg as SectionName] !== seg) {
+      // Внутреннее имя раздела на языке с другим адресом — на красивый (без дублей страниц).
+      const to = req.nextUrl.clone();
+      to.pathname = "/" + [SECTION_SLUGS[lang][seg as SectionName], ...rest].join("/");
+      return NextResponse.redirect(to, 308);
+    }
     url.pathname = `/${lang}${inner === "/" ? "" : inner}`;
     return NextResponse.rewrite(url);
   }

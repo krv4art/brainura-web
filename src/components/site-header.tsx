@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Locale } from "@/lib/i18n";
+import { sectionPath, type Locale } from "@/lib/i18n";
 import { UI } from "@/lib/ui";
 import { playUrl } from "@/lib/site";
 
@@ -29,17 +29,17 @@ export function SiteHeader({ lang = "en", sections }: { lang?: Locale; sections?
             </Link>
           )}
           {has.games && (
-            <Link href="/games" className={`hidden sm:block ${item}`}>
+            <Link href={sectionPath(lang, "games")} className={`hidden sm:block ${item}`}>
               {t.games}
             </Link>
           )}
           {has.tests && (
-            <Link href="/tests" className={item}>
+            <Link href={sectionPath(lang, "tests")} className={item}>
               {t.tests}
             </Link>
           )}
           {!en && has.learn && (
-            <Link href="/learn" className={`hidden sm:block ${item}`}>
+            <Link href={sectionPath(lang, "learn")} className={`hidden sm:block ${item}`}>
               {t.learn}
             </Link>
           )}

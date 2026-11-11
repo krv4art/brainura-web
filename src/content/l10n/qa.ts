@@ -29,7 +29,7 @@ export const QA: LocaleContent = {
               { title: "Pick a mode", text: "Numbers, numbers backwards or grid." },
               { title: "Watch", text: "The sequence appears one item at a time." },
             ] },
-            { t: "callout", kind: "tip", text: "Links stay on this subdomain: [all tests](/tests)." },
+            { t: "callout", kind: "tip", text: "Links stay on this subdomain: [all tests](/testy-qa)." },
           ],
         },
       ],

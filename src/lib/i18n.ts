@@ -22,7 +22,7 @@
 // `qa` — псевдо-язык для проверки механизма: собирается только при SITE_QA_LOCALE=1,
 // открывается на `qa.localhost:<порт>`; в проде его нет.
 
-export type Locale = "en" | "qa";
+export type Locale = "en" | "ru" | "qa";
 
 export interface LocaleInfo {
   /** BCP 47 для hreflang и <html lang>. */
@@ -41,10 +41,38 @@ export const DEFAULT_LOCALE: Locale = "en";
 
 export const LOCALES: Record<Locale, LocaleInfo> = {
   en: { hreflang: "en", host: "brainura.app", nativeName: "English", dateLocale: "en-US" },
+  ru: { hreflang: "ru", host: "ru.brainura.app", nativeName: "Русский", dateLocale: "ru-RU" },
   qa: { hreflang: "en-GB", host: "qa.brainura.app", nativeName: "QA", dateLocale: "en-GB", preview: true },
 };
 
 export const QA_ENABLED = process.env.SITE_QA_LOCALE === "1";
+
+// Разделы сайта и их адреса по языкам. 🔒 Решение владельца 12.11: названия разделов
+// переводятся и несут поисковую фразу (`/testy-dlya-mozga`), внутри сайт по-прежнему
+// знает их как tests / games / learn. Править адреса языка — только в SECTION_SLUGS;
+// прокси (src/proxy.ts) сам переводит их во внутренние маршруты `[lang]/tests/…`.
+export type SectionName = "tests" | "games" | "learn" | "compare";
+
+const EN_SECTIONS: Record<SectionName, string> = { tests: "tests", games: "games", learn: "learn", compare: "compare" };
+
+export const SECTION_SLUGS: Record<Locale, Record<SectionName, string>> = {
+  en: EN_SECTIONS,
+  // ru: адреса утверждены владельцем 12.11.2026 (тесты для мозга 58 · игры для мозга 503 — точная частота)
+  ru: { tests: "testy-dlya-mozga", games: "igry-dlya-mozga", learn: "stati", compare: "sravneniya" },
+  // qa: другие слаги, чтобы проверить, что нигде не осталось жёстких «/tests»
+  qa: { tests: "testy-qa", games: "igry-qa", learn: "stati-qa", compare: "compare-qa" },
+};
+
+/** Путь раздела на языке: sectionPath("ru", "tests") → "/testy-dlya-mozga". */
+export function sectionPath(lang: Locale, section: SectionName): string {
+  return `/${SECTION_SLUGS[lang][section]}`;
+}
+
+/** Раздел по первому сегменту пути на хосте языка (локализованному), иначе null. */
+export function sectionFromSegment(lang: Locale, seg: string): SectionName | null {
+  for (const k of Object.keys(EN_SECTIONS) as SectionName[]) if (SECTION_SLUGS[lang][k] === seg) return k;
+  return null;
+}
 
 export function isLocale(x: string): x is Locale {
   return Object.prototype.hasOwnProperty.call(LOCALES, x);

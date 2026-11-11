@@ -1,4 +1,4 @@
-import { absoluteUrl, isLocale, LOCALES, subdomainLocales, type Locale } from "@/lib/i18n";
+import { absoluteUrl, isLocale, LOCALES, sectionPath, subdomainLocales, type Locale } from "@/lib/i18n";
 import { SECTIONS, hubVersions, pagesOf, versionsOf, type SectionKey } from "@/content/registry";
 
 // sitemap.xml поддомена языка: <код>.brainura.app/sitemap.xml (src/proxy.ts переписывает
@@ -29,9 +29,9 @@ export async function GET(_req: Request, { params }: { params: Promise<{ lang: s
     const pages = pagesOf(section, lang);
     if (!pages.length) continue;
     const latest = pages.map((p) => p.updated).sort().at(-1);
-    urls.push(urlTag(absoluteUrl(lang, SECTIONS[section].path), latest, hubVersions(section)));
+    urls.push(urlTag(absoluteUrl(lang, sectionPath(lang, section)), latest, hubVersions(section)));
     for (const p of pages) {
-      urls.push(urlTag(absoluteUrl(lang, `${SECTIONS[section].path}/${p.slug}`), p.updated, versionsOf(section, p.key)));
+      urls.push(urlTag(absoluteUrl(lang, `${sectionPath(lang, section)}/${p.slug}`), p.updated, versionsOf(section, p.key)));
     }
   }
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls.join("\n")}\n</urlset>\n`;
