@@ -6,6 +6,7 @@
 import { DEFAULT_LOCALE, subdomainLocales, type LangVersion, type Locale } from "@/lib/i18n";
 import { GAME_PAGES } from "./games";
 import { ARTICLES_ALL } from "./articles";
+import { TESTS_EN } from "./tests";
 import { L10N } from "./l10n";
 
 export interface PageEntry {
@@ -21,43 +22,14 @@ export interface PageEntry {
   updated: string;
 }
 
-export const TESTS: PageEntry[] = [
-  {
-    key: "memory-test",
-    slug: "memory-test",
-    name: "Memory Test",
-    blurb: "Repeat digits forwards, backwards or a grid sequence. Find your memory span.",
-    updated: "2026-11-11",
-  },
-  {
-    key: "reading-speed-test",
-    slug: "reading-speed-test",
-    name: "Reading Speed Test",
-    blurb: "Read a short text, answer three questions, get your words per minute.",
-    updated: "2026-11-11",
-  },
-  {
-    key: "reaction-time-test",
-    slug: "reaction-time-test",
-    name: "Reaction Time Test",
-    blurb: "Click when the screen turns green. Five tries, average in milliseconds.",
-    updated: "2026-11-11",
-  },
-  {
-    key: "schulte-table",
-    slug: "schulte-table",
-    name: "Schulte Table",
-    blurb: "Find the numbers 1 to 25 in order. A classic attention and visual search drill.",
-    updated: "2026-11-11",
-  },
-  {
-    key: "stroop-test",
-    slug: "stroop-test",
-    name: "Stroop Test",
-    blurb: "Name the ink color, not the word. Measure your own Stroop effect.",
-    updated: "2026-11-11",
-  },
-];
+// Тесты — из их контента (src/content/tests.ts).
+export const TESTS: PageEntry[] = TESTS_EN.map((t) => ({
+  key: t.key,
+  slug: t.slug,
+  name: t.name,
+  blurb: t.blurb,
+  updated: t.updated,
+}));
 
 // Игры с готовой страницей (контент — src/content/games.ts).
 export const GAMES: PageEntry[] = GAME_PAGES().map((g) => ({

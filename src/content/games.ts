@@ -7,6 +7,7 @@
 // docs/growth/seo/page_map.md); остальные видны в хабе карточкой без ссылки.
 
 import type { FaqItem, Source } from "@/components/seo/parts";
+import type { BlockSection } from "@/components/seo/blocks";
 import { GAME_PAGE_CONTENT } from "./game-pages";
 
 export type Skill = "Memory" | "Attention" | "Speed" | "Logic" | "Language" | "Emotions";
@@ -20,9 +21,10 @@ export interface GamePageContent {
   lead: string;
   /** Главный кластер и соседние фразы — для карты страниц. */
   cluster: string;
-  howToPlay: string[];
-  /** Тело: разделы H2 с абзацами. Абзац — обычный текст. */
-  sections: { h2: string; paragraphs: string[] }[];
+  /** «Как играть» — шаги: короткий заголовок + пояснение. Рисуется первым разделом. */
+  howToPlay: { title: string; text: string }[];
+  /** Тело: разделы блоками (src/components/seo/blocks.tsx) — разнообразная подача. */
+  sections: BlockSection[];
   faq: FaqItem[];
   sources?: Source[];
   /** Слаги тестов /tests/*, на которые сослаться. */

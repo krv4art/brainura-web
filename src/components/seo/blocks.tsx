@@ -33,7 +33,7 @@ export type Block =
   | { t: "compare"; good: { title: string; items: string[] }; bad: { title: string; items: string[] } }
   | { t: "quote"; text: string; cite?: string }
   /** Картинка. id — имя файла без расширения; brief — что должно быть на картинке (для автора). */
-  | { t: "figure"; id: string; alt: string; caption?: string; brief: string; aspect?: "16/9" | "4/3" | "1/1" }
+  | { t: "figure"; id: string; alt: string; caption?: string; brief: string; aspect?: "16/9" | "4/3" | "1/1" | "3/4" }
   /** Карточка-переход на инструмент или игру посреди текста. */
   | { t: "cta"; href: string; title: string; text: string; button: string };
 
@@ -93,7 +93,7 @@ function Figure({ b, pagePath }: { b: Extract<Block, { t: "figure" }>; pagePath:
   const aspect = b.aspect ?? "16/9";
   if (figureExists(src)) {
     return (
-      <figure className="mt-8">
+      <figure className={`mt-8 ${aspect === "3/4" ? "mx-auto max-w-xs" : ""}`}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={src} alt={b.alt} loading="lazy" className="w-full rounded-2xl border border-[var(--color-border)]/60" style={{ aspectRatio: aspect, objectFit: "cover" }} />
         {b.caption && <figcaption className="mt-2 text-center text-sm text-[var(--color-muted)]"><Inline text={b.caption} /></figcaption>}
@@ -102,7 +102,7 @@ function Figure({ b, pagePath }: { b: Extract<Block, { t: "figure" }>; pagePath:
   }
   if (!SHOW_PLACEHOLDERS) return null;
   return (
-    <figure className="mt-8" data-figure-placeholder={src}>
+    <figure className={`mt-8 ${aspect === "3/4" ? "mx-auto max-w-xs" : ""}`} data-figure-placeholder={src}>
       <div
         className="flex flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-[var(--color-border)] bg-[var(--color-surface)] p-6 text-center"
         style={{ aspectRatio: aspect }}
@@ -200,13 +200,21 @@ function BlockView({ b, pagePath, labels }: { b: Block; pagePath: string; labels
     }
     case "stats":
       return (
-        <div className={`mt-6 grid gap-3 ${b.items.length === 4 ? "grid-cols-2 sm:grid-cols-4" : b.items.length === 2 ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-3"}`}>
-          {b.items.map((s, i) => (
-            <div key={i} className="rounded-2xl border border-[var(--color-border)]/70 bg-white p-4 text-center shadow-sm">
-              <p className="text-gradient !mt-0 text-3xl font-extrabold tabular-nums">{s.value}</p>
-              <p className="!mt-1 text-sm leading-snug"><Inline text={s.label} /></p>
-            </div>
-          ))}
+        // На телефоне 3 карточки строками (цифра слева, подпись справа), чтобы не занимать экран;
+        // 2 и 4 — сеткой 2×N; с sm — колонками по центру.
+        <div className={`mt-6 grid gap-3 ${b.items.length === 4 ? "grid-cols-2 sm:grid-cols-4" : b.items.length === 2 ? "grid-cols-2" : "grid-cols-1 gap-2 sm:grid-cols-3 sm:gap-3"}`}>
+          {b.items.map((s, i) => {
+            const row = b.items.length === 3;
+            return (
+              <div
+                key={i}
+                className={`rounded-2xl border border-[var(--color-border)]/70 bg-white shadow-sm ${row ? "flex items-center gap-4 px-4 py-3 text-left sm:block sm:p-4 sm:text-center" : "p-4 text-center"}`}
+              >
+                <p className={`text-gradient !mt-0 font-extrabold tabular-nums ${row ? "min-w-[6.5rem] shrink-0 text-2xl sm:min-w-0 sm:text-3xl" : "text-3xl"}`}>{s.value}</p>
+                <p className={`text-sm leading-snug ${row ? "!mt-0 sm:!mt-1" : "!mt-1"}`}><Inline text={s.label} /></p>
+              </div>
+            );
+          })}
         </div>
       );
     case "bars": {

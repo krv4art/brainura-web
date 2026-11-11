@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ArticlePage, GamePage, ToolPage } from "./templates";
-import { BlockSections } from "./blocks";
+import { BlockSections, Inline } from "./blocks";
 import { Breadcrumbs, DownloadBlock, JsonLd } from "./parts";
 import { breadcrumbLd } from "@/lib/schema";
 import { absoluteUrl, alternatesFor, type Locale } from "@/lib/i18n";
@@ -124,20 +124,11 @@ export function GameView({
       campaign={`game-${game.slug}`}
       download={{ title: ui.game.playIn(name), body: ui.game.playInBody }}
     >
-      <h2>{ui.game.howToPlay(name)}</h2>
-      <ol>
-        {p.howToPlay.map((step) => (
-          <li key={step}>{step}</li>
-        ))}
-      </ol>
-      {p.sections.map((s) => (
-        <section key={s.h2}>
-          <h2>{s.h2}</h2>
-          {s.paragraphs.map((para) => (
-            <p key={para.slice(0, 40)}>{para}</p>
-          ))}
-        </section>
-      ))}
+      <BlockSections
+        sections={[{ id: "how-to-play", h2: ui.game.howToPlay(name), blocks: [{ t: "steps", items: p.howToPlay }] }, ...p.sections]}
+        pagePath={path}
+        labels={ui.blocks}
+      />
     </GamePage>
   );
 }
@@ -172,7 +163,7 @@ export function TestView({ t, lang }: { t: TestPageContent; lang: Locale }) {
       h1={t.h1}
       toolName={t.name}
       description={t.description}
-      lead={<p>{t.lead}</p>}
+      lead={<p><Inline text={t.lead} /></p>}
       tool={<ToolFor tool={t.key} lang={lang} />}
       faq={t.faq}
       sources={t.sources}

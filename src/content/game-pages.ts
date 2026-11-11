@@ -2,18 +2,41 @@
 // lib/screens/brain_training/services/level_params/*_params.dart и обучалками в
 // assets/translations/en/brain_training.json. Правила: без медицинских обещаний,
 // без чужих товарных знаков в заголовках, источники — для научных утверждений.
-// Порядок и ключи — docs/growth/seo/page_map.md.
+// Порядок и ключи — docs/growth/seo/page_map.md, ядра — docs/growth/seo/pages/games/.
+//
+// Подача — блоками (src/components/seo/blocks.tsx): в каждом разделе не только абзацы.
+// «Как играть» — шаги, рисуются первым разделом автоматически. Слот `screenshot` —
+// скриншот игры (файл public/games/<slug>/screenshot.webp появляется сам).
+// 🔒 Новые факты о механике — только сверив с кодом приложения.
 
 import type { GamePageContent } from "./games";
+import type { Block } from "@/components/seo/blocks";
 
-const U = "2026-11-11";
+const U = "2026-11-12";
 
 const SIMONS_2016 = {
   text: "Simons, D. J., et al. (2016). Do “brain-training” programs work? Psychological Science in the Public Interest, 17(3), 103–186.",
   url: "https://doi.org/10.1177/1529100616661983",
 };
 
+const shot = (game: string, what: string): Block => ({
+  t: "figure",
+  id: "screenshot",
+  alt: `${game} in the Brainura app`,
+  caption: `${game} in Brainura.`,
+  brief: `Скриншот игры «${game}» из приложения, вертикальный 3:4: ${what}. Можно снять с web-сборки (scripts/aso_visuals/capture_web.py).`,
+  aspect: "3/4",
+});
+
+const PREMIUM_NOTE: Block = {
+  t: "callout",
+  kind: "note",
+  title: "Premium game",
+  text: "New players get all Premium games free for the first 7 days, no card needed.",
+};
+
 export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
+  // ───────────────────────────── Card Match ─────────────────────────────
   "card-match": {
     title: "Memory Matching Game for Adults: Card Match",
     description:
@@ -23,33 +46,84 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
     lead:
       "The classic pairs game, built for grown-ups: a short look at the cards, then flip two at a time and find every match with as few misses as possible.",
     howToPlay: [
-      "At the start of a round all cards are shown face up for a moment. Take in as many as you can.",
-      "The cards flip over. Tap two cards to turn them face up.",
-      "If they match, they stay open. If not, they flip back, and now you know two more positions.",
-      "Clear the board with as few wrong pairs as you can. Fewer misses mean a better score.",
+      { title: "Memorize", text: "At the start of a round all cards are shown face up for a moment. Take in as many as you can." },
+      { title: "Flip two", text: "The cards turn over. Tap two cards to turn them face up." },
+      { title: "Match or learn", text: "If they match, they stay open. If not, they flip back, and now you know two more positions." },
+      { title: "Clear the board", text: "Find every pair with as few wrong guesses as you can. Fewer misses mean a better score." },
     ],
     sections: [
       {
+        id: "levels",
         h2: "How the levels work",
-        paragraphs: [
-          "Level 1 starts on a 4×4 grid (8 pairs) with a three-second preview. As your level rises, the grid grows step by step to 8×8, which is 32 pairs, and the preview shrinks to about one second. Your level follows your results: play well and it climbs, have an off day and it eases back.",
-          "The bigger grids change the game. On 4×4 you can simply remember. On 8×8 you need a system: scan in rows, keep track of the cards you have already seen, and resist the urge to flip a card you have no information about when a known pair is waiting.",
+        blocks: [
+          {
+            t: "stats",
+            items: [
+              { value: "8 → 32", label: "pairs, from a 4×4 to an 8×8 grid" },
+              { value: "3 s → 1 s", label: "preview before the cards flip" },
+              { value: "Free", label: "in the app, no ads" },
+            ],
+          },
+          {
+            t: "table",
+            head: ["Board", "Pairs", "What it takes"],
+            rows: [
+              ["**4×4**, level 1", "8", "You can simply remember the cards."],
+              ["Grids in between", "grows step by step", "Remember a few cards for sure instead of all of them vaguely."],
+              ["**8×8**, top levels", "32", "A system: scan in rows, track every card you've seen."],
+            ],
+          },
+          {
+            t: "p",
+            text: "Your level follows your results: play well and it climbs, have an off day and it eases back. On big boards, resist flipping a card you know nothing about when a known pair is waiting.",
+          },
+          shot("Card Match", "середина партии на поле 6×6, несколько пар уже открыты"),
         ],
       },
       {
-        h2: "What the game exercises",
-        paragraphs: [
-          "Matching games lean on visual working memory, the short-term store that holds what something looked like and where it was. Each wrong flip adds a card and a position you need to keep in mind until its partner appears, and the board quickly fills up with half-remembered locations.",
-          "That makes it a good warm-up and a pleasant challenge, but keep expectations realistic: research on brain training finds that practice improves performance on the trained game far more reliably than it improves memory in everyday life.",
-        ],
-      },
-      {
+        id: "tips",
         h2: "Tips to remember more cards",
-        paragraphs: [
-          "Use the preview to anchor a few cards, not all of them. Pick one row or one corner and remember it well; trying to take in the whole board at once usually leaves you with nothing certain.",
-          "Name what you see. Saying \"cat, top left\" in your head is easier to keep than a picture alone.",
-          "Work the edges first. Corners and edges are easier to recall than cells in the middle of a large grid.",
-          "When you have no known pair, flip a card you have never seen first. If it matches something you remember, you get a free pair.",
+        blocks: [
+          {
+            t: "ul",
+            items: [
+              "**Anchor a few, not all.** Use the preview to lock in one row or one corner. Trying to take in the whole board usually leaves you with nothing certain.",
+              "**Name what you see.** “Cat, top left” in your head is easier to keep than a picture alone.",
+              "**Work the edges first.** Corners and edges are easier to recall than cells in the middle of a big grid.",
+            ],
+          },
+          {
+            t: "callout",
+            kind: "tip",
+            title: "The free-pair trick",
+            text: "No known pair? Flip a card you have **never** seen first. If it matches one you remember, you get a pair for free.",
+          },
+        ],
+      },
+      {
+        id: "what-it-trains",
+        h2: "What the game exercises",
+        blocks: [
+          {
+            t: "p",
+            text: "Matching games lean on **visual working memory**: the short-term store that holds what something looked like and where it was. Each wrong flip adds a card and a position to hold until its partner appears.",
+          },
+          {
+            t: "mythFact",
+            items: [
+              {
+                myth: "Playing memory games makes your everyday memory better.",
+                fact: "Practice reliably improves the game itself; evidence that it improves memory in daily life is weak.",
+              },
+            ],
+          },
+          {
+            t: "cta",
+            href: "/tests/memory-test",
+            title: "How long is your memory span?",
+            text: "Try the free online memory test: digits forwards, backwards or a grid sequence.",
+            button: "Take the test",
+          },
         ],
       },
     ],
@@ -72,9 +146,11 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
       },
     ],
     sources: [SIMONS_2016],
+    tests: ["memory-test"],
     updated: U,
   },
 
+  // ───────────────────────────── Anagrams ─────────────────────────────
   anagrams: {
     title: "Anagram Game: Unscramble Letters Into Words",
     description:
@@ -84,33 +160,68 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
     lead:
       "You get a jumble of letters. Find the word hidden in them before the timer runs out. Short to play, hard to put down.",
     howToPlay: [
-      "Look at the scrambled letters and find the word they spell.",
-      "Type your answer and submit it.",
-      "Stuck? On the first 50 levels you can use a hint.",
-      "Solve as many words as you can within the time limit for each one.",
+      { title: "Look", text: "Study the scrambled letters and find the word they spell." },
+      { title: "Type", text: "Type your answer and submit it." },
+      { title: "Hint if stuck", text: "On the first 50 levels you can use a hint." },
+      { title: "Beat the clock", text: "Each word has its own timer. Solve as many as you can." },
     ],
     sections: [
       {
+        id: "levels",
         h2: "How the levels get harder",
-        paragraphs: [
-          "The first ten levels use easy, everyday words with about a minute per word. Medium words arrive from level 11 and hard words from level 31, while the time per word shrinks to well under half a minute at the top levels.",
-          "From level 41 there are extra letters in the mix that don't belong to the word, so you can no longer use every letter you see. From level 51 hints are switched off. The combination turns a relaxed word game into a real test of vocabulary under pressure.",
+        blocks: [
+          {
+            t: "table",
+            head: ["Levels", "Words", "What changes"],
+            rows: [
+              ["1–10", "Easy, everyday", "About a minute per word"],
+              ["11–30", "Medium", "Less time per word"],
+              ["31–40", "Hard", "Less time again"],
+              ["41–50", "Hard", "**Extra letters** that don't belong to the word"],
+              ["51+", "Hard", "Extra letters, **no hints**, under 20 seconds at the top"],
+            ],
+          },
+          {
+            t: "p",
+            text: "From level 41 you can no longer use every letter you see, and from level 51 you are on your own. Together they turn a relaxed word game into a real test of vocabulary under pressure.",
+          },
+          shot("Anagrams", "перемешанные буквы и поле ввода, таймер вверху"),
         ],
       },
       {
+        id: "solve-faster",
         h2: "How to solve anagrams faster",
-        paragraphs: [
-          "Look for common endings first: -ING, -ED, -ER, -LY, -TION. Pulling them aside leaves a shorter, easier jumble.",
-          "Find pairs that often sit together, like TH, CH, SH, QU, CK, and try them at the start or end of the word.",
-          "Separate vowels and consonants in your head and try consonant-vowel patterns. Most English words alternate more than you would think.",
-          "If nothing comes, say the letters in a different order out loud. Hearing a fragment often unlocks the word faster than staring.",
+        blocks: [
+          {
+            t: "steps",
+            items: [
+              { title: "Pull off the ending", text: "Look for -ING, -ED, -ER, -LY, -TION. Setting them aside leaves a shorter, easier jumble." },
+              { title: "Pair up letters", text: "TH, CH, SH, QU, CK often sit together. Try them at the start or end of the word." },
+              { title: "Alternate", text: "Split vowels and consonants in your head and try consonant-vowel patterns. English words alternate more than you'd think." },
+              { title: "Say it out loud", text: "Reading the letters in a new order aloud often unlocks the word faster than staring." },
+            ],
+          },
+          {
+            t: "callout",
+            kind: "tip",
+            title: "Worked example",
+            text: "**GNIKLAW** → pull out I, N, G → you're left with K, L, A, W → **WALK** + ING = **WALKING**.",
+          },
         ],
       },
       {
+        id: "why",
         h2: "Why word games feel good for the brain",
-        paragraphs: [
-          "An anagram makes you search your mental dictionary in an unusual way: instead of going from meaning to word, you go from a bag of letters to a word that fits. That search is what makes the moment of finding it so satisfying.",
-          "Playing regularly makes you faster at spotting letter patterns and at recalling words. It is a fun habit, not a treatment; research on brain games shows that gains mostly stay with the trained task.",
+        blocks: [
+          {
+            t: "p",
+            text: "An anagram makes you search your mental dictionary in an unusual way: not from meaning to word, but from a bag of letters to a word that fits. That search is what makes the moment of finding it so satisfying.",
+          },
+          {
+            t: "callout",
+            kind: "note",
+            text: "Playing regularly makes you faster at spotting letter patterns and recalling words. It is a fun habit, not a treatment: research on brain games shows gains mostly stay with the trained task.",
+          },
         ],
       },
     ],
@@ -132,6 +243,7 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
     updated: U,
   },
 
+  // ───────────────────────────── Merge Numbers ─────────────────────────────
   "merge-numbers": {
     title: "Merge Numbers: a 2048-Style Sliding Puzzle",
     description:
@@ -141,32 +253,59 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
     lead:
       "Slide every tile at once, merge equal numbers into their sum, and see how high you can climb before the board locks up. No timer, no move limit.",
     howToPlay: [
-      "Use the arrow pad to slide all tiles in one direction at once.",
-      "Two equal tiles that collide merge into one tile with double the value: 2 + 2 = 4, 4 + 4 = 8, and so on.",
-      "After each move a new small tile appears on an empty cell.",
-      "The game ends when no move can change the board. Your highest tile is your score.",
+      { title: "Slide", text: "Use the arrow pad to slide all tiles in one direction at once." },
+      { title: "Merge", text: "Two equal tiles that collide become one tile with double the value: 2 + 2 = 4, 4 + 4 = 8, and so on." },
+      { title: "New tile", text: "After each move a new small tile appears on an empty cell." },
+      { title: "Climb", text: "The game ends when no move can change the board. Your highest tile is your score." },
     ],
     sections: [
       {
+        id: "scoring",
         h2: "Scoring and stars",
-        paragraphs: [
-          "There are no levels here: every game is the same puzzle, and the board itself is the challenge. Reaching a 256 tile earns one star, 512 earns two, and 1024 earns three.",
-          "Because there is no clock, Merge Numbers is the calm game in Brainura's line-up. It rewards planning several moves ahead rather than quick reflexes.",
+        blocks: [
+          {
+            t: "stats",
+            items: [
+              { value: "256", label: "highest tile for ★" },
+              { value: "512", label: "highest tile for ★★" },
+              { value: "1024", label: "highest tile for ★★★" },
+            ],
+          },
+          {
+            t: "p",
+            text: "There are no levels: every game is the same puzzle, and the board itself is the challenge. With **no clock and no move limit**, Merge Numbers is the calm game in Brainura's line-up. It rewards planning several moves ahead, not fast reflexes.",
+          },
+          shot("Merge Numbers", "поле 4×4 с плитками, крупная плитка в углу"),
         ],
       },
       {
+        id: "strategy",
         h2: "Strategy that works",
-        paragraphs: [
-          "Pick a corner and keep your biggest tile there. Most good games are built around one corner, with the largest numbers lined up along one edge.",
-          "Use mostly two or three directions. Moving away from your corner is sometimes necessary, but every time you do it, a small tile can land in the spot your big tile just left.",
-          "Keep the edge row full. If the row with your big tiles always has four tiles, sideways moves won't shift it out of order.",
-          "Merge small tiles early. Leaving lots of 2s and 4s scattered around fills the board quickly and ends the game.",
+        blocks: [
+          {
+            t: "steps",
+            items: [
+              { title: "Pick a corner", text: "Keep your biggest tile there. Most good games are built around one corner, with the largest numbers along one edge." },
+              { title: "Use two or three directions", text: "Moving away from your corner is sometimes necessary, but each time a small tile can land where your big tile just was." },
+              { title: "Keep the edge row full", text: "If the row with your big tiles always has four tiles, sideways moves won't shift it out of order." },
+              { title: "Merge small tiles early", text: "Scattered 2s and 4s fill the board fast and end the game." },
+            ],
+          },
+          {
+            t: "compare",
+            good: { title: "Do", items: ["Build a descending row along one edge", "Think one move ahead before every swipe", "Clean up small tiles early"] },
+            bad: { title: "Avoid", items: ["Swiping in all four directions", "Pulling the big tile out of its corner", "Letting small tiles pile up"] },
+          },
         ],
       },
       {
+        id: "history",
         h2: "Where the idea comes from",
-        paragraphs: [
-          "Sliding-merge puzzles became hugely popular in 2014 with an open-source web game built around reaching the 2048 tile, itself inspired by earlier mobile games. The rules are simple enough to learn in seconds, and the planning goes surprisingly deep.",
+        blocks: [
+          {
+            t: "p",
+            text: "Sliding-merge puzzles became hugely popular in 2014 with an open-source web game built around reaching the 2048 tile, itself inspired by earlier mobile games. The rules take seconds to learn, and the planning goes surprisingly deep.",
+          },
         ],
       },
     ],
@@ -191,6 +330,7 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
     updated: U,
   },
 
+  // ───────────────────────────── Quick Math ─────────────────────────────
   "quick-math": {
     title: "Mental Math Games for Adults: Quick Math",
     description:
@@ -200,32 +340,67 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
     lead:
       "A problem, a few answer options, and a clock. Pick the right answer as fast as you can; faster answers earn more points.",
     howToPlay: [
-      "Read the problem at the top of the screen.",
-      "Tap the correct answer from the options below.",
-      "Answer quickly: speed adds bonus points to every correct answer.",
-      "Finish the round and see your accuracy and score.",
+      { title: "Read", text: "The problem appears at the top of the screen." },
+      { title: "Tap the answer", text: "Choose the correct answer from the options below." },
+      { title: "Be quick", text: "Speed adds bonus points to every correct answer." },
+      { title: "See your score", text: "Finish the round and check your accuracy and points." },
     ],
     sections: [
       {
+        id: "levels",
         h2: "From warm-up sums to real mental math",
-        paragraphs: [
-          "The first ten levels are addition only, with small numbers and three or four answers to choose from. Subtraction joins from level 11, multiplication from level 31 and division from level 41. The numbers grow (up to 200 at the top) and the number of answer options rises to six, so estimating alone stops being enough.",
-          "The level follows your results automatically, so the game stays in the zone where you have to concentrate but can still win.",
+        blocks: [
+          {
+            t: "table",
+            head: ["Levels", "Operations", "Answer options"],
+            rows: [
+              ["1–10", "Addition, small numbers", "3–4"],
+              ["11–30", "+ subtraction", "more as you climb"],
+              ["31–40", "+ multiplication", "more as you climb"],
+              ["41+", "+ division; numbers grow to 200 at the top", "up to 6"],
+            ],
+          },
+          {
+            t: "p",
+            text: "With six options, estimating alone stops being enough. The level follows your results automatically, so the game stays in the zone where you have to concentrate but can still win.",
+          },
+          shot("Quick Math", "пример сверху и варианты ответа снизу"),
         ],
       },
       {
+        id: "tips",
         h2: "Tips to calculate faster in your head",
-        paragraphs: [
-          "Round and correct: 49 + 37 is easier as 50 + 37 − 1.",
-          "Split numbers: 8 × 27 = 8 × 25 + 8 × 2 = 200 + 16.",
-          "Estimate before you calculate. With answers to choose from, a quick estimate often rules out most options at once.",
-          "Learn a few anchors by heart: squares up to 15, and multiples of 25 and 12. They make a surprising number of problems instant.",
+        blocks: [
+          {
+            t: "table",
+            head: ["Trick", "Example"],
+            rows: [
+              ["**Round and correct**", "49 + 37 = 50 + 37 − 1 = 86"],
+              ["**Split a number**", "8 × 27 = 8 × 25 + 8 × 2 = 200 + 16 = 216"],
+              ["**Estimate first**", "With answers to choose from, a rough estimate often rules out most options at once"],
+              ["**Learn anchors**", "Squares up to 15, multiples of 25 and 12 make many problems instant"],
+            ],
+          },
+          {
+            t: "callout",
+            kind: "tip",
+            text: "Accuracy first, then speed. A fast wrong answer costs more than a slightly slower right one.",
+          },
         ],
       },
       {
+        id: "why",
         h2: "Why practise mental arithmetic",
-        paragraphs: [
-          "Mental math is a skill like any other: regular short practice makes it quicker and less effortful, which shows up when you split a bill, compare prices or check a number at work. Treat it as practising a useful skill rather than a general brain upgrade; studies of brain training find the clearest gains on the practised task.",
+        blocks: [
+          {
+            t: "p",
+            text: "Mental math is a skill like any other: short regular practice makes it quicker and less effortful. It shows up when you split a bill, compare prices or check a number at work.",
+          },
+          {
+            t: "callout",
+            kind: "note",
+            text: "Treat it as practising a useful skill rather than a general brain upgrade: studies of brain training find the clearest gains on the practised task.",
+          },
         ],
       },
     ],
@@ -248,6 +423,7 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
     updated: U,
   },
 
+  // ───────────────────────────── Quarters (shikaku) ─────────────────────────────
   quarters: {
     title: "Shikaku Puzzle Online: How to Play Quarters",
     description:
@@ -257,31 +433,61 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
     lead:
       "Cut the grid into rectangles so that each one holds exactly one number, and that number equals its area. No math beyond counting, all logic.",
     howToPlay: [
-      "Drag across the grid to draw a rectangle.",
-      "Each rectangle must contain exactly one number.",
-      "The rectangle's area (number of cells) must equal that number: a 6 can be 1×6, 2×3, 3×2 or 6×1.",
-      "Fill the whole grid with no gaps or overlaps. Tap a rectangle to remove it.",
+      { title: "Draw", text: "Drag across the grid to draw a rectangle." },
+      { title: "One number each", text: "Every rectangle must contain exactly one number." },
+      { title: "Match the area", text: "The number of cells must equal that number." },
+      { title: "Fill it all", text: "Cover the whole grid with no gaps or overlaps. Tap a rectangle to remove it." },
     ],
     sections: [
       {
+        id: "shapes",
+        h2: "Which rectangles can a number make?",
+        blocks: [
+          {
+            t: "table",
+            head: ["Number", "Possible rectangles", "Why it helps"],
+            rows: [
+              ["1", "1×1", "Always a single cell: draw it straight away"],
+              ["4", "1×4, 2×2, 4×1", "Three shapes, often one fits"],
+              ["5, 7 (primes)", "1×5, 5×1 · 1×7, 7×1", "Only straight lines: at most two orientations"],
+              ["6", "1×6, 2×3, 3×2, 6×1", "Four shapes: wait for neighbours to decide"],
+            ],
+          },
+          shot("Quarters", "сетка 6×6 с числами, часть прямоугольников уже нарисована"),
+        ],
+      },
+      {
+        id: "techniques",
         h2: "Solving techniques",
-        paragraphs: [
-          "Start with the certain ones. A 1 is always a single cell. A number squeezed into a corner or between other numbers often has only one shape and position that fit, so draw it.",
-          "Look at the empty cells, not just the numbers. If a cell can only be reached by one number's rectangle, it belongs to that number. This is often the move that breaks a hard puzzle open.",
-          "Prime numbers are friendly. A 5 or a 7 can only be a straight line, which leaves at most two orientations to check.",
-          "Each placement removes options for its neighbors. After every rectangle, scan the area around it for numbers that just became forced.",
+        blocks: [
+          {
+            t: "steps",
+            items: [
+              { title: "Start with the certain ones", text: "1s, and numbers squeezed into a corner or between other numbers, often have only one shape that fits." },
+              { title: "Look at empty cells", text: "If a cell can only be reached by one number's rectangle, it belongs to that number. This often breaks a hard puzzle open." },
+              { title: "Use primes", text: "A 5 or a 7 can only be a straight line, so there are at most two orientations to check." },
+              { title: "Re-scan after every move", text: "Each rectangle removes options for its neighbours. Look around it for numbers that just became forced." },
+            ],
+          },
         ],
       },
       {
+        id: "levels",
         h2: "How the levels grow",
-        paragraphs: [
-          "Brainura starts with 5×5 grids and gives you several hints per puzzle. The grids grow to 6×6, 7×7 and 8×8, and the top levels use 9×9 and 10×10 boards with fewer hints. Every puzzle has exactly one solution that can be reached by logic alone, so you never need to guess.",
-        ],
-      },
-      {
-        h2: "About the puzzle",
-        paragraphs: [
-          "This type of puzzle comes from Japan, where it was popularized by puzzle magazines, and it is known in English under several names, including shikaku and \"divide by squares\". In Brainura it is called Quarters.",
+        blocks: [
+          {
+            t: "stats",
+            items: [
+              { value: "5×5", label: "first grids, several hints" },
+              { value: "10×10", label: "top grids, fewer hints" },
+              { value: "1", label: "solution per puzzle, no guessing" },
+            ],
+          },
+          {
+            t: "p",
+            text: "Grids grow through 6×6, 7×7 and 8×8 to 9×9 and 10×10. This type of puzzle comes from Japan, where puzzle magazines made it popular; in English it is known as **shikaku** or “divide by squares”. In Brainura it is called Quarters.",
+          },
+          PREMIUM_NOTE,
         ],
       },
     ],
@@ -302,6 +508,7 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
     updated: U,
   },
 
+  // ───────────────────────────── Word Groups ─────────────────────────────
   "word-groups": {
     title: "Word Association Game: Sort Words Into Groups",
     description:
@@ -311,32 +518,60 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
     lead:
       "Every word on the board belongs to a hidden group. Find the groups. The catch: some words look like they fit two of them.",
     howToPlay: [
-      "Look over the board. Every word belongs to one hidden group.",
-      "Tap the words of one group. The group locks in as soon as you pick its last word.",
-      "A wrong pick flashes red and clears.",
-      "Higher levels add spare words that belong to no group, closer categories and a timer.",
+      { title: "Scan the board", text: "Every word belongs to one hidden group." },
+      { title: "Pick a group", text: "Tap its words. The group locks in as soon as you pick its last word." },
+      { title: "Wrong pick?", text: "It flashes red and clears." },
+      { title: "Level up", text: "Higher levels add spare words that belong nowhere, closer categories and a timer." },
     ],
     sections: [
       {
+        id: "difficulty",
         h2: "Where the difficulty comes from",
-        paragraphs: [
-          "Word Groups doesn't get harder by adding more words. It gets harder through decoys: words that plausibly belong to two categories on the same board, categories that sit close to each other, and spare words that belong nowhere.",
-          "That is why the game rewards patience. The obvious group is often a trap, and the right move is to find the group that has no ambiguous members first.",
+        blocks: [
+          {
+            t: "p",
+            text: "Word Groups doesn't get harder by adding more words. It gets harder through **decoys**:",
+          },
+          {
+            t: "ul",
+            items: [
+              "**Two-way words** that plausibly belong to two categories on the same board.",
+              "**Close categories** that sit right next to each other in meaning.",
+              "**Spare words** that belong to no group at all.",
+            ],
+          },
+          {
+            t: "callout",
+            kind: "warning",
+            title: "The obvious group is often a trap",
+            text: "Find the group with no ambiguous members first, and leave the tempting one for later.",
+          },
+          shot("Word Groups", "доска из слов, одна группа уже собрана и подсвечена"),
         ],
       },
       {
+        id: "solve",
         h2: "How to solve a board",
-        paragraphs: [
-          "Find the odd words first. A word that can only mean one thing tells you a category for sure.",
-          "Look for double meanings. Many words are both a noun and a verb, or belong to two topics. Those are the decoys.",
-          "Count. If you think you see a group but have one word too many, one of them belongs elsewhere.",
-          "Leave the hardest group for last. Once the others are locked in, it often solves itself.",
+        blocks: [
+          {
+            t: "steps",
+            items: [
+              { title: "Find the odd words", text: "A word that can only mean one thing tells you a category for sure." },
+              { title: "Spot double meanings", text: "Words that are both a noun and a verb, or belong to two topics, are the decoys." },
+              { title: "Count", text: "One word too many for a group means one of them belongs elsewhere." },
+              { title: "Save the hardest for last", text: "Once the others are locked in, it often solves itself." },
+            ],
+          },
         ],
       },
       {
+        id: "languages",
         h2: "Built for every language",
-        paragraphs: [
-          "The word banks are not translations. Each language has its own words and categories, written for that language, because good decoys only work inside a language: a pun or a double meaning rarely survives translation.",
+        blocks: [
+          {
+            t: "p",
+            text: "The word banks are not translations. Each language has its own words and categories, written for that language, because good decoys only work inside a language: a pun or a double meaning rarely survives translation.",
+          },
         ],
       },
     ],
@@ -357,6 +592,7 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
     updated: U,
   },
 
+  // ───────────────────────────── Mirror Drawing ─────────────────────────────
   "mirror-drawing": {
     title: "Mirror Drawing Game: Draw the Mirrored Half",
     description:
@@ -366,25 +602,51 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
     lead:
       "One half of a picture is drawn on a grid. Draw the other half as its exact mirror image across the dashed axis.",
     howToPlay: [
-      "Touch the start dot on the axis.",
-      "Drag to draw. The line stays straight behind your finger, and a corner locks in when you turn.",
-      "Going back along your own line erases it, but every erased corner costs accuracy.",
-      "On the first 10 levels the correct path is shown faintly. After that you draw blind and see the answer when you reach the finish ring.",
+      { title: "Start on the axis", text: "Touch the start dot on the dashed line." },
+      { title: "Draw", text: "Drag to draw. The line stays straight behind your finger, and a corner locks in when you turn." },
+      { title: "Fix with care", text: "Going back along your line erases it, but every erased corner costs accuracy." },
+      { title: "Finish", text: "Reach the finish ring to see how close your half was." },
     ],
     sections: [
       {
+        id: "why-hard",
         h2: "Why it is harder than it looks",
-        paragraphs: [
-          "Mirroring flips left and right while keeping up and down. Your hand naturally wants to copy the shape as it is, so every turn is a small decision: should this line go toward the axis or away from it?",
-          "As the levels rise, pictures get more corners and can have several separate details, and from level 11 you no longer see the target path while you draw.",
+        blocks: [
+          {
+            t: "p",
+            text: "Mirroring flips left and right while keeping up and down. Your hand naturally wants to copy the shape as it is, so every turn is a small decision: toward the axis, or away from it?",
+          },
+          {
+            t: "table",
+            head: ["Levels", "What you see while drawing"],
+            rows: [
+              ["1–10", "The correct path, shown faintly"],
+              ["11+", "Nothing: you draw blind and see the answer at the finish"],
+              ["Higher", "More corners and several separate details per picture"],
+            ],
+          },
+          shot("Mirror Drawing", "половина картинки на сетке, пунктирная ось, частично нарисованная вторая половина"),
         ],
       },
       {
+        id: "tips",
         h2: "Tips",
-        paragraphs: [
-          "Count grid squares, don't eyeball. Each corner of the mirrored half sits at the same distance from the axis as its original.",
-          "Work corner by corner. Find the next corner of the original, mirror its position, and only then draw.",
-          "Trace with your eyes first. A quick look along the original path before you start saves erasing later.",
+        blocks: [
+          {
+            t: "steps",
+            items: [
+              { title: "Trace with your eyes first", text: "A quick look along the original path before you start saves erasing later." },
+              { title: "Count squares, don't eyeball", text: "Each mirrored corner sits at the same distance from the axis as its original." },
+              { title: "Go corner by corner", text: "Find the next corner of the original, mirror its position, and only then draw." },
+            ],
+          },
+          {
+            t: "callout",
+            kind: "note",
+            title: "Not the mirror-tracing test",
+            text: "In the classic lab task you trace a shape while watching your hand in a mirror. Here you see your hand normally and draw the mirrored half yourself.",
+          },
+          PREMIUM_NOTE,
         ],
       },
     ],
@@ -405,6 +667,7 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
     updated: U,
   },
 
+  // ───────────────────────────── Math Cross ─────────────────────────────
   "math-cross": {
     title: "Math Crossword Puzzle: Place Every Number",
     description:
@@ -414,26 +677,58 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
     lead:
       "A crossword made of equations. Every row and column is a calculation, and each number from the bank goes into exactly one empty cell.",
     howToPlay: [
-      "Every row and every column on the board is an equation.",
-      "Tap a number in the bank, then tap an empty cell to place it.",
-      "Each number is used exactly once. Tap a placed number to take it back.",
-      "A wrong number is rejected right away and bounces back to the bank.",
-      "Equations are read left to right and top to bottom, without operator precedence: 3 + 4 × 2 = 14.",
+      { title: "Read the board", text: "Every row and every column is an equation." },
+      { title: "Place a number", text: "Tap a number in the bank, then tap an empty cell." },
+      { title: "Each number once", text: "Tap a placed number to take it back. A wrong number is rejected and bounces back to the bank." },
+      { title: "Left to right", text: "Equations are read left to right and top to bottom, without operator precedence." },
     ],
     sections: [
       {
-        h2: "How the levels grow",
-        paragraphs: [
-          "The first levels use only addition. Subtraction joins from level 5, multiplication from level 13 and division from level 25. Boards grow from 7 equations to 14, with more empty cells, bigger numbers and longer chains of operations.",
+        id: "order",
+        h2: "The one rule that surprises people",
+        blocks: [
+          {
+            t: "callout",
+            kind: "warning",
+            title: "No “multiplication first”",
+            text: "Each equation is calculated strictly in reading order: **3 + 4 × 2 = 14**, because 3 + 4 = 7 and then 7 × 2 = 14.",
+          },
+          shot("Math Cross", "сетка с уравнениями по строкам и столбцам, банк чисел снизу"),
         ],
       },
       {
+        id: "levels",
+        h2: "How the levels grow",
+        blocks: [
+          {
+            t: "table",
+            head: ["Levels", "Operations"],
+            rows: [
+              ["1–4", "Addition"],
+              ["5–12", "+ subtraction"],
+              ["13–24", "+ multiplication"],
+              ["25+", "+ division"],
+            ],
+          },
+          {
+            t: "p",
+            text: "Boards grow from **7 equations to 14**, with more empty cells, bigger numbers and longer chains of operations.",
+          },
+        ],
+      },
+      {
+        id: "tips",
         h2: "Solving tips",
-        paragraphs: [
-          "Start where a cell belongs to an equation with only one gap: it can be calculated directly.",
-          "Use the bank as a constraint. Each number is used once, so if only one number in the bank fits a cell, it goes there, and it is gone for every other cell.",
-          "Remember the reading order. There is no \"multiplication first\": the equation is simply evaluated left to right.",
-          "Cells where two equations cross are the key. A number there must work both across and down.",
+        blocks: [
+          {
+            t: "steps",
+            items: [
+              { title: "One gap first", text: "A cell in an equation with only one empty spot can be calculated directly." },
+              { title: "Use the bank", text: "Each number is used once. If only one number fits a cell, it goes there and is gone for every other cell." },
+              { title: "Crossings are the key", text: "A number where two equations cross must work both across and down." },
+            ],
+          },
+          PREMIUM_NOTE,
         ],
       },
     ],
@@ -454,6 +749,7 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
     updated: U,
   },
 
+  // ───────────────────────────── Read the Face ─────────────────────────────
   "read-the-face": {
     title: "Emotion Recognition Game: Read the Face",
     description:
@@ -463,26 +759,54 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
     lead:
       "A face appears. Name the emotion it shows. At higher levels the expressions get subtler, flash for a split second, or show only the eyes.",
     howToPlay: [
-      "Look at the face and tap the emotion it shows.",
-      "The faster you answer, the more points the face is worth.",
-      "Wrong answer? The face is shown at full strength and the right name lights up.",
-      "As you level up, emotions get subtler and the choices look more alike. Later an expression only flashes briefly, and sometimes only the eyes are visible.",
+      { title: "Look", text: "A face appears. Tap the emotion it shows." },
+      { title: "Be quick", text: "The faster you answer, the more points the face is worth." },
+      { title: "Learn from misses", text: "Wrong answer? The face is shown at full strength and the right name lights up." },
+      { title: "Level up", text: "Emotions get subtler and the choices look more alike. Later a face only flashes briefly, and sometimes only the eyes are visible." },
     ],
     sections: [
       {
-        h2: "How the faces are made",
-        paragraphs: [
-          "The faces in Brainura are drawn by the app from the muscle movements that make up each expression, following the Facial Action Coding System used by researchers to describe facial movement. That lets the game control exactly how strong an expression is, and show the same emotion on faces of different ages and looks.",
-          "The set covers the classic basic emotions plus contempt, which is the only one that shows on just one side of the face.",
+        id: "tell-apart",
+        h2: "How to tell similar emotions apart",
+        blocks: [
+          {
+            t: "table",
+            caption: "What to look for",
+            head: ["Emotion", "Tell-tale signs"],
+            rows: [
+              ["**Happiness** (genuine)", "Cheeks lift and the skin around the eyes crinkles. A polite smile often stays in the mouth."],
+              ["**Surprise**", "Brows rise in an arch, eyes widen, jaw drops."],
+              ["**Fear**", "Eyes widen too, but brows pull together and the lips stretch sideways."],
+              ["**Anger**", "Brows lower and draw together, lips tighten."],
+              ["**Disgust**", "Nose wrinkles, upper lip rises."],
+              ["**Contempt**", "One-sided: a single corner of the mouth tightens and lifts."],
+            ],
+          },
+          {
+            t: "callout",
+            kind: "tip",
+            title: "Fear or surprise?",
+            text: "Both widen the eyes. Check the brows: arched and raised means surprise, pulled together means fear.",
+          },
+          shot("Read the Face", "нарисованное лицо сверху и кнопки с названиями эмоций снизу"),
         ],
       },
       {
-        h2: "How to tell similar emotions apart",
-        paragraphs: [
-          "A real smile involves the eyes: cheeks lift and the skin around the eyes crinkles. A polite smile often stays in the mouth.",
-          "Fear and surprise both widen the eyes. In fear the brows are pulled together and the lips stretch sideways; in surprise the brows rise in an arch and the jaw drops.",
-          "Disgust wrinkles the nose and raises the upper lip; anger lowers and draws the brows together and tightens the lips.",
-          "Contempt is one-sided: one corner of the mouth tightens and lifts.",
+        id: "faces",
+        h2: "How the faces are made",
+        blocks: [
+          {
+            t: "p",
+            text: "The faces are drawn by the app from the muscle movements that make up each expression, following the **Facial Action Coding System** researchers use to describe facial movement. That lets the game set exactly how strong an expression is, and show the same emotion on faces of different ages and looks.",
+          },
+          {
+            t: "stats",
+            items: [
+              { value: "7", label: "emotions: six classic ones plus contempt" },
+              { value: "1", label: "of them shows on just one side of the face" },
+            ],
+          },
+          PREMIUM_NOTE,
         ],
       },
     ],
@@ -508,6 +832,7 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
     updated: U,
   },
 
+  // ───────────────────────────── Line Tracing ─────────────────────────────
   "line-tracing": {
     title: "Visual Tracing Game: Follow the Tangled Lines",
     description:
@@ -517,24 +842,42 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
     lead:
       "Numbers on the left, letters on the right, and a tangle of crossing lines between them. Follow one line with your eyes and tap the letter where it ends.",
     howToPlay: [
-      "A number appears below the tangle. Find its line on the left.",
-      "Follow the line with your eyes only, through every crossing.",
-      "Tap the letter where the line ends.",
-      "Higher levels add more lines, more crossings and loops.",
+      { title: "Find the start", text: "A number appears below the tangle. Find its line on the left." },
+      { title: "Follow with your eyes", text: "Track the line through every crossing, without your finger." },
+      { title: "Tap the end", text: "Tap the letter where the line ends." },
+      { title: "Level up", text: "Higher levels add more lines, more crossings and loops." },
     ],
     sections: [
       {
+        id: "origin",
         h2: "Where the idea comes from",
-        paragraphs: [
-          "The game is based on the Groffman Visual Tracing Test, a task used in vision and attention research where a person follows lines through a tangle without using a finger. It asks your eyes to stay on one path while dozens of others try to pull them away.",
+        blocks: [
+          {
+            t: "p",
+            text: "The game is based on the **Groffman Visual Tracing Test**, a task used in vision and attention research where a person follows lines through a tangle without using a finger. It asks your eyes to stay on one path while dozens of others try to pull them away.",
+          },
+          shot("Line Tracing", "клубок пересекающихся линий, цифры слева и буквы справа"),
         ],
       },
       {
+        id: "tips",
         h2: "Tips",
-        paragraphs: [
-          "Slow down at crossings. Most mistakes happen where two lines meet at a shallow angle; check which way your line continues before moving on.",
-          "Keep your hands still. Tracing with a finger is easier, which is exactly why the game is about the eyes.",
-          "If you lose the line, go back to the start rather than guessing from the middle.",
+        blocks: [
+          {
+            t: "ul",
+            items: [
+              "**Slow down at crossings.** Most mistakes happen where two lines meet at a shallow angle. Check which way your line continues before moving on.",
+              "**Keep your hands still.** Tracing with a finger is easier, which is exactly why the game is about the eyes.",
+              "**Lost the line? Restart it.** Go back to the beginning rather than guessing from the middle.",
+            ],
+          },
+          {
+            t: "cta",
+            href: "/tests/schulte-table",
+            title: "Another eyes-only drill",
+            text: "The Schulte table: find the numbers 1 to 25 in order with your side vision.",
+            button: "Try it online",
+          },
         ],
       },
     ],
@@ -552,6 +895,7 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
     updated: U,
   },
 
+  // ───────────────────────────── Sudoku ─────────────────────────────
   sudoku: {
     title: "Sudoku Without Ads: Classic, Diagonal and Odd-Even",
     description:
@@ -561,32 +905,67 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
     lead:
       "The classic 9×9 number puzzle, with a clean board, no ads between puzzles, and levels that move you from friendly grids to diagonal and odd-even variants.",
     howToPlay: [
-      "Fill every row, column and 3×3 box with the digits 1 to 9.",
-      "No digit may repeat in a row, a column or a box.",
-      "Pick a cell and then a digit, or a digit and then cells. The digit pad sits right under the board.",
-      "Use notes to mark candidates. Undo any move; a wrong digit is taken off the board.",
+      { title: "Fill the grid", text: "Every row, column and 3×3 box gets the digits 1 to 9." },
+      { title: "No repeats", text: "A digit may not repeat in a row, a column or a box." },
+      { title: "Your way", text: "Pick a cell and then a digit, or a digit and then cells. The digit pad sits right under the board." },
+      { title: "Notes and undo", text: "Mark candidates, undo any move. A wrong digit is taken off the board." },
     ],
     sections: [
       {
+        id: "levels",
         h2: "From easy to variant sudoku",
-        paragraphs: [
-          "The first levels give you 46 clues and no clock, so the puzzle can be solved with simple scanning. Clues get fewer as you climb, down to the low twenties, and a time limit appears after level 10.",
-          "From level 31 the game switches to diagonal sudoku, where both long diagonals must also contain 1 to 9. From level 51 come odd-even puzzles, where every empty cell is marked as odd or even. The top levels mix the modes at random.",
+        blocks: [
+          {
+            t: "table",
+            head: ["Levels", "Puzzle", "What changes"],
+            rows: [
+              ["1–10", "Classic", "46 clues, no clock: simple scanning is enough"],
+              ["11–30", "Classic", "Fewer clues, and a time limit"],
+              ["31–50", "**Diagonal**", "Both long diagonals must also hold 1 to 9"],
+              ["51+", "**Odd-even**", "Every empty cell is marked odd or even"],
+              ["Top", "Mixed", "Modes at random, clues down to the low twenties"],
+            ],
+          },
+          {
+            t: "stats",
+            items: [
+              { value: "0", label: "ads, ever" },
+              { value: "1", label: "solution per puzzle, reachable by logic" },
+              { value: "Free", label: "one of 13 free games" },
+            ],
+          },
+          shot("Sudoku", "поле 9×9 с заметками в нескольких клетках и панель цифр под ним"),
         ],
       },
       {
+        id: "techniques",
         h2: "Solving techniques worth learning",
-        paragraphs: [
-          "Hidden singles: look at one digit at a time. If a 7 can only go in one cell of a box, it goes there, even if that cell has other candidates.",
-          "Naked singles: if a cell has only one possible digit left, fill it.",
-          "Pairs: when two cells in a row can only hold the same two digits, those digits can be removed from every other cell in that row.",
-          "In diagonal sudoku, the diagonals are extra houses: check them like rows. In odd-even puzzles, the odd or even mark roughly halves the candidates of a cell before you start.",
+        blocks: [
+          {
+            t: "table",
+            head: ["Technique", "How it works"],
+            rows: [
+              ["**Hidden single**", "Look at one digit at a time. If a 7 can only go in one cell of a box, it goes there, even if that cell has other candidates."],
+              ["**Naked single**", "If a cell has only one possible digit left, fill it."],
+              ["**Pair**", "Two cells in a row that can only hold the same two digits: remove those digits from every other cell in that row."],
+            ],
+          },
+          {
+            t: "callout",
+            kind: "tip",
+            title: "In the variants",
+            text: "In diagonal sudoku, treat the diagonals as extra rows. In odd-even puzzles, the mark roughly halves a cell's candidates before you start.",
+          },
         ],
       },
       {
+        id: "why",
         h2: "Why sudoku is a good daily puzzle",
-        paragraphs: [
-          "Sudoku needs no arithmetic, only logic: every digit placed is a small deduction. That makes it a calm, absorbing way to focus for a few minutes. Like any puzzle, it makes you better at sudoku; whether that spreads to other skills is not well established.",
+        blocks: [
+          {
+            t: "p",
+            text: "Sudoku needs no arithmetic, only logic: every digit placed is a small deduction. That makes it a calm, absorbing way to focus for a few minutes. Like any puzzle, it makes you better at sudoku; whether that spreads to other skills is not well established.",
+          },
         ],
       },
     ],
@@ -611,6 +990,7 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
     updated: U,
   },
 
+  // ───────────────────────────── Mathmoji ─────────────────────────────
   mathmoji: {
     title: "Emoji Math Puzzles: Solve the Equations",
     description:
@@ -620,24 +1000,59 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
     lead:
       "A few equations made of icons instead of numbers. Work out what each icon is worth, then solve the last line.",
     howToPlay: [
-      "Study the equations. Each icon stands for one specific number.",
-      "Work out the values one by one, starting with the equation that has a single unknown.",
-      "Solve the final equation and pick the correct answer from the options.",
+      { title: "Study", text: "Each icon stands for one specific number." },
+      { title: "Solve step by step", text: "Start with the equation that has a single unknown, then substitute." },
+      { title: "Answer", text: "Solve the final line and pick the correct answer from the options." },
     ],
     sections: [
       {
-        h2: "How to crack an emoji equation",
-        paragraphs: [
-          "Find the line with only one kind of icon. Three apples making 30 means one apple is 10.",
-          "Substitute and move on. Each value you find turns the next equation into an easier one.",
-          "Distrust the answer that comes too easily. The wrong options are built from typical slips: a flipped sign, a forgotten multiplier, an answer off by one, or two values swapped.",
-          "Some puzzles turn the question around and ask for the value of one icon, or for the operator missing from an equation. Read what is being asked before you calculate.",
+        id: "example",
+        h2: "A worked example",
+        blocks: [
+          {
+            t: "steps",
+            items: [
+              { title: "🍎 + 🍎 + 🍎 = 30", text: "Only one kind of icon, so one apple is **10**." },
+              { title: "🍎 + 🍌 + 🍌 = 18", text: "10 + two bananas = 18, so one banana is **4**." },
+              { title: "🍌 × 🍎 = ?", text: "4 × 10 = **40**." },
+            ],
+          },
+          shot("Mathmoji", "три строки уравнений из иконок и варианты ответа"),
         ],
       },
       {
+        id: "traps",
+        h2: "How to avoid the traps",
+        blocks: [
+          {
+            t: "p",
+            text: "The wrong options aren't random. They are built from typical slips, so the answer that comes too easily deserves a second look:",
+          },
+          {
+            t: "ul",
+            items: [
+              "a **flipped sign**: + read as −;",
+              "a **forgotten multiplier**: one icon counted once instead of twice;",
+              "an answer **off by one**;",
+              "**two values swapped** between icons.",
+            ],
+          },
+          {
+            t: "callout",
+            kind: "warning",
+            text: "Some puzzles turn the question around and ask for the value of one icon, or for the operator missing from an equation. Read what is being asked before you calculate.",
+          },
+        ],
+      },
+      {
+        id: "viral",
         h2: "Why these puzzles went viral",
-        paragraphs: [
-          "Picture equations look like a joke and turn out to be real algebra: every icon is a variable, and solving them is the same substitution you learned at school. The mix of easy-looking pictures and a sneaky final line is what makes people share them, and argue about the answer.",
+        blocks: [
+          {
+            t: "p",
+            text: "Picture equations look like a joke and turn out to be real algebra: every icon is a variable, and solving them is the same substitution you learned at school. Easy-looking pictures plus a sneaky final line are what make people share them, and argue about the answer.",
+          },
+          PREMIUM_NOTE,
         ],
       },
     ],
@@ -654,6 +1069,7 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
     updated: U,
   },
 
+  // ───────────────────────────── Math Snake ─────────────────────────────
   "math-snake": {
     title: "Math Snake Game: Eat the Right Answer",
     description:
@@ -663,24 +1079,46 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
     lead:
       "The classic snake, with a twist: a math problem floats above the board, and the snake has to eat the correct answer. Bite the wrong number and the game is over.",
     howToPlay: [
-      "Solve the problem shown in the thought bubble.",
-      "Steer the snake with the direction buttons toward the correct answer.",
-      "Eating a wrong number ends the game immediately.",
-      "Each correct answer brings a new problem and a longer snake. Walls let you through to the opposite side, but don't bite yourself.",
+      { title: "Solve", text: "Work out the problem in the thought bubble." },
+      { title: "Steer", text: "Guide the snake with the direction buttons toward the correct answer." },
+      { title: "Don't bite wrong", text: "Eating a wrong number ends the game immediately." },
+      { title: "Grow", text: "Each correct answer brings a new problem and a longer snake. Walls let you through to the other side, but don't bite yourself." },
     ],
     sections: [
       {
+        id: "two-tasks",
         h2: "Two tasks at once",
-        paragraphs: [
-          "Math Snake makes you calculate while you plan a route. You can't stop to think: the snake keeps moving, so the answer has to come while you are already steering. Later stages bring harder problems and a faster, longer snake.",
+        blocks: [
+          {
+            t: "p",
+            text: "Math Snake makes you calculate while you plan a route. You can't stop to think: the snake keeps moving, so the answer has to come while you are already steering. Later stages bring harder problems and a faster, longer snake.",
+          },
+          {
+            t: "compare",
+            good: { title: "Can be fixed", items: ["A wrong turn", "A long detour", "Going through a wall"] },
+            bad: { title: "Ends the game", items: ["Eating a wrong number", "Biting your own tail"] },
+          },
+          shot("Math Snake", "змейка на поле, пример в облачке и несколько чисел-ответов"),
         ],
       },
       {
+        id: "tips",
         h2: "Tips",
-        paragraphs: [
-          "Solve first, then steer. A wrong turn can be fixed; a wrong number can't.",
-          "Use the walls. Passing through one side and coming out the other is often the shortest way to the answer.",
-          "Keep the body in mind. As the snake grows, plan a loop that leaves room for the next turn.",
+        blocks: [
+          {
+            t: "steps",
+            items: [
+              { title: "Solve first, then steer", text: "A wrong turn can be fixed; a wrong number can't." },
+              { title: "Use the walls", text: "Passing through one side and coming out the other is often the shortest way to the answer." },
+              { title: "Mind the body", text: "As the snake grows, plan a loop that leaves room for the next turn." },
+            ],
+          },
+          {
+            t: "callout",
+            kind: "note",
+            title: "Premium game",
+            text: "New players get all Premium games free for the first 7 days. Quick Math, the free mental math game, is a good place to start.",
+          },
         ],
       },
     ],
@@ -697,6 +1135,7 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
     updated: U,
   },
 
+  // ───────────────────────────── Mirror Reading ─────────────────────────────
   "mirror-reading": {
     title: "Mirror Reading: Read Backwards and Upside Down",
     description:
@@ -706,30 +1145,71 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
     lead:
       "A short text, flipped like in a mirror. Read it before time runs out, then answer questions about what it said. Its sibling, Upside Down Reading, turns the text on its head.",
     howToPlay: [
-      "Read the mirrored text carefully. You have a limited time, set by your level.",
-      "Answer the questions about the text you just read.",
-      "At higher levels some words fade, letters move closer together and the text tilts, so decoding takes more effort.",
+      { title: "Read", text: "Read the mirrored text carefully. Your level sets how much time you have." },
+      { title: "Answer", text: "Answer the questions about the text you just read." },
+      { title: "Level up", text: "At higher levels some words fade, letters move closer together and the text tilts." },
     ],
     sections: [
       {
+        id: "why-hard",
         h2: "Why backwards text is hard",
-        paragraphs: [
-          "Skilled readers recognize whole words at a glance. Flip the text and that shortcut breaks: letters like b and d swap roles, familiar word shapes disappear, and your eyes have to work right to left. You slow down and read almost letter by letter, then gradually speed up as the flipped shapes become familiar.",
-          "Because you have to answer questions afterwards, decoding is not enough: you also need to keep the meaning in mind while your attention is busy with the letters.",
+        blocks: [
+          {
+            t: "p",
+            text: "Skilled readers recognize whole words at a glance. Flip the text and that shortcut breaks:",
+          },
+          {
+            t: "ul",
+            items: [
+              "letters like **b** and **d** swap roles;",
+              "familiar word shapes disappear;",
+              "your eyes have to work right to left.",
+            ],
+          },
+          {
+            t: "p",
+            text: "You slow down and read almost letter by letter, then gradually speed up as the flipped shapes become familiar. And because questions follow, decoding isn't enough: you have to keep the meaning in mind while your attention is busy with the letters.",
+          },
+          shot("Mirror Reading", "абзац зеркального текста на экране"),
         ],
       },
       {
-        h2: "Mirror writing in history",
-        paragraphs: [
-          "The most famous mirror writer is Leonardo da Vinci, who filled his notebooks with right-to-left mirror script. Reading those pages comfortably usually takes a mirror, or some practice.",
+        id: "two-games",
+        h2: "Two games, two flips",
+        blocks: [
+          {
+            t: "table",
+            head: ["Game", "How the text is flipped", "Access"],
+            rows: [
+              ["**Upside Down Reading**", "Turned on its head", "Free"],
+              ["**Mirror Reading**", "Mirrored left to right", "Premium, free for the first 7 days"],
+            ],
+          },
+          {
+            t: "quote",
+            text: "The most famous mirror writer is Leonardo da Vinci, who filled his notebooks with right-to-left mirror script.",
+          },
         ],
       },
       {
+        id: "tips",
         h2: "Tips",
-        paragraphs: [
-          "Find the start of the line on the right and read in chunks of two or three words.",
-          "Use context. Once you get the topic of the text, you can predict many words from their first letters.",
-          "Don't reread. Keep moving; questions are about the main points, not every word.",
+        blocks: [
+          {
+            t: "steps",
+            items: [
+              { title: "Start on the right", text: "Find the start of the line and read in chunks of two or three words." },
+              { title: "Use context", text: "Once you know the topic, you can predict many words from their first letters." },
+              { title: "Don't reread", text: "Keep moving: the questions are about the main points, not every word." },
+            ],
+          },
+          {
+            t: "cta",
+            href: "/tests/reading-speed-test",
+            title: "How fast do you read normal text?",
+            text: "Take the free reading speed test: words per minute with a comprehension check.",
+            button: "Take the test",
+          },
         ],
       },
     ],
@@ -743,9 +1223,11 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
         a: "Upside Down Reading is free. Mirror Reading is Premium; new players get all Premium games free for the first 7 days, no card needed.",
       },
     ],
+    tests: ["reading-speed-test"],
     updated: U,
   },
 
+  // ───────────────────────────── Bourdon Test ─────────────────────────────
   "bourdon-test": {
     title: "Bourdon Test Online: Attention and Cancellation Game",
     description:
@@ -755,25 +1237,59 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
     lead:
       "A grid full of symbols and a target. Scan carefully, count every occurrence of the target, and pick the right number before time runs out.",
     howToPlay: [
-      "Look at the target shown above the grid: a letter, a number, a dice face or a constellation.",
-      "Scan the grid and count every occurrence of the target.",
-      "Pick the correct count from the answer options.",
-      "Answer before the time runs out. Higher levels bring denser grids and look-alike symbols.",
+      { title: "See the target", text: "A letter, a number, a dice face or a constellation is shown above the grid." },
+      { title: "Scan and count", text: "Count every occurrence of the target in the grid." },
+      { title: "Pick the count", text: "Choose the correct number from the answer options." },
+      { title: "Beat the clock", text: "Answer before time runs out. Higher levels bring denser grids and look-alike symbols." },
     ],
     sections: [
       {
-        h2: "About the Bourdon test",
-        paragraphs: [
-          "The task goes back to the French psychologist Benjamin Bourdon, who described a letter-crossing test at the end of the 19th century. Versions of it, often called cancellation tests, are still used in psychology to observe sustained and selective attention: how steadily someone can keep scanning without skipping targets or marking the wrong ones.",
-          "In Brainura the test comes in four modes. Letters and numbers are the classic versions; dice dots and constellations replace the symbols with patterns you have to count, which makes look-alikes much harder to tell apart.",
+        id: "modes",
+        h2: "Four modes",
+        blocks: [
+          {
+            t: "table",
+            head: ["Mode", "What you count", "The hard part"],
+            rows: [
+              ["**Letters**", "A target letter", "Look-alikes such as b and d"],
+              ["**Numbers**", "A target digit", "Look-alikes such as 6 and 9"],
+              ["**Dice dots**", "A dice face", "Telling five dots from six at a glance"],
+              ["**Constellations**", "A star pattern", "Patterns instead of symbols"],
+            ],
+          },
+          shot("Bourdon Test", "сетка символов, цель сверху и варианты ответа"),
         ],
       },
       {
+        id: "about",
+        h2: "About the Bourdon test",
+        blocks: [
+          {
+            t: "p",
+            text: "The task goes back to the French psychologist **Benjamin Bourdon**, who described a letter-crossing test at the end of the 19th century. Versions of it, often called **cancellation tests**, are still used in psychology to observe sustained and selective attention: how steadily someone keeps scanning without skipping targets or marking the wrong ones.",
+          },
+        ],
+      },
+      {
+        id: "tips",
         h2: "Tips for accuracy",
-        paragraphs: [
-          "Scan in a fixed pattern, row by row, the way you read. Jumping around is how targets get counted twice or missed.",
-          "Keep a running count under your breath instead of trying to see the total at once.",
-          "Watch for look-alikes: b and d, 6 and 9, five and six dots. A quick second look is cheaper than a wrong answer.",
+        blocks: [
+          {
+            t: "steps",
+            items: [
+              { title: "Scan in a fixed pattern", text: "Row by row, the way you read. Jumping around is how targets get counted twice or missed." },
+              { title: "Count under your breath", text: "Keep a running count instead of trying to see the total at once." },
+              { title: "Double-check look-alikes", text: "A quick second look is cheaper than a wrong answer." },
+            ],
+          },
+          {
+            t: "cta",
+            href: "/tests/stroop-test",
+            title: "Another classic attention task",
+            text: "The Stroop test: name the ink color, not the word, and measure your own interference effect.",
+            button: "Try it online",
+          },
+          PREMIUM_NOTE,
         ],
       },
     ],
