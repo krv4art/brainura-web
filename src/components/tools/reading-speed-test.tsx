@@ -6,8 +6,14 @@
 // при понимании не ниже 2 из 3: скорость без понимания — не скорость чтения.
 // Быстрее SKIM wpm — уже пролистывание: результат показываем, но в рекорд не пишем.
 // Средняя для взрослых (тихое чтение, нон-фикшн) — 238 wpm (Brysbaert, 2019).
+//
+// 🔒 По языкам (READING ниже): у каждого языка СВОИ тексты (≈ 300 слов нон-фикшна,
+// пишутся на языке, не переводятся — число слов и сложность у перевода плывут) и СВОЯ
+// норма средней скорости из источника по этому языку. Английские 238 wpm на другой
+// язык не переносятся. Для ja/zh/ko/th тест не делается (слова не считаются так же).
 
 import { useEffect, useRef, useState } from "react";
+import type { Locale } from "@/lib/i18n";
 import { loadBest, saveBest } from "./storage";
 
 interface Question {
@@ -23,10 +29,7 @@ interface Passage {
   questions: Question[];
 }
 
-const AVERAGE = 238;
-const SKIM = 700;
-
-const PASSAGES: Passage[] = [
+const EN_PASSAGES: Passage[] = [
   {
     key: "bees",
     label: "Honeybees",
@@ -115,11 +118,93 @@ const PASSAGES: Passage[] = [
   },
 ];
 
+interface Strings {
+  chooseText: string;
+  text: string;
+  bestLabel: string;
+  best: (wpm: number) => string;
+  intro: (title: string, words: number) => string;
+  start: string;
+  done: string;
+  quizHint: string;
+  seeResult: string;
+  yourSpeed: string;
+  wpm: string;
+  summary: (words: number, secs: string) => string;
+  understanding: (c: number, n: number) => string;
+  average: (n: number) => string;
+  verdict: { skim: string; missed: string; slow: string; typical: (lo: number, hi: number) => string; fast: string };
+  answer: string;
+  another: string;
+  again: string;
+  note: (skim: number) => string;
+}
+
+interface ReadingLocale {
+  /** Средняя скорость тихого чтения нон-фикшна на этом языке (источник — в комментарии). */
+  average: number;
+  /** Обычный диапазон взрослых. */
+  typical: [number, number];
+  /** Выше — пролистывание: результат не идёт в рекорд. */
+  skim: number;
+  scaleMax: number;
+  passages: Passage[];
+  strings: Strings;
+}
+
+const EN_STRINGS: Strings = {
+  chooseText: "Choose a text",
+  text: "Text:",
+  bestLabel: "Best:",
+  best: (w) => `${w} wpm`,
+  intro: (title, words) =>
+    `“${title}”, ${words} words. Read at your normal pace, as if you wanted to remember it. Then answer three questions without looking back.`,
+  start: "Start reading",
+  done: "I’m done reading",
+  quizHint: "Without looking back, answer three questions.",
+  seeResult: "See my result",
+  yourSpeed: "Your reading speed",
+  wpm: "wpm",
+  summary: (w, secs) => `${w} words in ${secs} s · understanding `,
+  understanding: (c, n) => `${c} of ${n}`,
+  average: (n) => `average ${n}`,
+  verdict: {
+    skim: "That is far beyond a normal reading pace, so this was most likely skimming.",
+    missed: "You missed some details. A reading speed only counts with understanding, so try again a little slower.",
+    slow: "Slower than the typical range. That is perfectly fine for careful reading, and practice on easy texts brings speed up.",
+    typical: (lo, hi) => `Right in the typical range for adults, roughly ${lo} to ${hi} words per minute.`,
+    fast: "Faster than most adults, with good understanding.",
+  },
+  answer: "Answer:",
+  another: "Try another text",
+  again: "Read it again",
+  note: (skim) =>
+    `The timer runs from “Start reading” to “I’m done reading”. Your best speed is saved on this device when you answer at least two of three questions correctly at a real reading pace (up to ${skim} words per minute; faster than that is skimming).`,
+};
+
+// Английский: Brysbaert (2019) — 238 wpm нон-фикшн, обычный диапазон 175–300.
+const EN_READING: ReadingLocale = {
+  average: 238,
+  typical: [175, 300],
+  skim: 700,
+  scaleMax: 600,
+  passages: EN_PASSAGES,
+  strings: EN_STRINGS,
+};
+
+const READING: Record<Locale, ReadingLocale> = { en: EN_READING, qa: EN_READING };
+
 const countWords = (p: Passage) => [p.title, ...p.paragraphs].join(" ").split(/\s+/).filter(Boolean).length;
 
 type Phase = "idle" | "read" | "quiz" | "done";
 
-export function ReadingSpeedTest() {
+export function ReadingSpeedTest({ lang = "en" }: { lang?: Locale }) {
+  const R = READING[lang];
+  const tx = R.strings;
+  const PASSAGES = R.passages;
+  const AVERAGE = R.average;
+  const SKIM = R.skim;
+  const bestKey = lang === "en" ? "reading-wpm" : `reading-wpm-${lang}`;
   const [pi, setPi] = useState(0);
   const [phase, setPhase] = useState<Phase>("idle");
   const [ms, setMs] = useState(0);
@@ -131,7 +216,7 @@ export function ReadingSpeedTest() {
   const p = PASSAGES[pi];
   const words = countWords(p);
 
-  useEffect(() => setBest(loadBest("reading-wpm")), []);
+  useEffect(() => setBest(loadBest(bestKey)), [bestKey]);
 
   const scrollToBox = () => boxRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
 
@@ -151,29 +236,29 @@ export function ReadingSpeedTest() {
   const wpm = ms > 0 ? Math.round(words / (ms / 60000)) : 0;
 
   const submit = () => {
-    if (correct >= 2 && wpm <= SKIM) setBest(saveBest("reading-wpm", wpm, "max"));
+    if (correct >= 2 && wpm <= SKIM) setBest(saveBest(bestKey, wpm, "max"));
     setPhase("done");
     requestAnimationFrame(scrollToBox);
   };
 
   const verdict =
     wpm > SKIM
-      ? "That is far beyond a normal reading pace, so this was most likely skimming."
+      ? tx.verdict.skim
       : correct < 2
-        ? "You missed some details. A reading speed only counts with understanding, so try again a little slower."
-        : wpm < 175
-          ? "Slower than the typical range. That is perfectly fine for careful reading, and practice on easy texts brings speed up."
-          : wpm <= 300
-            ? "Right in the typical range for adults, roughly 175 to 300 words per minute."
-            : "Faster than most adults, with good understanding.";
+        ? tx.verdict.missed
+        : wpm < R.typical[0]
+          ? tx.verdict.slow
+          : wpm <= R.typical[1]
+            ? tx.verdict.typical(R.typical[0], R.typical[1])
+            : tx.verdict.fast;
 
-  const scaleMax = 600;
+  const scaleMax = R.scaleMax;
   const pct = (v: number) => `${Math.min(100, (v / scaleMax) * 100)}%`;
 
   return (
     <div ref={boxRef} className="scroll-mt-24">
-      <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Choose a text">
-        <span className="text-sm font-medium text-[var(--color-text-secondary)]">Text:</span>
+      <div className="flex flex-wrap items-center gap-2" role="group" aria-label={tx.chooseText}>
+        <span className="text-sm font-medium text-[var(--color-text-secondary)]">{tx.text}</span>
         {PASSAGES.map((x, i) => (
           <button
             key={x.key}
@@ -187,7 +272,7 @@ export function ReadingSpeedTest() {
           </button>
         ))}
         <span className="ml-auto text-sm tabular-nums text-[var(--color-text-secondary)]">
-          {best !== null && <>Best: <strong className="text-[var(--color-text)]">{best} wpm</strong></>}
+          {best !== null && <>{tx.bestLabel} <strong className="text-[var(--color-text)]">{tx.best(best)}</strong></>}
         </span>
       </div>
 
@@ -195,11 +280,10 @@ export function ReadingSpeedTest() {
         {phase === "idle" && (
           <div className="flex min-h-[260px] flex-col items-center justify-center gap-4 text-center">
             <p className="max-w-sm text-[var(--color-text-secondary)]">
-              &ldquo;{p.title}&rdquo;, {words} words. Read at your normal pace, as if you wanted to remember it. Then
-              answer three questions without looking back.
+              {tx.intro(p.title, words)}
             </p>
             <button type="button" onClick={start} className="btn-gradient rounded-full px-8 py-4 text-lg font-bold text-white shadow-xl transition hover:scale-[1.03]">
-              Start reading
+              {tx.start}
             </button>
           </div>
         )}
@@ -212,7 +296,7 @@ export function ReadingSpeedTest() {
             ))}
             <div className="mt-8 flex justify-center">
               <button type="button" onClick={doneReading} className="btn-gradient rounded-full px-8 py-3 text-lg font-bold text-white shadow-lg">
-                I&apos;m done reading
+                {tx.done}
               </button>
             </div>
           </article>
@@ -223,7 +307,7 @@ export function ReadingSpeedTest() {
             onSubmit={(e) => { e.preventDefault(); submit(); }}
             className="mx-auto max-w-[62ch] rounded-2xl bg-white p-5 sm:p-8"
           >
-            <p className="text-sm font-medium text-[var(--color-text-secondary)]">Without looking back, answer three questions.</p>
+            <p className="text-sm font-medium text-[var(--color-text-secondary)]">{tx.quizHint}</p>
             {p.questions.map((q, qi) => (
               <fieldset key={qi} className="mt-6">
                 <legend className="font-semibold text-[var(--color-text)]">{qi + 1}. {q.q}</legend>
@@ -248,7 +332,7 @@ export function ReadingSpeedTest() {
             ))}
             <div className="mt-8 flex justify-center">
               <button type="submit" disabled={picks.some((a) => a === null)} className="btn-gradient rounded-full px-8 py-3 text-lg font-bold text-white disabled:opacity-50">
-                See my result
+                {tx.seeResult}
               </button>
             </div>
           </form>
@@ -256,12 +340,12 @@ export function ReadingSpeedTest() {
 
         {phase === "done" && (
           <div className="mx-auto max-w-[62ch] text-center" aria-live="polite">
-            <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">Your reading speed</p>
+            <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">{tx.yourSpeed}</p>
             <p className="mt-1 text-5xl font-extrabold tabular-nums text-[var(--color-text)]">
-              {wpm} <span className="text-2xl font-bold">wpm</span>
+              {wpm} <span className="text-2xl font-bold">{tx.wpm}</span>
             </p>
             <p className="mt-2 text-[var(--color-text-secondary)]">
-              {words} words in {(ms / 1000).toFixed(0)} s · understanding <strong className="text-[var(--color-text)]">{correct} of 3</strong>
+              {tx.summary(words, (ms / 1000).toFixed(0))}<strong className="text-[var(--color-text)]">{tx.understanding(correct, p.questions.length)}</strong>
             </p>
 
             <div className="mx-auto mt-6 max-w-md text-left">
@@ -271,7 +355,7 @@ export function ReadingSpeedTest() {
               </div>
               <div className="relative mt-1 h-5 text-xs text-[var(--color-text-secondary)]">
                 <span className="absolute left-0">0</span>
-                <span className="absolute -translate-x-1/2 whitespace-nowrap" style={{ left: pct(AVERAGE) }}>average {AVERAGE}</span>
+                <span className="absolute -translate-x-1/2 whitespace-nowrap" style={{ left: pct(AVERAGE) }}>{tx.average(AVERAGE)}</span>
                 <span className="absolute right-0">{scaleMax}+</span>
               </div>
             </div>
@@ -284,7 +368,7 @@ export function ReadingSpeedTest() {
                 return (
                   <li key={qi} className={`rounded-xl px-4 py-2 ${ok ? "bg-[#27AE60]/10" : "bg-[#E74C3C]/10"}`}>
                     <span className="font-semibold">{ok ? "✓" : "✗"} {q.q}</span>
-                    {!ok && <span className="block text-[var(--color-text-secondary)]">Answer: {q.options[q.answer]}</span>}
+                    {!ok && <span className="block text-[var(--color-text-secondary)]">{tx.answer} {q.options[q.answer]}</span>}
                   </li>
                 );
               })}
@@ -296,19 +380,17 @@ export function ReadingSpeedTest() {
                 onClick={() => { setPi((pi + 1) % PASSAGES.length); setPhase("idle"); }}
                 className="btn-gradient rounded-full px-6 py-3 font-bold text-white"
               >
-                Try another text
+                {tx.another}
               </button>
               <button type="button" onClick={start} className="rounded-full border border-[var(--color-border)] bg-white px-6 py-3 font-bold text-[var(--color-text)]">
-                Read it again
+                {tx.again}
               </button>
             </div>
           </div>
         )}
       </div>
       <p className="mt-3 text-sm text-[var(--color-text-secondary)]">
-        The timer runs from &ldquo;Start reading&rdquo; to &ldquo;I&apos;m done reading&rdquo;. Your best speed is saved
-        on this device when you answer at least two of three questions correctly at a real reading pace (up to{" "}
-        {SKIM} words per minute; faster than that is skimming).
+        {tx.note(SKIM)}
       </p>
     </div>
   );

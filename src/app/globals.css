@@ -54,3 +54,11 @@ body {
 .btn-gradient {
   background: linear-gradient(135deg, var(--color-gradient-purple-start) 0%, var(--color-gradient-purple-end) 100%);
 }
+
+/* Крупные цифры в статьях (блок stats): текст в фирменном градиенте. */
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-gradient-purple-start) 0%, var(--color-gradient-purple-end) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

@@ -1,13 +1,14 @@
 import type { MetadataRoute } from "next";
-import { SECTIONS, type PageEntry } from "@/content/registry";
-import { absoluteUrl, LOCALES, type Locale } from "@/lib/i18n";
+import { SECTIONS, hubVersions, pagesOf, versionsOf, type SectionKey } from "@/content/registry";
+import { absoluteUrl, LOCALES, type LangVersion } from "@/lib/i18n";
 
-// sitemap.xml (SEO_PLAN §2, шаг 0.2). Только индексируемые страницы: без
-// /extension/* (noindex), без ссылок Арены и API. hreflang — через `alternates`.
+// sitemap.xml основного домена (SEO_PLAN §2, шаг 0.2): только английские страницы.
+// У поддоменов языков — свой /sitemap.xml (src/app/[lang]/sitemap.xml). Без /extension/*
+// (noindex), без ссылок Арены и API. hreflang — через `alternates` по ключу страницы.
 
-function alternates(path: string, locales: Locale[]) {
+function alternates(versions: LangVersion[]) {
   const languages: Record<string, string> = {};
-  for (const l of locales) languages[LOCALES[l].hreflang] = absoluteUrl(l, path);
+  for (const v of versions) languages[LOCALES[v.lang].hreflang] = absoluteUrl(v.lang, v.path);
   return { languages };
 }
 
@@ -19,27 +20,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl("en", "/terms"), changeFrequency: "yearly", priority: 0.2 },
   ];
 
-  for (const section of Object.values(SECTIONS)) {
-    const pages = section.pages as PageEntry[];
+  for (const section of Object.keys(SECTIONS) as SectionKey[]) {
+    const pages = pagesOf(section, "en");
     if (!pages.length) continue;
-    const latest = pages.map((p) => p.updated).sort().at(-1);
+    const path = SECTIONS[section].path;
     out.push({
-      url: absoluteUrl("en", section.path),
-      lastModified: latest,
+      url: absoluteUrl("en", path),
+      lastModified: pages.map((p) => p.updated).sort().at(-1),
       changeFrequency: "weekly",
       priority: 0.8,
+      alternates: alternates(hubVersions(section)),
     });
     for (const p of pages) {
-      const path = `${section.path}/${p.slug}`;
-      for (const lang of p.locales) {
-        out.push({
-          url: absoluteUrl(lang, path),
-          lastModified: p.updated,
-          changeFrequency: "monthly",
-          priority: 0.7,
-          alternates: alternates(path, p.locales),
-        });
-      }
+      out.push({
+        url: absoluteUrl("en", `${path}/${p.slug}`),
+        lastModified: p.updated,
+        changeFrequency: "monthly",
+        priority: 0.7,
+        alternates: alternates(versionsOf(section, p.key)),
+      });
     }
   }
   return out;

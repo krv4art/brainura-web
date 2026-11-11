@@ -5,6 +5,8 @@ import Link from "next/link";
 import { ChevronDown, ChevronRight, Play, Apple as AppleStore } from "lucide-react";
 import { APP_STORE_URL, playUrl } from "@/lib/site";
 import type { Crumb } from "@/lib/schema";
+import type { Locale } from "@/lib/i18n";
+import { UI } from "@/lib/ui";
 
 export function JsonLd({ data }: { data: object | object[] }) {
   const list = Array.isArray(data) ? data : [data];
@@ -48,10 +50,11 @@ export interface FaqItem {
   a: string;
 }
 
-export function FaqList({ faq, title = "Frequently asked questions" }: { faq: FaqItem[]; title?: string }) {
+export function FaqList({ faq, title, lang = "en" }: { faq: FaqItem[]; title?: string; lang?: Locale }) {
+  if (!faq.length) return null;
   return (
     <section className="mt-16">
-      <h2 className="text-2xl font-bold text-[var(--color-text)] sm:text-3xl">{title}</h2>
+      <h2 className="text-2xl font-bold text-[var(--color-text)] sm:text-3xl">{title ?? UI[lang].faq}</h2>
       <div className="mt-6 space-y-3">
         {faq.map(({ q, a }) => (
           <details
@@ -75,11 +78,11 @@ export interface Source {
   url?: string;
 }
 
-export function Sources({ sources }: { sources: Source[] }) {
+export function Sources({ sources, lang = "en" }: { sources: Source[]; lang?: Locale }) {
   if (!sources.length) return null;
   return (
     <section className="mt-16 border-t border-[var(--color-border)] pt-8">
-      <h2 className="text-lg font-bold text-[var(--color-text)]">Sources</h2>
+      <h2 className="text-lg font-bold text-[var(--color-text)]">{UI[lang].sources}</h2>
       <ol className="mt-4 list-decimal space-y-2 pl-6 text-sm text-[var(--color-text-secondary)]">
         {sources.map((s) => (
           <li key={s.text}>
@@ -102,32 +105,35 @@ export function DownloadBlock({
   campaign,
   title,
   body,
+  lang = "en",
 }: {
   campaign: string;
   title: string;
   body: string;
+  lang?: Locale;
 }) {
+  const t = UI[lang].store;
   return (
     <section className="btn-gradient mt-16 rounded-3xl px-6 py-10 text-center shadow-xl sm:px-10">
       <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl">{title}</h2>
       <p className="mx-auto mt-3 max-w-xl text-white/90">{body}</p>
       <div className="mx-auto mt-6 flex w-full max-w-xs flex-col items-stretch gap-3 sm:max-w-none sm:flex-row sm:justify-center">
         <a
-          href={playUrl(campaign)}
+          href={lang === "en" ? playUrl(campaign) : playUrl(`${lang}-${campaign}`, "seo", lang)}
           className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-[var(--color-text)] shadow-md transition hover:scale-[1.02]"
         >
           <Play className="h-5 w-5" aria-hidden="true" />
-          Get it on Google Play
+          {t.play}
         </a>
         <a
           href={APP_STORE_URL}
           className="inline-flex items-center justify-center gap-2 rounded-full bg-white/15 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:scale-[1.02]"
         >
           <AppleStore className="h-5 w-5" aria-hidden="true" />
-          Download on the App Store
+          {t.appStore}
         </a>
       </div>
-      <p className="mt-4 text-xs text-white/75">Free to install · no ads · no account needed</p>
+      <p className="mt-4 text-xs text-white/75">{t.note}</p>
     </section>
   );
 }
@@ -138,11 +144,11 @@ export interface RelatedLink {
   body: string;
 }
 
-export function Related({ links, title = "Try next" }: { links: RelatedLink[]; title?: string }) {
+export function Related({ links, title, lang = "en" }: { links: RelatedLink[]; title?: string; lang?: Locale }) {
   if (!links.length) return null;
   return (
     <section className="mt-16">
-      <h2 className="text-2xl font-bold text-[var(--color-text)]">{title}</h2>
+      <h2 className="text-2xl font-bold text-[var(--color-text)]">{title ?? UI[lang].tryNext}</h2>
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         {links.map((l) => (
           <Link

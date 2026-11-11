@@ -5,7 +5,8 @@
 // время верных ответов по каждому типу; разница = эффект Струпа (интерференция).
 // Клавиши: R, G, B, Y. Фон стимула тёмный — все четыре цвета на нём читаются.
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import type { Locale } from "@/lib/i18n";
 import { loadBest, saveBest } from "./storage";
 
 const COLORS = [
@@ -48,7 +49,49 @@ function makeTrials(): Trial[] {
 
 const mean = (xs: number[]) => (xs.length ? Math.round(xs.reduce((a, b) => a + b, 0) / xs.length) : 0);
 
-export function StroopTest() {
+// 🔒 Строки — по языкам. Слова-цвета и клавиши — на языке страницы; первые буквы
+// четырёх цветов должны различаться (иначе клавиши 1–4). Новый язык без записи не соберётся.
+interface Strings {
+  colors: Record<ColorKey, { label: string; hotkey: string }>;
+  intro: (trials: number, keys: string) => [string, string, string];
+  start: string;
+  effect: string;
+  matching: string;
+  mismatched: string;
+  accuracy: string;
+  again: string;
+  explain: string;
+  smallest: string;
+}
+
+const EN: Strings = {
+  colors: {
+    red: { label: "Red", hotkey: "r" },
+    green: { label: "Green", hotkey: "g" },
+    blue: { label: "Blue", hotkey: "b" },
+    yellow: { label: "Yellow", hotkey: "y" },
+  },
+  intro: (n, keys) => [
+    "A color word appears in colored ink. Click the ",
+    "ink color",
+    `, not the word. ${n} words, as fast and accurately as you can. Keyboard: ${keys}.`,
+  ],
+  start: "Start the Stroop test",
+  effect: "Your Stroop effect",
+  matching: "Matching",
+  mismatched: "Mismatched",
+  accuracy: "Accuracy",
+  again: "Try again",
+  explain: "The Stroop effect is how much slower you answer when the word and the ink disagree. Only correct answers count.",
+  smallest: "Your smallest effect so far:",
+};
+
+const STRINGS: Record<Locale, Strings> = { en: EN, qa: EN };
+
+export function StroopTest({ lang = "en" }: { lang?: Locale }) {
+  const tx = STRINGS[lang];
+  const colors = useMemo(() => COLORS.map((c) => ({ ...c, ...tx.colors[c.key] })), [tx]);
+  const intro = tx.intro(TRIALS, colors.map((c) => c.hotkey.toUpperCase()).join(", "));
   const [phase, setPhase] = useState<"idle" | "run" | "done">("idle");
   const [trials, setTrials] = useState<Trial[]>([]);
   const [i, setI] = useState(0);
@@ -99,7 +142,7 @@ export function StroopTest() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      const c = COLORS.find((x) => x.hotkey === e.key.toLowerCase());
+      const c = colors.find((x) => x.hotkey === e.key.toLowerCase());
       if (c && phase === "run") {
         e.preventDefault();
         answer(c.key);
@@ -107,7 +150,7 @@ export function StroopTest() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [answer, phase]);
+  }, [answer, phase, colors]);
 
   const ok = answers.filter((a) => a.correct);
   const congruentMs = mean(ok.filter((a) => a.congruent).map((a) => a.ms));
@@ -125,18 +168,17 @@ export function StroopTest() {
         {phase === "idle" && (
           <>
             <p className="max-w-md text-base text-white/85">
-              A color word appears in colored ink. Click the <strong className="text-white">ink color</strong>, not
-              the word. {TRIALS} words, as fast and accurately as you can. Keyboard: R, G, B, Y.
+              {intro[0]}<strong className="text-white">{intro[1]}</strong>{intro[2]}
             </p>
             <button type="button" onClick={start} className="btn-gradient mt-6 rounded-full px-8 py-3 text-lg font-bold text-white shadow-xl">
-              Start the Stroop test
+              {tx.start}
             </button>
           </>
         )}
         {phase === "run" && t && (
           <>
             <span className="select-none text-6xl font-extrabold uppercase tracking-wide sm:text-7xl" style={{ color: inkOf(t.ink) }}>
-              {COLORS.find((c) => c.key === t.word)!.label}
+              {colors.find((c) => c.key === t.word)!.label}
             </span>
             <span className="mt-4 text-sm tabular-nums text-white/60">
               {i + 1} / {trials.length}
@@ -145,22 +187,22 @@ export function StroopTest() {
         )}
         {phase === "done" && (
           <div className="w-full max-w-md text-white">
-            <p className="text-sm uppercase tracking-wide text-white/60">Your Stroop effect</p>
+            <p className="text-sm uppercase tracking-wide text-white/60">{tx.effect}</p>
             <p className="mt-1 text-5xl font-extrabold tabular-nums">{incongruentMs - congruentMs} ms</p>
             <div className="mt-5 grid grid-cols-3 gap-3 text-sm">
-              <div><p className="text-white/60">Matching</p><p className="text-lg font-bold tabular-nums">{congruentMs} ms</p></div>
-              <div><p className="text-white/60">Mismatched</p><p className="text-lg font-bold tabular-nums">{incongruentMs} ms</p></div>
-              <div><p className="text-white/60">Accuracy</p><p className="text-lg font-bold tabular-nums">{accuracy}%</p></div>
+              <div><p className="text-white/60">{tx.matching}</p><p className="text-lg font-bold tabular-nums">{congruentMs} ms</p></div>
+              <div><p className="text-white/60">{tx.mismatched}</p><p className="text-lg font-bold tabular-nums">{incongruentMs} ms</p></div>
+              <div><p className="text-white/60">{tx.accuracy}</p><p className="text-lg font-bold tabular-nums">{accuracy}%</p></div>
             </div>
             <button type="button" onClick={start} className="mt-6 rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-[var(--color-text)]">
-              Try again
+              {tx.again}
             </button>
           </div>
         )}
       </div>
 
       <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        {COLORS.map((c) => (
+        {colors.map((c) => (
           <button
             key={c.key}
             type="button"
@@ -177,8 +219,8 @@ export function StroopTest() {
       </div>
       {phase === "done" && (
         <p className="mt-3 text-sm text-[var(--color-text-secondary)]">
-          The Stroop effect is how much slower you answer when the word and the ink disagree. Only correct answers count.
-          {best !== null && <> Your smallest effect so far: <strong className="text-[var(--color-text)]">{best} ms</strong>.</>}
+          {tx.explain}
+          {best !== null && <> {tx.smallest} <strong className="text-[var(--color-text)]">{best} ms</strong>.</>}
         </p>
       )}
     </div>

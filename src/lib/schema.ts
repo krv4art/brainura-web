@@ -1,13 +1,14 @@
 // schema.org (JSON-LD) для SEO-страниц. Рендер — компонент <JsonLd>.
 
 import { SITE_URL, playUrl, APP_STORE_URL } from "./site";
+import { absoluteUrl, LOCALES, type Locale } from "./i18n";
 
 export interface Crumb {
   name: string;
   path: string;
 }
 
-export function breadcrumbLd(crumbs: Crumb[]) {
+export function breadcrumbLd(crumbs: Crumb[], lang: Locale = "en") {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -15,7 +16,7 @@ export function breadcrumbLd(crumbs: Crumb[]) {
       "@type": "ListItem",
       position: i + 1,
       name: c.name,
-      item: SITE_URL + (c.path === "/" ? "" : c.path),
+      item: absoluteUrl(lang, c.path),
     })),
   };
 }
@@ -33,13 +34,14 @@ export function faqLd(faq: { q: string; a: string }[]) {
 }
 
 /** Тест, который проходят прямо на странице. */
-export function webAppLd(name: string, description: string, path: string) {
+export function webAppLd(name: string, description: string, path: string, lang: Locale = "en") {
   return {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     name,
     description,
-    url: SITE_URL + path,
+    url: absoluteUrl(lang, path),
+    inLanguage: LOCALES[lang].hreflang,
     applicationCategory: "EducationalApplication",
     operatingSystem: "Any (web browser)",
     browserRequirements: "Requires JavaScript",
@@ -69,13 +71,15 @@ export function articleLd(opts: {
   path: string;
   published: string;
   modified?: string;
+  lang?: Locale;
 }) {
   return {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: opts.headline,
     description: opts.description,
-    mainEntityOfPage: SITE_URL + opts.path,
+    mainEntityOfPage: absoluteUrl(opts.lang ?? "en", opts.path),
+    inLanguage: LOCALES[opts.lang ?? "en"].hreflang,
     datePublished: opts.published,
     dateModified: opts.modified ?? opts.published,
     author: { "@type": "Organization", name: "Brainura", url: SITE_URL },

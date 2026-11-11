@@ -5,12 +5,45 @@
 // до pointerdown/клавиши — так браузер добавляет меньше лишнего.
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import type { Locale } from "@/lib/i18n";
 import { saveBest, loadBest } from "./storage";
 
 const TRIALS = 5;
 type Phase = "idle" | "wait" | "go" | "early" | "shown" | "done";
 
-export function ReactionTimeTest() {
+// 🔒 Строки — по языкам; новый язык в Locale без своей записи не соберётся.
+interface Strings {
+  idle: [string, string];
+  wait: string;
+  go: string;
+  early: [string, string];
+  shown: (attempt: number, total: number) => string;
+  doneTitle: (avg: number) => string;
+  doneSub: string;
+  bestAvg: string;
+  fastest: string;
+  slowest: string;
+  deviceNote: string;
+}
+
+const EN: Strings = {
+  idle: ["Reaction time test", "Click or tap here (or press Space) to start. Wait for green, then click as fast as you can."],
+  wait: "Wait for green…",
+  go: "CLICK!",
+  early: ["Too soon!", "You clicked before it turned green. Click to try this round again."],
+  shown: (a, t) => `Attempt ${a} of ${t}. Click to continue.`,
+  doneTitle: (avg) => `${avg} ms average`,
+  doneSub: "Click to try again.",
+  bestAvg: "Your best average:",
+  fastest: "Fastest:",
+  slowest: "slowest:",
+  deviceNote: "Your device adds its own delay, so compare your scores on the same device rather than with other people.",
+};
+
+const STRINGS: Record<Locale, Strings> = { en: EN, qa: EN };
+
+export function ReactionTimeTest({ lang = "en" }: { lang?: Locale }) {
+  const tx = STRINGS[lang];
   const [phase, setPhase] = useState<Phase>("idle");
   const [times, setTimes] = useState<number[]>([]);
   const [best, setBest] = useState<number | null>(null);
@@ -71,12 +104,12 @@ export function ReactionTimeTest() {
   const last = times[times.length - 1];
 
   const look: Record<Phase, { bg: string; title: string; sub: string }> = {
-    idle: { bg: "bg-[#4A90E2]", title: "Reaction time test", sub: "Click or tap here (or press Space) to start. Wait for green, then click as fast as you can." },
-    wait: { bg: "bg-[#C0392B]", title: "Wait for green…", sub: "" },
-    go: { bg: "bg-[#27AE60]", title: "CLICK!", sub: "" },
-    early: { bg: "bg-[#E67E22]", title: "Too soon!", sub: "You clicked before it turned green. Click to try this round again." },
-    shown: { bg: "bg-[#4A90E2]", title: `${last} ms`, sub: `Attempt ${times.length} of ${TRIALS}. Click to continue.` },
-    done: { bg: "bg-[#4A90E2]", title: `${avg} ms average`, sub: "Click to try again." },
+    idle: { bg: "bg-[#4A90E2]", title: tx.idle[0], sub: tx.idle[1] },
+    wait: { bg: "bg-[#C0392B]", title: tx.wait, sub: "" },
+    go: { bg: "bg-[#27AE60]", title: tx.go, sub: "" },
+    early: { bg: "bg-[#E67E22]", title: tx.early[0], sub: tx.early[1] },
+    shown: { bg: "bg-[#4A90E2]", title: `${last} ms`, sub: tx.shown(times.length, TRIALS) },
+    done: { bg: "bg-[#4A90E2]", title: tx.doneTitle(avg), sub: tx.doneSub },
   };
   const l = look[phase];
 
@@ -103,13 +136,12 @@ export function ReactionTimeTest() {
             {times[i] ? `${times[i]} ms` : `#${i + 1}`}
           </span>
         ))}
-        {best !== null && <span className="ml-auto">Your best average: <strong className="text-[var(--color-text)]">{best} ms</strong></span>}
+        {best !== null && <span className="ml-auto">{tx.bestAvg} <strong className="text-[var(--color-text)]">{best} ms</strong></span>}
       </div>
       {phase === "done" && (
         <p className="mt-3 text-sm text-[var(--color-text-secondary)]">
-          Fastest: <strong className="text-[var(--color-text)]">{Math.min(...times)} ms</strong> · slowest:{" "}
-          <strong className="text-[var(--color-text)]">{Math.max(...times)} ms</strong>. Your device adds its own delay,
-          so compare your scores on the same device rather than with other people.
+          {tx.fastest} <strong className="text-[var(--color-text)]">{Math.min(...times)} ms</strong> · {tx.slowest}{" "}
+          <strong className="text-[var(--color-text)]">{Math.max(...times)} ms</strong>. {tx.deviceNote}
         </p>
       )}
     </div>

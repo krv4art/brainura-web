@@ -5,6 +5,7 @@
 // для взгляда (держать его в центре и искать периферийным зрением).
 
 import { useEffect, useRef, useState } from "react";
+import type { Locale } from "@/lib/i18n";
 import { loadBest, saveBest } from "./storage";
 
 const SIZES = [3, 4, 5, 6, 7] as const;
@@ -18,7 +19,32 @@ function shuffled(n: number) {
   return a;
 }
 
-export function SchulteTableTest() {
+// 🔒 Строки — по языкам; новый язык в Locale без своей записи не соберётся.
+interface Strings {
+  grid: string;
+  find: string;
+  errors: (n: number) => string;
+  best: (size: number) => string;
+  result: (secs: string, errors: number) => string;
+  start: (size: number) => string;
+  hint: (total: number) => string;
+}
+
+const EN: Strings = {
+  grid: "Grid:",
+  find: "Find",
+  errors: (n) => `errors ${n}`,
+  best: (n) => `Best ${n}×${n}:`,
+  result: (secs, e) => `${secs} s · ${e} error${e === 1 ? "" : "s"} — play again`,
+  start: (n) => `Start ${n}×${n}`,
+  hint: (total) =>
+    `Click the numbers from 1 to ${total} in order. Try to keep your eyes on the center of the grid and find the next number with your side vision.`,
+};
+
+const STRINGS: Record<Locale, Strings> = { en: EN, qa: EN };
+
+export function SchulteTableTest({ lang = "en" }: { lang?: Locale }) {
+  const tx = STRINGS[lang];
   const [size, setSize] = useState<number>(5);
   const [cells, setCells] = useState<number[]>(() => Array.from({ length: 25 }, (_, i) => i + 1));
   const [next, setNext] = useState(1);
@@ -73,7 +99,7 @@ export function SchulteTableTest() {
   return (
     <div>
       <div className="flex flex-wrap items-center gap-2">
-        <span className="text-sm font-medium text-[var(--color-text-secondary)]">Grid:</span>
+        <span className="text-sm font-medium text-[var(--color-text-secondary)]">{tx.grid}</span>
         {SIZES.map((s) => (
           <button
             key={s}
@@ -86,7 +112,7 @@ export function SchulteTableTest() {
           </button>
         ))}
         <span className="ml-auto text-sm tabular-nums text-[var(--color-text-secondary)]" aria-live="polite">
-          {running ? <>Find <strong className="text-[var(--color-text)]">{next}</strong> · {secs} s · errors {errors}</> : best !== null ? <>Best {size}×{size}: <strong className="text-[var(--color-text)]">{best} s</strong></> : null}
+          {running ? <>{tx.find} <strong className="text-[var(--color-text)]">{next}</strong> · {secs} s · {tx.errors(errors)}</> : best !== null ? <>{tx.best(size)} <strong className="text-[var(--color-text)]">{best} s</strong></> : null}
         </span>
       </div>
 
@@ -125,14 +151,13 @@ export function SchulteTableTest() {
               onClick={() => start()}
               className="btn-gradient rounded-full px-8 py-4 text-lg font-bold text-white shadow-xl transition hover:scale-[1.03]"
             >
-              {done ? `${secs} s · ${errors} error${errors === 1 ? "" : "s"} — play again` : `Start ${size}×${size}`}
+              {done ? tx.result(secs, errors) : tx.start(size)}
             </button>
           </div>
         )}
       </div>
       <p className="mt-3 text-sm text-[var(--color-text-secondary)]">
-        Click the numbers from 1 to {total} in order. Try to keep your eyes on the center of the grid and find
-        the next number with your side vision.
+        {tx.hint(total)}
       </p>
     </div>
   );

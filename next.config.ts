@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Два корневых layout — (en) и [lang] (поддомены языков) — значит 404 общий, отдельным файлом.
+  experimental: { globalNotFound: true },
   // Ссылки Арены из приложения Brainura: /d/<КОД> (дуэль), /c/<номер> (вызов дня) и /f/<КОД> (приглашение в друзья).
   // Страница-переходник public/arena.html открывает приложение через intent://
   // или уводит в Google Play. Подробности — docs/arena_web в репозитории приложения.

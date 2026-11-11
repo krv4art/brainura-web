@@ -7,6 +7,9 @@
 
 import type { ReactNode } from "react";
 import type { Crumb } from "@/lib/schema";
+import { LOCALES, type Locale } from "@/lib/i18n";
+import { UI } from "@/lib/ui";
+import { Takeaways, Toc, countWords, type BlockSection } from "./blocks";
 import { breadcrumbLd, faqLd, webAppLd, mobileAppLd, articleLd } from "@/lib/schema";
 import {
   Breadcrumbs,
@@ -35,6 +38,8 @@ interface BaseProps {
   download: { title: string; body: string };
   /** utm_campaign для кнопки Play. */
   campaign: string;
+  /** Язык страницы (по умолчанию английский). */
+  lang?: Locale;
 }
 
 function Shell({
@@ -50,22 +55,25 @@ function Shell({
   campaign,
   ld,
   meta,
-}: BaseProps & { top?: ReactNode; ld: object[]; meta?: ReactNode }) {
+  intro,
+  lang = "en",
+}: BaseProps & { top?: ReactNode; ld: object[]; meta?: ReactNode; intro?: ReactNode }) {
   return (
     <article className="mx-auto max-w-3xl px-4 pb-20 pt-8 sm:px-6 sm:pt-12">
-      <JsonLd data={[breadcrumbLd(crumbs), ...ld, ...(faq.length ? [faqLd(faq)] : [])]} />
+      <JsonLd data={[breadcrumbLd(crumbs, lang), ...ld, ...(faq.length ? [faqLd(faq)] : [])]} />
       <Breadcrumbs crumbs={crumbs} />
       <h1 className="mt-6 text-balance text-4xl font-extrabold tracking-tight text-[var(--color-text)] sm:text-5xl">
         {h1}
       </h1>
       {meta}
       <div className="mt-4 text-lg leading-relaxed text-[var(--color-text-secondary)]">{lead}</div>
+      {intro}
       {top && <div className="mt-8">{top}</div>}
       <div className={`mt-4 ${proseClass}`}>{children}</div>
-      <FaqList faq={faq} />
-      <Related links={related} />
-      <DownloadBlock campaign={campaign} title={download.title} body={download.body} />
-      <Sources sources={sources} />
+      <FaqList faq={faq} lang={lang} />
+      <Related links={related} lang={lang} />
+      <DownloadBlock campaign={campaign} title={download.title} body={download.body} lang={lang} />
+      <Sources sources={sources} lang={lang} />
     </article>
   );
 }
@@ -76,7 +84,7 @@ export function ToolPage(props: BaseProps & { tool: ReactNode; toolName: string 
     <Shell
       {...props}
       top={props.tool}
-      ld={[webAppLd(props.toolName, props.description, props.path)]}
+      ld={[webAppLd(props.toolName, props.description, props.path, props.lang)]}
     />
   );
 }
@@ -86,16 +94,32 @@ export function GamePage(props: BaseProps & { hero?: ReactNode }) {
   return <Shell {...props} top={props.hero} ld={[mobileAppLd()]} />;
 }
 
-/** Статья под info-кластер. Дата публикации видна и уходит в Article. */
-export function ArticlePage(props: BaseProps & { published: string; modified?: string }) {
+/**
+ * Статья под info-кластер. Дата и время чтения видны; «коротко о главном» и
+ * оглавление — над текстом, если переданы `takeaways` и `sections`.
+ */
+export function ArticlePage(
+  props: BaseProps & { published: string; modified?: string; takeaways?: string[]; sections?: BlockSection[] },
+) {
+  const lang = props.lang ?? "en";
+  const t = UI[lang].article;
   const shown = props.modified ?? props.published;
+  const minutes = props.sections ? Math.max(1, Math.round(countWords(props.sections) / 220)) : null;
   return (
     <Shell
       {...props}
       meta={
         <p className="mt-3 text-sm text-[var(--color-muted)]">
-          Brainura team · <time dateTime={shown}>{new Date(shown).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</time>
+          {t.team} · {props.modified ? `${t.updated} ` : ""}
+          <time dateTime={shown}>{new Date(shown).toLocaleDateString(LOCALES[lang].dateLocale, { year: "numeric", month: "long", day: "numeric" })}</time>
+          {minutes && <> · {t.minRead(minutes)}</>}
         </p>
+      }
+      intro={
+        <>
+          {props.takeaways?.length ? <Takeaways title={t.takeaways} items={props.takeaways} /> : null}
+          {props.sections && props.sections.length > 2 ? <Toc title={t.toc} sections={props.sections} /> : null}
+        </>
       }
       ld={[
         articleLd({
@@ -104,6 +128,7 @@ export function ArticlePage(props: BaseProps & { published: string; modified?: s
           path: props.path,
           published: props.published,
           modified: props.modified,
+          lang,
         }),
       ]}
     />

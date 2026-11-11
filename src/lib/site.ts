@@ -18,8 +18,9 @@ export const CHROME_URL =
  * (Статистика → Источники установок), `referrer` уходит в Install Referrer API
  * (Firebase / GA4 приложения). Без меток — главная страница (историческое поведение).
  */
-export function playUrl(campaign?: string, medium = "seo"): string {
-  if (!campaign) return PLAY_BASE;
+export function playUrl(campaign?: string, medium = "seo", hl?: string): string {
+  const lang = hl ? `&hl=${hl}` : "";
+  if (!campaign) return PLAY_BASE + lang;
   const utm = `utm_source=brainura.app&utm_medium=${medium}&utm_campaign=${campaign}`;
-  return `${PLAY_BASE}&${utm}&referrer=${encodeURIComponent(utm)}`;
+  return `${PLAY_BASE}${lang}&${utm}&referrer=${encodeURIComponent(utm)}`;
 }

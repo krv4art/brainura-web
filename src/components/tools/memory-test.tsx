@@ -8,15 +8,16 @@
 // ошибка подряд завершает тест. Результат = самая длинная верно повторённая длина.
 
 import { useEffect, useRef, useState } from "react";
+import type { Locale } from "@/lib/i18n";
 import { loadBest, saveBest } from "./storage";
 
 type Mode = "digits" | "backwards" | "grid";
 type Phase = "idle" | "show" | "input" | "feedback" | "done";
 
-const MODES: { key: Mode; label: string; start: number }[] = [
-  { key: "digits", label: "Numbers", start: 3 },
-  { key: "backwards", label: "Numbers backwards", start: 2 },
-  { key: "grid", label: "Grid sequence", start: 3 },
+const MODES: { key: Mode; start: number }[] = [
+  { key: "digits", start: 3 },
+  { key: "backwards", start: 2 },
+  { key: "grid", start: 3 },
 ];
 const GRID = 4;
 const MAX_GRID = GRID * GRID;
@@ -38,13 +39,79 @@ function makeSeq(mode: Mode, len: number): number[] {
   return out;
 }
 
-const TYPICAL: Record<Mode, string> = {
-  digits: "Most adults recall about 6 to 8 digits in order.",
-  backwards: "Repeating digits backwards is harder: most adults manage about 4 to 6.",
-  grid: "On sequence tasks like this one, most adults repeat about 5 to 7 positions.",
+// 🔒 Строки — по языкам; новый язык в Locale без своей записи не соберётся.
+// Нормы (6–8 / 4–6 / 5–7) от языка не зависят.
+interface Strings {
+  modes: Record<Mode, string>;
+  modeGroup: string;
+  best: string;
+  length: string;
+  lastTry: string;
+  /** Число с единицей: «4 digits» / «4 цифры». */
+  unit: (mode: Mode, n: number) => string;
+  /** Только единица (после крупного числа на экране результата). */
+  unitWord: (mode: Mode, n: number) => string;
+  cell: (n: number) => string;
+  typeInOrder: string;
+  typeReverse: string;
+  check: string;
+  tapInOrder: (done: number, total: number) => string;
+  intro: Record<Mode, string>;
+  start: string;
+  correct: string;
+  notQuite: string;
+  next: (what: string) => string;
+  sequenceWas: string;
+  cellsOrder: string;
+  oneMore: (what: string) => string;
+  cont: string;
+  yourSpan: string;
+  tryAgain: string;
+  typical: Record<Mode, string>;
+  note: (mode: Mode) => string;
+}
+
+const EN: Strings = {
+  modes: { digits: "Numbers", backwards: "Numbers backwards", grid: "Grid sequence" },
+  modeGroup: "Test mode",
+  best: "Best:",
+  length: "Length",
+  lastTry: " · last try",
+  unit: (m, n) => `${n} ${m === "grid" ? "positions" : "digits"}`,
+  unitWord: (m) => (m === "grid" ? "positions" : "digits"),
+  cell: (n) => `Cell ${n}`,
+  typeInOrder: "Type the digits in order",
+  typeReverse: "Type the digits in reverse order",
+  check: "Check",
+  tapInOrder: (d, t) => `Tap the cells in the same order (${d}/${t})`,
+  intro: {
+    grid: "Cells light up one after another. Then tap them in the same order.",
+    backwards: "Digits appear one at a time. Then type them backwards: 4 7 1 becomes 174.",
+    digits: "Digits appear one at a time. Then type them in the same order.",
+  },
+  start: "Start",
+  correct: "Correct!",
+  notQuite: "Not quite",
+  next: (w) => `Next: ${w}.`,
+  sequenceWas: "The sequence was",
+  cellsOrder: " (cells counted left to right, top to bottom)",
+  oneMore: (w) => `. One more try at ${w}.`,
+  cont: "Continue",
+  yourSpan: "Your span",
+  tryAgain: "Try again",
+  typical: {
+    digits: "Most adults recall about 6 to 8 digits in order.",
+    backwards: "Repeating digits backwards is harder: most adults manage about 4 to 6.",
+    grid: "On sequence tasks like this one, most adults repeat about 5 to 7 positions.",
+  },
+  note: (m) =>
+    `Each correct answer adds one more ${m === "grid" ? "cell" : "digit"}. You get two tries at every length; the test ends after two misses in a row. Your best span is saved on this device.`,
 };
 
-export function MemoryTest() {
+const STRINGS: Record<Locale, Strings> = { en: EN, qa: EN };
+
+export function MemoryTest({ lang = "en" }: { lang?: Locale }) {
+  const t = STRINGS[lang];
   const [mode, setMode] = useState<Mode>("digits");
   const [phase, setPhase] = useState<Phase>("idle");
   const [len, setLen] = useState(3);
@@ -159,11 +226,10 @@ export function MemoryTest() {
   };
 
   const shownSeq = (mode === "grid" ? seq.map((c) => c + 1) : seq).join(" ");
-  const unit = mode === "grid" ? "positions" : "digits";
 
   return (
     <div>
-      <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Test mode">
+      <div className="flex flex-wrap items-center gap-2" role="group" aria-label={t.modeGroup}>
         {MODES.map((m) => (
           <button
             key={m.key}
@@ -172,13 +238,13 @@ export function MemoryTest() {
             aria-pressed={m.key === mode}
             className={`rounded-full px-3 py-1 text-sm font-semibold ${m.key === mode ? "bg-[var(--color-primary)] text-white" : "border border-[var(--color-border)] bg-white text-[var(--color-text)]"}`}
           >
-            {m.label}
+            {t.modes[m.key]}
           </button>
         ))}
         <span className="ml-auto text-sm tabular-nums text-[var(--color-text-secondary)]" aria-live="polite">
           {phase === "idle" || phase === "done"
-            ? best !== null && <>Best: <strong className="text-[var(--color-text)]">{best} {unit}</strong></>
-            : <>Length <strong className="text-[var(--color-text)]">{len}</strong>{strike && " · last try"}</>}
+            ? best !== null && <>{t.best} <strong className="text-[var(--color-text)]">{t.unit(mode, best)}</strong></>
+            : <>{t.length} <strong className="text-[var(--color-text)]">{len}</strong>{strike && t.lastTry}</>}
         </span>
       </div>
 
@@ -199,7 +265,7 @@ export function MemoryTest() {
                   disabled={phase !== "input"}
                   onPointerDown={(e) => { e.preventDefault(); tapCell(c); }}
                   onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); tapCell(c); } }}
-                  aria-label={`Cell ${c + 1}`}
+                  aria-label={t.cell(c + 1)}
                   className={`rounded-xl border transition-colors duration-100 touch-manipulation select-none ${
                     bad ? "border-[#E74C3C] bg-[#FDECEA]" : on ? "border-transparent bg-[var(--color-primary)]" : tapped ? "border-transparent bg-[var(--color-primary)]/25" : "border-[var(--color-border)] bg-white"
                   }`}
@@ -220,7 +286,7 @@ export function MemoryTest() {
                 className="flex w-full max-w-[320px] flex-col items-center gap-3"
               >
                 <label htmlFor="mem-entry" className="text-sm font-medium text-[var(--color-text-secondary)]">
-                  {mode === "backwards" ? "Type the digits in reverse order" : "Type the digits in order"}
+                  {mode === "backwards" ? t.typeReverse : t.typeInOrder}
                 </label>
                 <input
                   id="mem-entry"
@@ -232,7 +298,7 @@ export function MemoryTest() {
                   className="w-full rounded-2xl border border-[var(--color-border)] bg-white px-4 py-3 text-center text-3xl font-bold tracking-[0.3em] tabular-nums text-[var(--color-text)] outline-none focus:border-[var(--color-primary)]"
                 />
                 <button type="submit" disabled={!entry} className="btn-gradient rounded-full px-8 py-3 font-bold text-white disabled:opacity-50">
-                  Check
+                  {t.check}
                 </button>
               </form>
             )}
@@ -241,7 +307,7 @@ export function MemoryTest() {
 
         {mode === "grid" && phase === "input" && (
           <p className="mt-3 text-sm font-medium text-[var(--color-text-secondary)]">
-            Tap the cells in the same order ({taps.length}/{seq.length})
+            {t.tapInOrder(taps.length, seq.length)}
           </p>
         )}
 
@@ -250,41 +316,37 @@ export function MemoryTest() {
             {phase === "idle" && (
               <>
                 <p className="max-w-xs text-[var(--color-text-secondary)]">
-                  {mode === "grid"
-                    ? "Cells light up one after another. Then tap them in the same order."
-                    : mode === "backwards"
-                      ? "Digits appear one at a time. Then type them backwards: 4 7 1 becomes 174."
-                      : "Digits appear one at a time. Then type them in the same order."}
+                  {t.intro[mode]}
                 </p>
                 <button type="button" onClick={begin} className="btn-gradient rounded-full px-8 py-4 text-lg font-bold text-white shadow-xl transition hover:scale-[1.03]">
-                  Start
+                  {t.start}
                 </button>
               </>
             )}
             {phase === "feedback" && (
               <>
                 <p className="text-2xl font-bold text-[var(--color-text)]">
-                  {lastOk ? "Correct!" : "Not quite"}
+                  {lastOk ? t.correct : t.notQuite}
                 </p>
                 <p className="max-w-xs text-sm text-[var(--color-text-secondary)]">
                   {lastOk
-                    ? `Next: ${len + 1} ${unit}.`
-                    : <>The sequence was <strong className="tabular-nums text-[var(--color-text)]">{shownSeq}</strong>{mode === "grid" ? " (cells counted left to right, top to bottom)" : ""}. One more try at {len} {unit}.</>}
+                    ? t.next(t.unit(mode, len + 1))
+                    : <>{t.sequenceWas} <strong className="tabular-nums text-[var(--color-text)]">{shownSeq}</strong>{mode === "grid" ? t.cellsOrder : ""}{t.oneMore(t.unit(mode, len))}</>}
                 </p>
                 <button ref={contRef} type="button" onClick={next} className="btn-gradient rounded-full px-8 py-3 font-bold text-white">
-                  Continue
+                  {t.cont}
                 </button>
               </>
             )}
             {phase === "done" && (
               <>
-                <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">Your span</p>
+                <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">{t.yourSpan}</p>
                 <p className="text-5xl font-extrabold tabular-nums text-[var(--color-text)]">
-                  {span > 0 ? span : `< ${cfg.start}`} <span className="text-2xl font-bold">{unit}</span>
+                  {span > 0 ? span : `< ${cfg.start}`} <span className="text-2xl font-bold">{t.unitWord(mode, span > 0 ? span : cfg.start)}</span>
                 </p>
-                <p className="max-w-xs text-sm text-[var(--color-text-secondary)]">{TYPICAL[mode]}</p>
+                <p className="max-w-xs text-sm text-[var(--color-text-secondary)]">{t.typical[mode]}</p>
                 <button ref={contRef} type="button" onClick={begin} className="btn-gradient rounded-full px-8 py-3 font-bold text-white">
-                  Try again
+                  {t.tryAgain}
                 </button>
               </>
             )}
@@ -292,8 +354,7 @@ export function MemoryTest() {
         )}
       </div>
       <p className="mt-3 text-sm text-[var(--color-text-secondary)]">
-        Each correct answer adds one more {mode === "grid" ? "cell" : "digit"}. You get two tries at every length; the
-        test ends after two misses in a row. Your best span is saved on this device.
+        {t.note(mode)}
       </p>
     </div>
   );
