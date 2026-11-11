@@ -1,7 +1,7 @@
 // Маршрутизация языковых поддоменов (Next 16: proxy = бывший middleware).
 //
 //   de.brainura.app/tests/x      → внутри /de/tests/x   (src/app/[lang]/…)
-//   de.brainura.app/sitemap.xml  → /de/sitemap.xml       (свой sitemap у поддомена)
+//   de.brainura.app/sitemap.xml  → /de/sitemap-xml       (свой sitemap у поддомена)
 //   brainura.app/de/tests/x      → 308 на de.brainura.app/tests/x (без дублей)
 //   brainura.app/…               → как есть (английский, src/app/(en)/…)
 //
@@ -17,7 +17,9 @@ export function proxy(req: NextRequest) {
 
   if (lang) {
     const url = req.nextUrl.clone();
-    url.pathname = `/${lang}${pathname === "/" ? "" : pathname}`;
+    // Служебные файлы — во внутренние маршруты без точки в имени (см. [lang]/sitemap-xml).
+    const inner = pathname === "/sitemap.xml" ? "/sitemap-xml" : pathname === "/robots.txt" ? "/robots-txt" : pathname;
+    url.pathname = `/${lang}${inner === "/" ? "" : inner}`;
     return NextResponse.rewrite(url);
   }
 

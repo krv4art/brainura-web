@@ -2,15 +2,13 @@ import { absoluteUrl, isLocale, LOCALES, subdomainLocales, type Locale } from "@
 import { SECTIONS, hubVersions, pagesOf, versionsOf, type SectionKey } from "@/content/registry";
 
 // sitemap.xml поддомена языка: <код>.brainura.app/sitemap.xml (src/proxy.ts переписывает
-// в /<код>/sitemap.xml). Только страницы этого языка; у каждой — hreflang всех версий.
+// в /<код>/sitemap-xml). Только страницы этого языка; у каждой — hreflang всех версий.
 // Search Console «Домен» видит sitemap всех поддоменов.
 
-export const dynamic = "force-static";
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  return subdomainLocales().map((lang) => ({ lang }));
-}
+// Папка без расширения в имени (`sitemap-xml`, не `sitemap.xml`): с точкой сборщик Vercel
+// падал «failed to find source route … for prerender». Ответ динамический — дёшево и без
+// пререндера пустого списка языков.
+export const dynamic = "force-dynamic";
 
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
 
@@ -25,7 +23,7 @@ function urlTag(loc: string, lastmod: string | undefined, alts: { lang: Locale; 
 
 export async function GET(_req: Request, { params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
-  if (!isLocale(lang)) return new Response("Not found", { status: 404 });
+  if (!isLocale(lang) || !subdomainLocales().includes(lang)) return new Response("Not found", { status: 404 });
   const urls: string[] = [urlTag(absoluteUrl(lang, "/"), undefined, [{ lang, path: "/" }])];
   for (const section of Object.keys(SECTIONS) as SectionKey[]) {
     const pages = pagesOf(section, lang);
