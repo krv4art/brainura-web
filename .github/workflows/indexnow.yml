@@ -1,0 +1,27 @@
+# Автоиндексация: после успешного продакшен-деплоя Vercel сообщить Bing/Яндексу
+# (IndexNow) об изменённых страницах. Без секретов: ключ IndexNow публичный.
+name: IndexNow after deploy
+
+on:
+  deployment_status:
+  workflow_dispatch:
+    inputs:
+      all:
+        description: "Отправить все адреса sitemap"
+        type: boolean
+        default: false
+
+jobs:
+  indexnow:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.deployment_status.state == 'success' &&
+       contains(github.event.deployment.environment, 'roduction'))
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Submit changed URLs
+        run: python scripts/indexnow.py ${{ inputs.all && '--all' || '' }}
