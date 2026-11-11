@@ -20,6 +20,20 @@ export interface PageEntry {
 
 export const TESTS: PageEntry[] = [
   {
+    slug: "memory-test",
+    name: "Memory Test",
+    blurb: "Repeat digits forwards, backwards or a grid sequence. Find your memory span.",
+    locales: ["en"],
+    updated: "2026-11-11",
+  },
+  {
+    slug: "reading-speed-test",
+    name: "Reading Speed Test",
+    blurb: "Read a short text, answer three questions, get your words per minute.",
+    locales: ["en"],
+    updated: "2026-11-11",
+  },
+  {
     slug: "reaction-time-test",
     name: "Reaction Time Test",
     blurb: "Click when the screen turns green. Five tries, average in milliseconds.",

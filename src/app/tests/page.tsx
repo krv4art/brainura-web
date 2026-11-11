@@ -11,9 +11,9 @@ import { TESTS } from "@/content/registry";
 // «cognitive test» (33 100) сознательно не главный ключ: в выдаче — клинические
 // скрининги деменции, интент не наш.
 const PATH = "/tests";
-const TITLE = "Free Brain Tests Online: Reaction, Attention and Focus";
+const TITLE = "Free Brain Tests Online: Memory, Reaction, Attention, Reading";
 const DESCRIPTION =
-  "Free online brain tests you can take right now: reaction time, Schulte table and the Stroop test. No sign-up, results in seconds, your best score saved.";
+  "Free online brain tests you can take right now: memory span, reaction time, reading speed, Schulte table and the Stroop test. No sign-up, best score saved.";
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -77,6 +77,12 @@ export default function TestsHub() {
           measures visual search and sustained attention as you find numbers in order. The{" "}
           <strong className="text-[var(--color-text)]">Stroop test</strong> measures how well you suppress an
           automatic response, a core part of self-control in attention.
+        </p>
+        <p className="mt-4 leading-relaxed">
+          The <strong className="text-[var(--color-text)]">memory test</strong> measures your span: how long a
+          sequence of digits or grid positions you can repeat, forwards or backwards. The{" "}
+          <strong className="text-[var(--color-text)]">reading speed test</strong> gives your words per minute
+          together with a short comprehension check, because speed without understanding is just skimming.
         </p>
         <p className="mt-4 leading-relaxed">
           They are made for curiosity and practice. Scores depend on your device, sleep and mood, so compare your own
