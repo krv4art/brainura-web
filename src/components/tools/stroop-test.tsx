@@ -113,7 +113,7 @@ const RU: Strings = {
   ms: "мс",
 };
 
-const STRINGS: Record<Locale, Strings> = { en: EN, ru: RU, qa: EN };
+const STRINGS: Record<Locale, Strings> = { en: EN, ru: RU, uk: EN, qa: EN };
 
 export function StroopTest({ lang = "en" }: { lang?: Locale }) {
   const tx = STRINGS[lang];

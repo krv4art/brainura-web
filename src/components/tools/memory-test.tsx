@@ -149,7 +149,7 @@ const RU: Strings = {
     `Каждый верный ответ добавляет ${m === "grid" ? "ещё одну клетку" : "ещё одну цифру"}. На каждой длине две попытки: тест заканчивается после двух ошибок подряд. Рекорд хранится на вашем устройстве.`,
 };
 
-const STRINGS: Record<Locale, Strings> = { en: EN, ru: RU, qa: EN };
+const STRINGS: Record<Locale, Strings> = { en: EN, ru: RU, uk: EN, qa: EN };
 
 export function MemoryTest({ lang = "en" }: { lang?: Locale }) {
   const t = STRINGS[lang];

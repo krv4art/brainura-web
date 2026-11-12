@@ -283,7 +283,7 @@ const RU_READING: ReadingLocale = {
   strings: RU_STRINGS,
 };
 
-const READING: Record<Locale, ReadingLocale> = { en: EN_READING, ru: RU_READING, qa: EN_READING };
+const READING: Record<Locale, ReadingLocale> = { en: EN_READING, ru: RU_READING, uk: EN_READING, qa: EN_READING };
 
 const countWords = (p: Passage) => [p.title, ...p.paragraphs].join(" ").split(/\s+/).filter(Boolean).length;
 

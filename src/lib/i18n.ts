@@ -22,7 +22,7 @@
 // `qa` — псевдо-язык для проверки механизма: собирается только при SITE_QA_LOCALE=1,
 // открывается на `qa.localhost:<порт>`; в проде его нет.
 
-export type Locale = "en" | "ru" | "qa";
+export type Locale = "en" | "ru" | "uk" | "qa";
 
 export interface LocaleInfo {
   /** BCP 47 для hreflang и <html lang>. */
@@ -42,6 +42,9 @@ export const DEFAULT_LOCALE: Locale = "en";
 export const LOCALES: Record<Locale, LocaleInfo> = {
   en: { hreflang: "en", host: "brainura.app", nativeName: "English", dateLocale: "en-US" },
   ru: { hreflang: "ru", host: "ru.brainura.app", nativeName: "Русский", dateLocale: "ru-RU" },
+  // uk: ЧЕРНОВИК (12.11.2026). `preview: true` — в проде не собирается, в переключателе и sitemap его нет.
+  // При публикации (STATUS_uk.md, этап 9) флаг `preview` снять и подключить домен: add_site_locale.py uk.
+  uk: { hreflang: "uk", host: "uk.brainura.app", nativeName: "Українська", dateLocale: "uk-UA", preview: true },
   qa: { hreflang: "en-GB", host: "qa.brainura.app", nativeName: "QA", dateLocale: "en-GB", preview: true },
 };
 
@@ -59,6 +62,8 @@ export const SECTION_SLUGS: Record<Locale, Record<SectionName, string>> = {
   en: EN_SECTIONS,
   // ru: адреса утверждены владельцем 12.11.2026 (тесты для мозга 58 · игры для мозга 503 — точная частота)
   ru: { tests: "testy-dlya-mozga", games: "igry-dlya-mozga", learn: "stati", compare: "sravneniya" },
+  // uk: слаги ВРЕМЕННЫЕ (английские) — утвердить по главным ключам хабов на этапе 5 (STATUS_uk.md), до публикации
+  uk: EN_SECTIONS,
   // qa: другие слаги, чтобы проверить, что нигде не осталось жёстких «/tests»
   qa: { tests: "testy-qa", games: "igry-qa", learn: "stati-qa", compare: "compare-qa" },
 };

@@ -154,5 +154,6 @@ const RU: Ui = {
 export const UI: Record<Locale, Ui> = {
   en: EN,
   ru: RU,
+  uk: EN, // TODO: перевести (STATUS_uk.md, этап 5)
   qa: EN,
 };
