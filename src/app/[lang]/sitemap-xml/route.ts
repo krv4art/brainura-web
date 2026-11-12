@@ -1,5 +1,5 @@
 import { absoluteUrl, isLocale, LOCALES, sectionPath, subdomainLocales, type Locale } from "@/lib/i18n";
-import { SECTIONS, hubVersions, pagesOf, versionsOf, type SectionKey } from "@/content/registry";
+import { SECTIONS, homeVersions, hubVersions, pagesOf, versionsOf, type SectionKey } from "@/content/registry";
 
 // sitemap.xml поддомена языка: <код>.brainura.app/sitemap.xml (src/proxy.ts переписывает
 // в /<код>/sitemap-xml). Только страницы этого языка; у каждой — hreflang всех версий.
@@ -24,7 +24,7 @@ function urlTag(loc: string, lastmod: string | undefined, alts: { lang: Locale; 
 export async function GET(_req: Request, { params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
   if (!isLocale(lang) || !subdomainLocales().includes(lang)) return new Response("Not found", { status: 404 });
-  const urls: string[] = [urlTag(absoluteUrl(lang, "/"), undefined, [{ lang, path: "/" }])];
+  const urls: string[] = [urlTag(absoluteUrl(lang, "/"), undefined, homeVersions().some((v) => v.lang === lang) ? homeVersions() : [{ lang, path: "/" }])];
   for (const section of Object.keys(SECTIONS) as SectionKey[]) {
     const pages = pagesOf(section, lang);
     if (!pages.length) continue;

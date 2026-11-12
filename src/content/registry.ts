@@ -8,6 +8,7 @@ import { GAME_PAGES } from "./games";
 import { ARTICLES_ALL } from "./articles";
 import { TESTS_EN } from "./tests";
 import { L10N } from "./l10n";
+import { landingFor } from "./landing";
 
 export interface PageEntry {
   /** Общий ключ языковых версий страницы (= английский слаг). */
@@ -94,6 +95,13 @@ export function hubVersions(section: SectionKey): LangVersion[] {
   return builtLocales()
     .filter((l) => pagesOf(section, l).length > 0)
     .map((lang) => ({ lang, path: sectionPath(lang, section) }));
+}
+
+/** Версии главной: языки, у которых есть лендинг (для hreflang brainura.app/ ↔ <код>.brainura.app/). */
+export function homeVersions(): LangVersion[] {
+  return builtLocales()
+    .filter((l) => l !== "qa" && landingFor(l))
+    .map((lang) => ({ lang, path: "/" }));
 }
 
 /** Какие разделы есть на языке — для шапки и подвала. */

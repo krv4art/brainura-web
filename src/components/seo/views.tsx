@@ -240,14 +240,36 @@ export function HubView({ section, lang }: { section: SectionKey; lang: Locale }
   );
 }
 
-/** Главная языка: все разделы, в которых есть страницы. */
+/** Главная языка без лендинга: все разделы, в которых есть страницы. */
 export function LangHomeView({ lang }: { lang: Locale }) {
   const ui = UI[lang];
-  const sections = (["tests", "games", "learn"] as const).filter((s) => pagesOf(s, lang).length > 0);
   return (
     <div className="mx-auto max-w-5xl px-4 pb-20 pt-10 sm:px-6 sm:pt-16">
       <h1 className="text-balance text-4xl font-extrabold tracking-tight text-[var(--color-text)] sm:text-6xl">{ui.hub.homeTitle}</h1>
       <p className="mt-4 max-w-2xl text-lg leading-relaxed text-[var(--color-text-secondary)]">{ui.hub.homeLead}</p>
+      <LangSections lang={lang} />
+      <div className="max-w-3xl">
+        <DownloadBlock campaign="home" title={ui.download.title} body={ui.download.body} lang={lang} />
+      </div>
+    </div>
+  );
+}
+
+/** Каталог разделов языка (под лендингом или на главной без него). */
+export function LangCatalog({ lang, title, lead }: { lang: Locale; title: string; lead: string }) {
+  return (
+    <div className="mx-auto max-w-5xl px-4 pb-20 pt-4 sm:px-6">
+      <h2 className="text-3xl font-extrabold tracking-tight text-[var(--color-text)] sm:text-4xl">{title}</h2>
+      <p className="mt-3 max-w-2xl text-base leading-relaxed text-[var(--color-text-secondary)]">{lead}</p>
+      <LangSections lang={lang} />
+    </div>
+  );
+}
+
+function LangSections({ lang }: { lang: Locale }) {
+  const sections = (["tests", "games", "learn"] as const).filter((s) => pagesOf(s, lang).length > 0);
+  return (
+    <>
       {sections.map((s) => (
         <section key={s} className="mt-14">
           <h2 className="text-2xl font-bold text-[var(--color-text)] sm:text-3xl">
@@ -256,9 +278,6 @@ export function LangHomeView({ lang }: { lang: Locale }) {
           <Cards section={s} lang={lang} />
         </section>
       ))}
-      <div className="max-w-3xl">
-        <DownloadBlock campaign="home" title={ui.download.title} body={ui.download.body} lang={lang} />
-      </div>
-    </div>
+    </>
   );
 }
