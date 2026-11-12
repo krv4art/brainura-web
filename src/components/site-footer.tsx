@@ -29,9 +29,8 @@ export function SiteFooter({ lang = "en", sections }: { lang?: Locale; sections?
           <a href={main("/privacy")} className="hover:text-[var(--color-text)]">{t.privacy}</a>
           <a href={main("/terms")} className="hover:text-[var(--color-text)]">{t.terms}</a>
           <a href={main("/support")} className="hover:text-[var(--color-text)]">{t.support}</a>
-          {en ? (
-            <a href="mailto:krv4art.dev@gmail.com" className="hover:text-[var(--color-text)]">krv4art.dev@gmail.com</a>
-          ) : (
+          <a href="mailto:krv4art.dev@gmail.com" className="hover:text-[var(--color-text)]">krv4art.dev@gmail.com</a>
+          {!en && (
             <a href={absoluteUrl("en", "/")} hrefLang="en" className="hover:text-[var(--color-text)]">{LOCALES.en.nativeName}</a>
           )}
         </nav>

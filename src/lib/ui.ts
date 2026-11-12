@@ -6,7 +6,7 @@ import type { BlockLabels } from "@/components/seo/blocks";
 import type { Locale } from "./i18n";
 
 export interface Ui {
-  nav: { home: string; games: string; tests: string; learn: string; support: string; download: string };
+  nav: { home: string; features: string; games: string; tests: string; learn: string; support: string; download: string };
   footer: { brainGames: string; brainTests: string; learn: string; privacy: string; terms: string; support: string; rights: string };
   faq: string;
   sources: string;
@@ -30,11 +30,13 @@ export interface Ui {
   game: { free: string; premium: string; howToPlay: (name: string) => string; playIn: (name: string) => string; playInBody: string };
   skills: Record<"Memory" | "Attention" | "Speed" | "Logic" | "Language" | "Emotions", string>;
   download: { title: string; body: string };
+  /** Заметный блок «больше игр в приложении» под инструментом/игрой. */
+  promo: { title: string; body: string };
   notFound: { title: string; body: string; home: string };
 }
 
 const EN: Ui = {
-  nav: { home: "Home", games: "Games", tests: "Tests", learn: "Learn", support: "Support", download: "Download" },
+  nav: { home: "Home", features: "Features", games: "Games", tests: "Tests", learn: "Learn", support: "Support", download: "Download" },
   footer: {
     brainGames: "Brain games",
     brainTests: "Brain tests",
@@ -81,6 +83,10 @@ const EN: Ui = {
     title: "Five minutes of brain games a day",
     body: "Brainura has 26 short games for memory, attention, speed and logic, with honest expectations and no ads.",
   },
+  promo: {
+    title: "More brain games in the app",
+    body: "Brainura has 26 short games for memory, attention, speed and logic, a daily plan and levels that adapt to you. 13 games are free.",
+  },
   notFound: { title: "Page not found", body: "This page does not exist or has moved.", home: "Go to the home page" },
 };
 
@@ -91,7 +97,7 @@ const plural = (n: number, one: string, few: string, many: string) => {
 };
 
 const RU: Ui = {
-  nav: { home: "Главная", games: "Игры", tests: "Тесты", learn: "Статьи", support: "Поддержка", download: "Скачать" },
+  nav: { home: "Главная", features: "Возможности", games: "Игры", tests: "Тесты", learn: "Статьи", support: "Поддержка", download: "Скачать" },
   footer: {
     brainGames: "Игры для мозга",
     brainTests: "Тесты для мозга",
@@ -137,6 +143,10 @@ const RU: Ui = {
   download: {
     title: "Пять минут игр для мозга в день",
     body: "В Brainura 26 коротких игр на память, внимание, скорость и логику. Без рекламы и без громких обещаний.",
+  },
+  promo: {
+    title: "Больше игр для мозга — в приложении",
+    body: "В Brainura 26 коротких игр на память, внимание, скорость и логику, ежедневный план и уровни, которые подстраиваются под вас. 13 игр бесплатны.",
   },
   notFound: { title: "Страница не найдена", body: "Такой страницы нет или она переехала.", home: "На главную" },
 };

@@ -16,6 +16,7 @@ import {
   DownloadBlock,
   FaqList,
   JsonLd,
+  MoreGamesPromo,
   Related,
   Sources,
   proseClass,
@@ -57,7 +58,8 @@ function Shell({
   meta,
   intro,
   lang = "en",
-}: BaseProps & { top?: ReactNode; ld: object[]; meta?: ReactNode; intro?: ReactNode }) {
+  promo = false,
+}: BaseProps & { top?: ReactNode; ld: object[]; meta?: ReactNode; intro?: ReactNode; promo?: boolean }) {
   return (
     <article className="mx-auto max-w-3xl px-4 pb-20 pt-8 sm:px-6 sm:pt-12">
       <JsonLd data={[breadcrumbLd(crumbs, lang), ...ld, ...(faq.length ? [faqLd(faq)] : [])]} />
@@ -69,6 +71,7 @@ function Shell({
       <div className="mt-4 text-lg leading-relaxed text-[var(--color-text-secondary)]">{lead}</div>
       {intro}
       {top && <div className="mt-8">{top}</div>}
+      {promo && <MoreGamesPromo campaign={campaign} lang={lang} />}
       <div className={`mt-4 ${proseClass}`}>{children}</div>
       <FaqList faq={faq} lang={lang} />
       <Related links={related} lang={lang} />
@@ -84,6 +87,7 @@ export function ToolPage(props: BaseProps & { tool: ReactNode; toolName: string 
     <Shell
       {...props}
       top={props.tool}
+      promo
       ld={[webAppLd(props.toolName, props.description, props.path, props.lang)]}
     />
   );
@@ -91,7 +95,7 @@ export function ToolPage(props: BaseProps & { tool: ReactNode; toolName: string 
 
 /** Страница игры приложения: что тренирует, как играть, скачать. */
 export function GamePage(props: BaseProps & { hero?: ReactNode }) {
-  return <Shell {...props} top={props.hero} ld={[mobileAppLd()]} />;
+  return <Shell {...props} top={props.hero} promo ld={[mobileAppLd()]} />;
 }
 
 /**

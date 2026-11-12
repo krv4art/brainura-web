@@ -1,6 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import { sectionPath, type Locale } from "@/lib/i18n";
+import { absoluteUrl, DEFAULT_LOCALE, LOCALES, sectionPath, subdomainLocales, type Locale } from "@/lib/i18n";
+import { LangSwitch, type LangOption } from "./lang-switch";
+
+const LANG_OPTIONS: LangOption[] = [DEFAULT_LOCALE, ...subdomainLocales()].map((l) => ({
+  hreflang: LOCALES[l].hreflang,
+  name: LOCALES[l].nativeName,
+  home: absoluteUrl(l, "/"),
+}));
+import { landingFor } from "@/content/landing";
 import { UI } from "@/lib/ui";
 import { playUrl } from "@/lib/site";
 
@@ -14,6 +22,8 @@ export function SiteHeader({ lang = "en", sections }: { lang?: Locale; sections?
   const t = UI[lang].nav;
   const en = lang === "en";
   const has = sections ?? { games: true, tests: true, learn: true };
+  // У языка с лендингом на главной есть якоря #features и #download — шапка как у английской.
+  const landing = en || !!landingFor(lang);
   return (
     <header className="sticky top-0 z-40 w-full border-b border-[var(--color-border)]/60 bg-white/80 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
@@ -23,9 +33,9 @@ export function SiteHeader({ lang = "en", sections }: { lang?: Locale; sections?
         </Link>
 
         <nav className="flex items-center gap-1 text-sm font-medium text-[var(--color-text-secondary)]">
-          {en && (
+          {landing && (
             <Link href="/#features" className={`hidden sm:block ${item}`}>
-              Features
+              {t.features}
             </Link>
           )}
           {has.games && (
@@ -43,13 +53,19 @@ export function SiteHeader({ lang = "en", sections }: { lang?: Locale; sections?
               {t.learn}
             </Link>
           )}
-          {en && (
+          {en ? (
             <Link href="/support" className={`hidden sm:block ${item}`}>
               {t.support}
             </Link>
+          ) : (
+            // Поддержка — только на основном домене (на английском).
+            <a href={absoluteUrl("en", "/support")} className={`hidden sm:block ${item}`}>
+              {t.support}
+            </a>
           )}
+          <LangSwitch current={LOCALES[lang].hreflang} options={LANG_OPTIONS} />
           <a
-            href={en ? "/#download" : playUrl(`${lang}-header`, "seo", lang)}
+            href={landing ? "/#download" : playUrl(`${lang}-header`, "seo", lang)}
             className="btn-gradient ml-2 inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
           >
             {t.download}

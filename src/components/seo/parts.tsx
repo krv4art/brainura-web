@@ -2,7 +2,7 @@
 // FAQ, источники, «скачать», связанные страницы.
 
 import Link from "next/link";
-import { ChevronDown, ChevronRight, Play, Apple as AppleStore } from "lucide-react";
+import { BrainCircuit, ChevronDown, ChevronRight, Play, Apple as AppleStore } from "lucide-react";
 import { APP_STORE_URL, playUrl } from "@/lib/site";
 import type { Crumb } from "@/lib/schema";
 import type { Locale } from "@/lib/i18n";
@@ -135,6 +135,49 @@ export function DownloadBlock({
       </div>
       <p className="mt-4 text-xs text-white/75">{t.note}</p>
     </section>
+  );
+}
+
+/**
+ * Заметный блок «больше игр в приложении» сразу под инструментом или игрой (не в самом низу).
+ * Светлая карточка с градиентной полосой — в тон остальным карточкам страницы, не спорит с
+ * синим блоком «скачать» внизу. Ссылки на Google Play (с UTM) и App Store.
+ */
+export function MoreGamesPromo({ campaign, lang = "en" }: { campaign: string; lang?: Locale }) {
+  const t = UI[lang].store;
+  const p = UI[lang].promo;
+  const play = `${campaign}-promo`;
+  return (
+    <aside className="relative mt-8 overflow-hidden rounded-2xl border border-[var(--color-primary)]/25 bg-white p-5 shadow-md sm:p-6">
+      <div className="btn-gradient absolute inset-y-0 left-0 w-1.5" aria-hidden="true" />
+      <div className="flex flex-col gap-5 pl-2 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+        <div className="flex items-start gap-4">
+          <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-secondary)]/10 text-[var(--color-primary)]">
+            <BrainCircuit className="h-6 w-6" aria-hidden="true" />
+          </span>
+          <div>
+            <p className="text-lg font-extrabold leading-snug text-[var(--color-text)]">{p.title}</p>
+            <p className="mt-1 text-sm leading-relaxed text-[var(--color-text-secondary)]">{p.body}</p>
+          </div>
+        </div>
+        <div className="flex shrink-0 flex-col gap-2 sm:items-stretch">
+          <a
+            href={lang === "en" ? playUrl(play) : playUrl(`${lang}-${play}`, "seo", lang)}
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-black px-5 py-2.5 text-sm font-semibold text-white shadow transition hover:scale-[1.02]"
+          >
+            <Play className="h-5 w-5" aria-hidden="true" />
+            {t.play}
+          </a>
+          <a
+            href={APP_STORE_URL}
+            className="inline-flex items-center justify-center gap-2 rounded-xl border border-[var(--color-border)] bg-white px-5 py-2.5 text-sm font-semibold text-[var(--color-text)] shadow-sm transition hover:scale-[1.02]"
+          >
+            <AppleStore className="h-5 w-5" aria-hidden="true" />
+            {t.appStore}
+          </a>
+        </div>
+      </div>
+    </aside>
   );
 }
 
