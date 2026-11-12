@@ -57,7 +57,7 @@ const EN: Landing = {
     appleName: "App Store",
     chromeTop: "Add to Chrome",
     chromeName: "Chrome extension",
-    note: "Free to install · 7 days of Premium games free, no card needed",
+    note: "Free to install · 13 games are free and stay free",
   },
   areas: ["Memory", "Attention", "Processing Speed", "Logic", "Emotional Intelligence"],
   screenshots: {
@@ -128,7 +128,7 @@ const EN: Landing = {
       },
       {
         q: "How much does it cost?",
-        a: "Free to install. 13 games are free and stay free. New users get 7 days of every Premium game with no card needed. After that, Premium on Android is a monthly or yearly subscription: in the US $5.99/month or $21.99/year, with prices adjusted by country. The iPhone app is free for now.",
+        a: "Free to install. 13 games are free and stay free. The rest of the games are Premium, a subscription. On Android it is monthly or yearly: in the US $5.99/month or $21.99/year, with prices adjusted by country. The iPhone app is free for now.",
       },
       {
         q: "Do I need an account?",
@@ -150,7 +150,7 @@ const EN: Landing = {
   },
   cta: {
     title: "Start your first 5-minute session today",
-    body: "Free to install. 7 days of every Premium game on us, no card needed.",
+    body: "Free to install. 13 games are free and stay free.",
     play: "Get on Google Play",
     apple: "Download on the App Store",
     chrome: "Add Chrome extension",
@@ -177,7 +177,7 @@ const RU: Landing = {
     appleName: "App Store",
     chromeTop: "Добавить в Chrome",
     chromeName: "Расширение для Chrome",
-    note: "Установка бесплатна · 7 дней игр Premium в подарок, карта не нужна",
+    note: "Установка бесплатна · 13 игр бесплатны и останутся такими",
   },
   areas: ["Память", "Внимание", "Скорость обработки", "Логика", "Эмоциональный интеллект"],
   screenshots: {
@@ -248,7 +248,7 @@ const RU: Landing = {
       },
       {
         q: "Сколько это стоит?",
-        a: "Установка бесплатна. 13 игр бесплатны и останутся такими. Новым пользователям на 7 дней открыты все игры Premium, карта не нужна. Дальше Premium на Android — подписка на месяц или на год; цены зависят от страны и указаны в магазине приложений (например, в США — $5,99 в месяц или $21,99 в год). Приложение для iPhone пока бесплатно.",
+        a: "Установка бесплатна. 13 игр бесплатны и останутся такими. Остальные игры — Premium, это подписка: на Android она на месяц или на год; цены зависят от страны и указаны в магазине приложений (например, в США — $5,99 в месяц или $21,99 в год). Приложение для iPhone пока бесплатно.",
       },
       {
         q: "Нужен ли аккаунт?",
@@ -270,7 +270,7 @@ const RU: Landing = {
   },
   cta: {
     title: "Начните первое пятиминутное занятие сегодня",
-    body: "Установка бесплатна. 7 дней всех игр Premium — за наш счёт, карта не нужна.",
+    body: "Установка бесплатна. 13 игр бесплатны и останутся такими.",
     play: "Скачать в Google Play",
     apple: "Загрузить в App Store",
     chrome: "Добавить расширение для Chrome",

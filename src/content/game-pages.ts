@@ -32,7 +32,7 @@ const PREMIUM_NOTE: Block = {
   t: "callout",
   kind: "note",
   title: "Premium game",
-  text: "New players get all Premium games free for the first 7 days, no card needed.",
+  text: "Premium games are part of the Premium subscription.",
 };
 
 export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
@@ -502,7 +502,7 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
       },
       {
         q: "Is Quarters free?",
-        a: "Quarters is a Premium game. New players get all Premium games free for the first 7 days, no card needed.",
+        a: "Quarters is a Premium game. Premium games are part of the Premium subscription.",
       },
     ],
     updated: U,
@@ -661,7 +661,7 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
       },
       {
         q: "Is Mirror Drawing free?",
-        a: "It is a Premium game. New players get all Premium games free for the first 7 days, no card needed.",
+        a: "It is a Premium game. Premium games are part of the Premium subscription.",
       },
     ],
     updated: U,
@@ -743,7 +743,7 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
       },
       {
         q: "Is Math Cross free?",
-        a: "It is a Premium game. New players get all Premium games free for the first 7 days, no card needed.",
+        a: "It is a Premium game. Premium games are part of the Premium subscription.",
       },
     ],
     updated: U,
@@ -821,7 +821,7 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
       },
       {
         q: "Is Read the Face free?",
-        a: "It is a Premium game. New players get all Premium games free for the first 7 days, no card needed. Mood Swipe, a quicker game about pleasant and unpleasant expressions, is also Premium.",
+        a: "It is a Premium game. Premium games are part of the Premium subscription. Mood Swipe, a quicker game about pleasant and unpleasant expressions, is also Premium.",
       },
     ],
     sources: [
@@ -1063,7 +1063,7 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
       },
       {
         q: "Is Mathmoji free?",
-        a: "Mathmoji is a Premium game. New players get all Premium games free for the first 7 days, no card needed.",
+        a: "Mathmoji is a Premium game. Premium games are part of the Premium subscription.",
       },
     ],
     updated: U,
@@ -1117,7 +1117,7 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
             t: "callout",
             kind: "note",
             title: "Premium game",
-            text: "New players get all Premium games free for the first 7 days. Quick Math, the free mental math game, is a good place to start.",
+            text: "Premium games are part of the Premium subscription. Quick Math, the free mental math game, is a good place to start.",
           },
         ],
       },
@@ -1129,7 +1129,7 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
       },
       {
         q: "Is Math Snake free?",
-        a: "It is a Premium game. New players get all Premium games free for the first 7 days, no card needed. Quick Math, the free mental math game, is a good place to start.",
+        a: "It is a Premium game. Premium games are part of the Premium subscription. Quick Math, the free mental math game, is a good place to start.",
       },
     ],
     updated: U,
@@ -1182,7 +1182,7 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
             head: ["Game", "How the text is flipped", "Access"],
             rows: [
               ["**Upside Down Reading**", "Turned on its head", "Free"],
-              ["**Mirror Reading**", "Mirrored left to right", "Premium, free for the first 7 days"],
+              ["**Mirror Reading**", "Mirrored left to right", "Premium"],
             ],
           },
           {
@@ -1220,7 +1220,7 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
       },
       {
         q: "Are the reading games free?",
-        a: "Upside Down Reading is free. Mirror Reading is Premium; new players get all Premium games free for the first 7 days, no card needed.",
+        a: "Upside Down Reading is free. Mirror Reading is a Premium game.",
       },
     ],
     tests: ["reading-speed-test"],
@@ -1300,7 +1300,7 @@ export const GAME_PAGE_CONTENT: Record<string, GamePageContent> = {
       },
       {
         q: "Is the Bourdon Test free?",
-        a: "It is a Premium game. New players get all Premium games free for the first 7 days, no card needed.",
+        a: "It is a Premium game. Premium games are part of the Premium subscription.",
       },
     ],
     tests: ["schulte-table", "stroop-test"],

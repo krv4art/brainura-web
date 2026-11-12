@@ -26,7 +26,7 @@ const PREMIUM: Block = {
   t: "callout",
   kind: "note",
   title: "Игра Premium",
-  text: "Все игры Premium новым игрокам открыты бесплатно на первые 7 дней, карта не нужна.",
+  text: "Игры Premium входят в подписку Premium.",
 };
 
 export const RU_GAMES: LocalizedGame[] = [
@@ -148,7 +148,7 @@ export const RU_GAMES: LocalizedGame[] = [
         },
         {
           q: "Математический кроссворд — это бесплатно?",
-          a: "Это игра Premium. Новым игрокам все игры Premium открыты бесплатно на первые 7 дней, карта не нужна.",
+          a: "Это игра Premium: она входит в подписку Premium.",
         },
       ],
       updated: U,

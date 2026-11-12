@@ -71,7 +71,7 @@ const EN: Ui = {
   },
   game: {
     free: "Free in the app",
-    premium: "Premium · free for the first 7 days",
+    premium: "Premium game",
     howToPlay: (n) => `How to play ${n}`,
     playIn: (n) => `Play ${n} in Brainura`,
     playInBody: "One of 26 short brain games with levels that adapt as you improve. Five minutes a day, no ads, no account.",
@@ -128,7 +128,7 @@ const RU: Ui = {
   },
   game: {
     free: "Бесплатно в приложении",
-    premium: "Premium · первые 7 дней бесплатно",
+    premium: "Игра Premium",
     howToPlay: (n) => `Как играть: ${n}`,
     playIn: (n) => `Играйте в «${n}» в Brainura`,
     playInBody: "Одна из 26 коротких игр для мозга: уровни подстраиваются под вас. Пять минут в день, без рекламы и регистрации.",

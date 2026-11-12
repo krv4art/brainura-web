@@ -53,7 +53,7 @@ export default function GamesHub() {
       <p className="mt-4 max-w-2xl text-lg leading-relaxed text-[var(--color-text-secondary)]">
         Brainura has 26 short games, each built around a classic task from cognitive psychology or a well-loved
         puzzle. A session takes about five minutes, and most games have up to 80 levels that adjust to how you play.
-        13 games are free; the rest are Premium, with 7 days free for new players.
+        13 games are free; the rest are Premium.
       </p>
 
       {ORDER.map((skill) => {
