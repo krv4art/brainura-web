@@ -17,6 +17,11 @@ const nextConfig: NextConfig = {
   // а Apple ждёт JSON. Team ID и bundle ID — в docs/arena_web/README.md приложения.
   async headers() {
     return [
+      // 🔒 Закрытый инструмент проверки чертежей: noindex дублируется заголовком.
+      {
+        source: "/drawing-check",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" }],
+      },
       {
         source: "/.well-known/apple-app-site-association",
         headers: [{ key: "Content-Type", value: "application/json" }],
