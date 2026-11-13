@@ -38,7 +38,6 @@ const AREA_COLORS = [
   "from-[#EC4899] to-[#DB2777]",
 ];
 
-const SHOTS = ["/screenshots/shot-1.jpg", "/screenshots/shot-2.jpg", "/screenshots/shot-3.jpg", "/screenshots/shot-4.jpg", "/screenshots/shot-5.jpg"];
 
 /** Подставляет ссылку вместо маркера `{name}` в строке. */
 function withLink(text: string, marker: string, link: React.ReactNode) {
@@ -156,12 +155,12 @@ export function LandingView({ lang = "en" }: { lang?: Locale }) {
           </div>
 
           <div className="mt-12 flex flex-wrap justify-center gap-4 sm:gap-6">
-            {SHOTS.map((src, i) => (
+            {L.screenshots.shots.map(({ src, caption }) => (
               <div key={src} className="group flex w-[calc(50%-0.5rem)] flex-col items-center sm:w-[calc(20%-1.2rem)]">
                 <div className="relative aspect-[704/1520] w-full overflow-hidden rounded-2xl border border-[var(--color-border)]/60 bg-white shadow-md transition group-hover:-translate-y-1 group-hover:shadow-xl">
-                  <Image src={src} alt={L.screenshots.captions[i]} fill sizes="(max-width: 640px) 50vw, 20vw" className="object-cover" />
+                  <Image src={src} alt={caption} fill sizes="(max-width: 640px) 50vw, 20vw" className="object-cover" />
                 </div>
-                <span className="mt-3 text-center text-xs font-medium text-[var(--color-text-secondary)]">{L.screenshots.captions[i]}</span>
+                <span className="mt-3 text-center text-xs font-medium text-[var(--color-text-secondary)]">{caption}</span>
               </div>
             ))}
           </div>

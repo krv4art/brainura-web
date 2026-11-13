@@ -257,6 +257,8 @@ export function LangHomeView({ lang }: { lang: Locale }) {
 
 /** Каталог разделов языка (под лендингом или на главной без него). */
 export function LangCatalog({ lang, title, lead }: { lang: Locale; title: string; lead: string }) {
+  // Язык только с лендингом (страниц ещё нет) — каталог не показываем, а не пустой заголовок.
+  if (!(["tests", "games", "learn"] as const).some((s) => pagesOf(s, lang).length > 0)) return null;
   return (
     <div className="mx-auto max-w-5xl px-4 pb-20 pt-4 sm:px-6">
       <h2 className="text-3xl font-extrabold tracking-tight text-[var(--color-text)] sm:text-4xl">{title}</h2>
