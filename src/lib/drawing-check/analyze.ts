@@ -6,14 +6,24 @@ import { RULES, rulesAsPrompt } from "./rules";
 //             картинки НЕ видят (проверено 12.11: «не вижу изображения», токены картинки не
 //             считаются) — зрячая только glm-4.5v; glm-5v-turbo не входит в тариф ключа.
 //  anthropic: ANTHROPIC_API_KEY, модель CHECKER_MODEL (по умолчанию claude-opus-5-5).
-type Provider = "glm" | "anthropic";
-const PROVIDER: Provider = process.env.CHECKER_PROVIDER === "anthropic" ? "anthropic" : "glm";
+//  gemini:    GEMINI_API_KEY, модели GEMINI_MODEL (через запятую, по порядку), REST без SDK.
+type Provider = "glm" | "anthropic" | "gemini";
+const PROVIDER: Provider =
+  process.env.CHECKER_PROVIDER === "anthropic" ? "anthropic" : process.env.CHECKER_PROVIDER === "glm" ? "glm" : "gemini";
+// Цепочка моделей: при перегрузке (503), лимите (429) или снятой с выдачи модели (404) берём следующую.
+// 🔒 На бесплатном ключе pro-модели имеют лимит 0, а flash часто отвечают 503 — отсюда цепочка.
+const GEMINI_MODELS = (process.env.GEMINI_MODEL || "gemini-3.8-flash,gemini-3.7-flash,gemini-3.1-flash-lite")
+  .split(",")
+  .map((m) => m.trim())
+  .filter(Boolean);
 const MODEL = process.env.CHECKER_MODEL || "claude-opus-5-5";
 const GLM_MODEL = process.env.GLM_VISION_MODEL || "glm-4.5v";
 const GLM_BASE_URL = "https://api.z.ai/api/anthropic";
 
 export function providerConfigured(): boolean {
-  return PROVIDER === "glm" ? !!process.env.GLM_API_KEY : !!process.env.ANTHROPIC_API_KEY;
+  if (PROVIDER === "glm") return !!process.env.GLM_API_KEY;
+  if (PROVIDER === "gemini") return !!process.env.GEMINI_API_KEY;
+  return !!process.env.ANTHROPIC_API_KEY;
 }
 
 export type Status = "ok" | "issue" | "unsure" | "na";
@@ -41,6 +51,8 @@ export interface CheckResult {
   legibility_note: string;
   findings: Finding[];
   summary: string;
+  /** Какая модель реально ответила (при цепочке с запасными). */
+  model?: string;
 }
 
 const str = { type: "string" } as const;
@@ -125,6 +137,19 @@ function normalize(raw: unknown): CheckResult {
       suggestion: s(f.suggestion),
     });
   }
+  // 🔒 Арифметику размеров считаем сами: модель уверенно пишет «3400+3400+3400+3900=18000».
+  const dim = given.get("DIM-01");
+  const chain = dim?.evidence.match(/((?:\d[\d\s]*\s*\+\s*)+\d[\d\s]*)\s*=\s*(\d[\d\s]*)/);
+  if (dim && chain) {
+    const num = (t: string) => Number(t.replace(/\s/g, ""));
+    const sum = chain[1].split("+").reduce((a, t) => a + num(t), 0);
+    const claimed = num(chain[2]);
+    if (sum !== claimed) {
+      dim.status = "issue";
+      dim.severity = "high";
+      dim.problem = `Сумма слагаемых ${sum}, а в цепочке заявлено ${claimed}. Либо ошибка в размерах на листе, либо прочитаны не все размеры цепочки — сверьте вручную.`;
+    }
+  }
   const findings = RULES.map(
     (r) =>
       given.get(r.id) ?? {
@@ -197,9 +222,72 @@ async function analyzeWithGlm(data: Buffer, mediaType: string, kind: InputKind):
   throw new CheckError("bad_json", "Модель вернула ответ в неверном формате. Попробуйте ещё раз.");
 }
 
+async function analyzeWithGemini(data: Buffer, mediaType: string): Promise<CheckResult> {
+  const body = JSON.stringify({
+    systemInstruction: { parts: [{ text: SYSTEM + GLM_FORMAT }] },
+    contents: [
+      {
+        role: "user",
+        parts: [
+          { inlineData: { mimeType: mediaType, data: data.toString("base64") } },
+          { text: "Проверь этот лист по всем правилам и верни результат в заданном формате." },
+        ],
+      },
+    ],
+    generationConfig: {
+      responseMimeType: "application/json",
+      maxOutputTokens: 16000,
+      mediaResolution: "MEDIA_RESOLUTION_HIGH", // плотный чертёж: мелкий текст
+    },
+  });
+
+  const started = Date.now();
+  let lastStatus = 0;
+  for (const model of GEMINI_MODELS) {
+    if (Date.now() - started > 200_000) break; // общий бюджет под maxDuration 300 с
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "x-goog-api-key": process.env.GEMINI_API_KEY ?? "" },
+      body,
+      signal: AbortSignal.timeout(120_000),
+    }).catch(() => null);
+    if (!res) {
+      lastStatus = 0;
+      continue; // таймаут или сеть — пробуем следующую модель
+    }
+    if (!res.ok) {
+      lastStatus = res.status;
+      // Тело ошибки может содержать детали запроса: в лог — коротко, наружу не отдаём.
+      console.error("drawing-check: gemini error", model, res.status, (await res.text()).slice(0, 200));
+      if ([404, 429, 500, 503].includes(res.status)) continue;
+      break; // 400/401/402/403 — следующая модель не поможет
+    }
+    const json = (await res.json()) as {
+      candidates?: { content?: { parts?: { text?: string; thought?: boolean }[] } }[];
+    };
+    const cand = json.candidates?.[0];
+    if (!cand) throw new CheckError("refusal", "Модель отказалась анализировать этот файл.");
+    const text = (cand.content?.parts ?? []).filter((p) => !p.thought).map((p) => p.text ?? "").join("");
+    try {
+      const result = normalize(extractJson(text));
+      result.model = model;
+      return result;
+    } catch {
+      console.error("drawing-check: gemini unparsable output", model, text.slice(0, 200));
+    }
+  }
+  throw new CheckError(
+    lastStatus === 429 || lastStatus === 503 ? "busy" : "upstream",
+    lastStatus === 429 || lastStatus === 503
+      ? "Модели Gemini сейчас перегружены или исчерпан лимит. Повторите через пару минут."
+      : "Ошибка сервиса модели.",
+  );
+}
+
 export type InputKind = "image" | "pdf";
 
 export async function analyzeSheet(data: Buffer, mediaType: string, kind: InputKind): Promise<CheckResult> {
+  if (PROVIDER === "gemini") return analyzeWithGemini(data, mediaType);
   if (PROVIDER === "glm") return analyzeWithGlm(data, mediaType, kind);
   const client = new Anthropic(); // ключ — из ANTHROPIC_API_KEY
   const b64 = data.toString("base64");
