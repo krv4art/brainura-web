@@ -6,7 +6,8 @@ import type { BlockLabels } from "@/components/seo/blocks";
 import type { Locale } from "./i18n";
 
 export interface Ui {
-  nav: { home: string; features: string; games: string; tests: string; learn: string; support: string; download: string };
+  /** `menu` — подпись кнопки ☰ на телефоне (для экранного диктора). */
+  nav: { home: string; features: string; games: string; tests: string; learn: string; support: string; download: string; menu: string };
   footer: { brainGames: string; brainTests: string; learn: string; privacy: string; terms: string; support: string; rights: string };
   faq: string;
   sources: string;
@@ -36,7 +37,7 @@ export interface Ui {
 }
 
 const EN: Ui = {
-  nav: { home: "Home", features: "Features", games: "Games", tests: "Tests", learn: "Learn", support: "Support", download: "Download" },
+  nav: { home: "Home", features: "Features", games: "Games", tests: "Tests", learn: "Learn", support: "Support", download: "Download", menu: "Menu" },
   footer: {
     brainGames: "Brain games",
     brainTests: "Brain tests",
@@ -97,7 +98,7 @@ const plural = (n: number, one: string, few: string, many: string) => {
 };
 
 const RU: Ui = {
-  nav: { home: "Главная", features: "Возможности", games: "Игры", tests: "Тесты", learn: "Статьи", support: "Поддержка", download: "Скачать" },
+  nav: { home: "Главная", features: "Возможности", games: "Игры", tests: "Тесты", learn: "Статьи", support: "Поддержка", download: "Скачать", menu: "Меню" },
   footer: {
     brainGames: "Игры для мозга",
     brainTests: "Тесты для мозга",
@@ -154,7 +155,7 @@ const RU: Ui = {
 // Украинский: одобрен владельцем 13.11.2026 (docs/growth/seo/l10n/audit_landing_uk.md, §2).
 // Заголовки хабов (hub.*Title) — временные: заменятся главными ключами из ядра uk.
 const UK: Ui = {
-  nav: { home: "Головна", features: "Можливості", games: "Ігри", tests: "Тести", learn: "Статті", support: "Підтримка", download: "Завантажити" },
+  nav: { home: "Головна", features: "Можливості", games: "Ігри", tests: "Тести", learn: "Статті", support: "Підтримка", download: "Завантажити", menu: "Меню" },
   footer: {
     brainGames: "Ігри для мозку",
     brainTests: "Тести для мозку",
