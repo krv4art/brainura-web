@@ -67,6 +67,15 @@ export const SECTION_SLUGS: Record<Locale, Record<SectionName, string>> = {
   qa: { tests: "testy-qa", games: "igry-qa", learn: "stati-qa", compare: "compare-qa" },
 };
 
+// Адрес страницы поддержки на языке (13.11.2026). Снаружи — локализованный, внутри — `[lang]/support`
+// (прокси переписывает, `/support` на поддомене с другим адресом уводит 308 на него).
+export const SUPPORT_SLUGS: Record<Locale, string> = { en: "support", ru: "podderzhka", uk: "pidtrymka", qa: "support-qa" };
+
+/** Путь поддержки на языке: supportPath("ru") → "/podderzhka". */
+export function supportPath(lang: Locale): string {
+  return `/${SUPPORT_SLUGS[lang]}`;
+}
+
 /** Путь раздела на языке: sectionPath("ru", "tests") → "/testy-dlya-mozga". */
 export function sectionPath(lang: Locale, section: SectionName): string {
   return `/${SECTION_SLUGS[lang][section]}`;

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { absoluteUrl, LOCALES, sectionPath, type Locale } from "@/lib/i18n";
 import { UI } from "@/lib/ui";
+import { supportHref } from "@/content/registry";
 
 /**
  * Подвал. На поддомене языка: свои разделы относительными ссылками, а юридические
@@ -28,7 +29,7 @@ export function SiteFooter({ lang = "en", sections }: { lang?: Locale; sections?
           {has.learn && <Link href={sectionPath(lang, "learn")} className="hover:text-[var(--color-text)]">{t.learn}</Link>}
           <a href={main("/privacy")} className="hover:text-[var(--color-text)]">{t.privacy}</a>
           <a href={main("/terms")} className="hover:text-[var(--color-text)]">{t.terms}</a>
-          <a href={main("/support")} className="hover:text-[var(--color-text)]">{t.support}</a>
+          <a href={supportHref(lang)} className="hover:text-[var(--color-text)]">{t.support}</a>
           <a href="mailto:krv4art.dev@gmail.com" className="hover:text-[var(--color-text)]">krv4art.dev@gmail.com</a>
           {!en && (
             <a href={absoluteUrl("en", "/")} hrefLang="en" className="hover:text-[var(--color-text)]">{LOCALES.en.nativeName}</a>

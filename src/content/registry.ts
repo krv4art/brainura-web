@@ -3,7 +3,8 @@
 // версии — src/content/l10n/<код>.ts. Карта страниц с кластерами и статусами —
 // docs/growth/seo/page_map.md, ядро каждой страницы — docs/growth/seo/pages/ (репо приложения).
 
-import { DEFAULT_LOCALE, sectionPath, subdomainLocales, type LangVersion, type Locale } from "@/lib/i18n";
+import { absoluteUrl, DEFAULT_LOCALE, sectionPath, subdomainLocales, supportPath, type LangVersion, type Locale } from "@/lib/i18n";
+import { supportFor } from "./support";
 import { GAME_PAGES } from "./games";
 import { ARTICLES_ALL } from "./articles";
 import { TESTS_EN } from "./tests";
@@ -102,6 +103,18 @@ export function homeVersions(): LangVersion[] {
   return builtLocales()
     .filter((l) => l !== "qa" && landingFor(l))
     .map((lang) => ({ lang, path: "/" }));
+}
+
+/** Версии поддержки: языки, у которых есть свой текст поддержки (content/support.ts). */
+export function supportVersions(): LangVersion[] {
+  return builtLocales()
+    .filter((l) => l !== "qa" && supportFor(l))
+    .map((lang) => ({ lang, path: supportPath(lang) }));
+}
+
+/** Ссылка на поддержку для языка: своя страница, иначе — английская на основном домене. */
+export function supportHref(lang: Locale): string {
+  return supportFor(lang) ? supportPath(lang) : absoluteUrl(DEFAULT_LOCALE, "/support");
 }
 
 /** Какие разделы есть на языке — для шапки и подвала. */

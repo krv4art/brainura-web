@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { SECTIONS, homeVersions, hubVersions, pagesOf, versionsOf, type SectionKey } from "@/content/registry";
+import { SECTIONS, homeVersions, hubVersions, supportVersions, pagesOf, versionsOf, type SectionKey } from "@/content/registry";
 import { absoluteUrl, LOCALES, type LangVersion } from "@/lib/i18n";
 
 // sitemap.xml основного домена (SEO_PLAN §2, шаг 0.2): только английские страницы.
@@ -15,7 +15,7 @@ function alternates(versions: LangVersion[]) {
 export default function sitemap(): MetadataRoute.Sitemap {
   const out: MetadataRoute.Sitemap = [
     { url: absoluteUrl("en", "/"), changeFrequency: "weekly", priority: 1, alternates: alternates(homeVersions()) },
-    { url: absoluteUrl("en", "/support"), changeFrequency: "monthly", priority: 0.4 },
+    { url: absoluteUrl("en", "/support"), changeFrequency: "monthly", priority: 0.4, alternates: alternates(supportVersions()) },
     { url: absoluteUrl("en", "/privacy"), changeFrequency: "yearly", priority: 0.2 },
     { url: absoluteUrl("en", "/terms"), changeFrequency: "yearly", priority: 0.2 },
   ];

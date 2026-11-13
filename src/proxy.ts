@@ -11,7 +11,7 @@
 // Статика, картинки, /_next, /api и служебные файлы мимо прокси.
 
 import { NextResponse, type NextRequest } from "next/server";
-import { absoluteUrl, isLocale, localeFromHost, sectionFromSegment, SECTION_SLUGS, subdomainLocales, type SectionName } from "@/lib/i18n";
+import { absoluteUrl, isLocale, localeFromHost, sectionFromSegment, SECTION_SLUGS, SUPPORT_SLUGS, subdomainLocales, type SectionName } from "@/lib/i18n";
 
 export function proxy(req: NextRequest) {
   const { pathname, search } = req.nextUrl;
@@ -24,7 +24,14 @@ export function proxy(req: NextRequest) {
     // Раздел: локализованный сегмент → внутренний (tests/games/learn).
     const [, seg = "", ...rest] = inner.split("/");
     const section = sectionFromSegment(lang, seg);
-    if (section) {
+    if (seg && seg === SUPPORT_SLUGS[lang] && seg !== "support") {
+      // Поддержка: локализованный адрес → внутренний [lang]/support.
+      inner = "/" + ["support", ...rest].join("/");
+    } else if (seg === "support" && SUPPORT_SLUGS[lang] !== "support") {
+      const to = req.nextUrl.clone();
+      to.pathname = "/" + [SUPPORT_SLUGS[lang], ...rest].join("/");
+      return NextResponse.redirect(to, 308);
+    } else if (section) {
       inner = "/" + [section, ...rest].join("/");
     } else if ((["tests", "games", "learn", "compare"] as SectionName[]).includes(seg as SectionName) && SECTION_SLUGS[lang][seg as SectionName] !== seg) {
       // Внутреннее имя раздела на языке с другим адресом — на красивый (без дублей страниц).

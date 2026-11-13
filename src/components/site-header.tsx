@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { sectionPath, type Locale } from "@/lib/i18n";
+import { sectionPath, supportPath, type Locale } from "@/lib/i18n";
+import { supportFor } from "@/content/support";
 // Переключатель языка (./lang-switch.tsx) временно снят с шапки по просьбе владельца 13.11.
 // Вернуть: импортировать LangSwitch + собрать LANG_OPTIONS из DEFAULT_LOCALE/subdomainLocales()/LOCALES
 // и поставить <LangSwitch current={LOCALES[lang].hreflang} options={LANG_OPTIONS} /> перед кнопкой «Скачать».
@@ -49,9 +50,9 @@ export function SiteHeader({ lang = "en", sections }: { lang?: Locale; sections?
               {t.learn}
             </Link>
           )}
-          {/* Поддержка есть только на английском: на языках её в шапке нет, чтобы не уводить на чужую версию. */}
-          {en && (
-            <Link href="/support" className={`hidden sm:block ${item}`}>
+          {/* Поддержка — только если у языка есть своя страница: не уводить на чужую версию. */}
+          {supportFor(lang) && (
+            <Link href={supportPath(lang)} className={`hidden sm:block ${item}`}>
               {t.support}
             </Link>
           )}

@@ -1,5 +1,6 @@
-import { absoluteUrl, isLocale, LOCALES, sectionPath, subdomainLocales, type Locale } from "@/lib/i18n";
-import { SECTIONS, homeVersions, hubVersions, pagesOf, versionsOf, type SectionKey } from "@/content/registry";
+import { absoluteUrl, isLocale, LOCALES, sectionPath, subdomainLocales, supportPath, type Locale } from "@/lib/i18n";
+import { supportFor } from "@/content/support";
+import { SECTIONS, homeVersions, hubVersions, supportVersions, pagesOf, versionsOf, type SectionKey } from "@/content/registry";
 
 // sitemap.xml поддомена языка: <код>.brainura.app/sitemap.xml (src/proxy.ts переписывает
 // в /<код>/sitemap-xml). Только страницы этого языка; у каждой — hreflang всех версий.
@@ -25,6 +26,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ lang: s
   const { lang } = await params;
   if (!isLocale(lang) || !subdomainLocales().includes(lang)) return new Response("Not found", { status: 404 });
   const urls: string[] = [urlTag(absoluteUrl(lang, "/"), undefined, homeVersions().some((v) => v.lang === lang) ? homeVersions() : [{ lang, path: "/" }])];
+  if (supportFor(lang)) urls.push(urlTag(absoluteUrl(lang, supportPath(lang)), undefined, supportVersions()));
   for (const section of Object.keys(SECTIONS) as SectionKey[]) {
     const pages = pagesOf(section, lang);
     if (!pages.length) continue;

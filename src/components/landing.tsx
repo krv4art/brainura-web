@@ -17,7 +17,8 @@ import {
   Sparkles,
   type LucideIcon,
 } from "lucide-react";
-import { absoluteUrl, type Locale } from "@/lib/i18n";
+import type { Locale } from "@/lib/i18n";
+import { supportHref } from "@/content/registry";
 import { APP_STORE_URL, CHROME_URL, playUrl } from "@/lib/site";
 import { LANDING, type FeatureIcon } from "@/content/landing";
 
@@ -57,15 +58,15 @@ export function LandingView({ lang = "en" }: { lang?: Locale }) {
   const en = lang === "en";
   const hl = en ? undefined : lang;
   const play = (campaign: string) => playUrl(en ? campaign : `${lang}-${campaign}`, "website", hl);
-  // Поддержка и юридические страницы — только на основном домене (на английском).
-  const supportHref = en ? "/support" : absoluteUrl("en", "/support");
+  // Поддержка — своя страница языка, если она есть; иначе английская на основном домене.
+  const href = supportHref(lang);
   const supportLink = (label: string, cls: string) =>
-    en ? (
-      <Link href={supportHref} className={cls}>
+    href.startsWith("/") ? (
+      <Link href={href} className={cls}>
         {label}
       </Link>
     ) : (
-      <a href={supportHref} className={cls}>
+      <a href={href} className={cls}>
         {label}
       </a>
     );
