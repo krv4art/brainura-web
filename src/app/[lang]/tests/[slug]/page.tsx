@@ -8,9 +8,11 @@ import { L10N } from "@/content/l10n";
 
 export const dynamicParams = false;
 
-export function generateStaticParams({ params }: { params: { lang: string } }) {
-  const langs = params?.lang ? [params.lang] : subdomainLocales();
-  return langs.flatMap((lang) => (isLocale(lang) ? (L10N[lang]?.tests ?? []).map((t) => ({ lang, slug: t.slug })) : []));
+// 🔒 Параметры собираются по ВСЕМ языкам сразу, без params родителя: язык без страниц раздела
+// (uk на 13.11.2026 — только лендинг) давал пустой список, и Next 16 при dynamicParams = false
+// не генерировал страницы и у остальных языков — все ru-страницы ушли в 404 (13.11.2026).
+export function generateStaticParams() {
+  return subdomainLocales().flatMap((lang) => (isLocale(lang) ? (L10N[lang]?.tests ?? []).map((t) => ({ lang, slug: t.slug })) : []));
 }
 
 function find(lang: string, slug: string) {
