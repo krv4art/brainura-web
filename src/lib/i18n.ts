@@ -42,9 +42,8 @@ export const DEFAULT_LOCALE: Locale = "en";
 export const LOCALES: Record<Locale, LocaleInfo> = {
   en: { hreflang: "en", host: "brainura.app", nativeName: "English", dateLocale: "en-US" },
   ru: { hreflang: "ru", host: "ru.brainura.app", nativeName: "Русский", dateLocale: "ru-RU" },
-  // uk: ЧЕРНОВИК (12.11.2026). `preview: true` — в проде не собирается, в переключателе и sitemap его нет.
-  // При публикации (STATUS_uk.md, этап 9) флаг `preview` снять и подключить домен: add_site_locale.py uk.
-  uk: { hreflang: "uk", host: "uk.brainura.app", nativeName: "Українська", dateLocale: "uk-UA", preview: true },
+  // uk: в проде с 13.11.2026 — пока только лендинг (разделы без страниц отдают 404). Страницы — STATUS_uk.md.
+  uk: { hreflang: "uk", host: "uk.brainura.app", nativeName: "Українська", dateLocale: "uk-UA" },
   qa: { hreflang: "en-GB", host: "qa.brainura.app", nativeName: "QA", dateLocale: "en-GB", preview: true },
 };
 
