@@ -29,7 +29,15 @@ export interface Ui {
     read: string;
     about: string;
   };
-  game: { free: string; premium: string; howToPlay: (name: string) => string; playIn: (name: string) => string; playInBody: string };
+  game: {
+    free: string;
+    premium: string;
+    howToPlay: (name: string) => string;
+    playIn: (name: string) => string;
+    playInBody: string;
+    /** Подпись над игрой в браузере (страницы из PLAYABLE_GAMES). */
+    playHere: (name: string) => string;
+  };
   skills: Record<"Memory" | "Attention" | "Speed" | "Logic" | "Language" | "Emotions", string>;
   download: { title: string; body: string };
   /** Заметный блок «больше игр в приложении» под инструментом/игрой. */
@@ -81,6 +89,7 @@ const EN: Ui = {
     howToPlay: (n) => `How to play ${n}`,
     playIn: (n) => `Play ${n} in Brainura`,
     playInBody: "One of 26 short brain games with levels that adapt as you improve. Five minutes a day, no ads, no account.",
+    playHere: (n) => `Play ${n} online, right here`,
   },
   skills: { Memory: "Memory", Attention: "Attention", Speed: "Speed", Logic: "Logic", Language: "Language", Emotions: "Emotions" },
   download: {
@@ -150,6 +159,7 @@ const RU: Ui = {
     howToPlay: (n) => `Как играть: ${n}`,
     playIn: (n) => `Играйте в «${n}» в Brainura`,
     playInBody: "Одна из 26 коротких игр для мозга: уровни подстраиваются под вас. Пять минут в день, без рекламы и регистрации.",
+    playHere: (n) => `Играйте в «${n}» онлайн прямо здесь`,
   },
   skills: { Memory: "Память", Attention: "Внимание", Speed: "Скорость", Logic: "Логика", Language: "Язык", Emotions: "Эмоции" },
   download: {
@@ -215,6 +225,7 @@ const UK: Ui = {
     howToPlay: (n) => `Як грати: ${n}`,
     playIn: (n) => `Грайте в «${n}» у Brainura`,
     playInBody: "Одна з 26 коротких ігор для мозку: рівні підлаштовуються під вас. П’ять хвилин на день, без реклами й реєстрації.",
+    playHere: (n) => `Грайте в «${n}» онлайн просто тут`,
   },
   skills: { Memory: "Пам’ять", Attention: "Увага", Speed: "Швидкість", Logic: "Логіка", Language: "Мова", Emotions: "Емоції" },
   download: {

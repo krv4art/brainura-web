@@ -15,6 +15,7 @@ import type { Game, GamePageContent } from "@/content/games";
 import type { TestPageContent } from "@/content/l10n";
 import { SECTIONS, hubVersions, pagesOf, versionsOf, type SectionKey } from "@/content/registry";
 import { ToolFor } from "@/components/tools/tool-for";
+import { GameFor, PLAYABLE_GAMES } from "@/components/tools/game-for";
 import { EXTENSION_GAMES, EXTENSION_TESTS } from "@/content/extension";
 
 // ─────────────── статьи ───────────────
@@ -108,16 +109,27 @@ export function GameView({
       description={p.description}
       lead={<p>{p.lead}</p>}
       hero={
-        <div className="flex flex-wrap items-center gap-2 text-sm">
-          {game.skills.map((s) => (
-            <span key={s} className="rounded-full bg-[var(--color-primary)]/10 px-3 py-1 font-semibold text-[var(--color-primary)]">
-              {ui.skills[s]}
+        <>
+          <div className="flex flex-wrap items-center gap-2 text-sm">
+            {game.skills.map((s) => (
+              <span key={s} className="rounded-full bg-[var(--color-primary)]/10 px-3 py-1 font-semibold text-[var(--color-primary)]">
+                {ui.skills[s]}
+              </span>
+            ))}
+            <span className="rounded-full border border-[var(--color-border)] px-3 py-1 text-[var(--color-text-secondary)]">
+              {game.premium ? ui.game.premium : ui.game.free}
             </span>
-          ))}
-          <span className="rounded-full border border-[var(--color-border)] px-3 py-1 text-[var(--color-text-secondary)]">
-            {game.premium ? ui.game.premium : ui.game.free}
-          </span>
-        </div>
+          </div>
+          {/* game.slug — канонический (en); `slug` у языковых страниц локализован. */}
+          {PLAYABLE_GAMES.has(game.slug) && (
+            <section className="mt-6" aria-labelledby="play-here">
+              <h2 id="play-here" className="mb-3 text-xl font-bold text-[var(--color-text)]">
+                {ui.game.playHere(name)}
+              </h2>
+              <GameFor slug={game.slug} lang={lang} />
+            </section>
+          )}
+        </>
       }
       faq={p.faq}
       sources={p.sources}
