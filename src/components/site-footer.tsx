@@ -1,7 +1,15 @@
 import Link from "next/link";
 import { absoluteUrl, LOCALES, sectionPath, type Locale } from "@/lib/i18n";
 import { UI } from "@/lib/ui";
-import { supportHref } from "@/content/registry";
+import { builtLocales, supportHref } from "@/content/registry";
+import { SecretLangSwitch, type SecretLang } from "./secret-lang-switch";
+
+// Языки скрытого переключателя: всё, что собирается в этой сборке (qa — только локально).
+const SECRET_LANGS: SecretLang[] = builtLocales().map((l) => ({
+  hreflang: LOCALES[l].hreflang,
+  label: l,
+  home: absoluteUrl(l, "/"),
+}));
 
 /**
  * Подвал. На поддомене языка: свои разделы относительными ссылками, а юридические
@@ -18,7 +26,8 @@ export function SiteFooter({ lang = "en", sections }: { lang?: Locale; sections?
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-6 py-10 sm:flex-row">
         <div className="flex flex-col items-center gap-2 sm:items-start">
           <span className="text-base font-bold text-[var(--color-text)]">Brainura</span>
-          <p className="text-sm text-[var(--color-text-secondary)]">
+          {/* data-secret-langs: 5 быстрых нажатий включают скрытый переключатель языка (secret-lang-switch.tsx). */}
+          <p data-secret-langs className="select-none text-sm text-[var(--color-text-secondary)]">
             © {new Date().getFullYear()} Brainura. {t.rights}
           </p>
         </div>
@@ -36,6 +45,7 @@ export function SiteFooter({ lang = "en", sections }: { lang?: Locale; sections?
           )}
         </nav>
       </div>
+      <SecretLangSwitch current={LOCALES[lang].hreflang} langs={SECRET_LANGS} />
     </footer>
   );
 }

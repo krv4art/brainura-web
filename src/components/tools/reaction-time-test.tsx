@@ -58,7 +58,22 @@ const RU: Strings = {
   ms: "мс",
 };
 
-const STRINGS: Record<Locale, Strings> = { en: EN, ru: RU, uk: EN, qa: EN };
+const UK: Strings = {
+  idle: ["Тест на реакцію", "Натисніть сюди (або клавішу «пробіл»), щоб почати. Дочекайтеся зеленого кольору й натисніть якомога швидше."],
+  wait: "Чекайте зеленого…",
+  go: "ТИСНІТЬ!",
+  early: ["Зарано!", "Ви натиснули до того, як стало зелено. Натисніть, щоб повторити цей раунд."],
+  shown: (a, t) => `Спроба ${a} з ${t}. Натисніть, щоб продовжити.`,
+  doneTitle: (avg) => `У середньому ${avg} мс`,
+  doneSub: "Натисніть, щоб пройти ще раз.",
+  bestAvg: "Найкраще середнє:",
+  fastest: "Найшвидше:",
+  slowest: "найповільніше:",
+  deviceNote: "Пристрій додає власну затримку, тож порівнюйте результати на тому самому пристрої, а не з іншими людьми.",
+  ms: "мс",
+};
+
+const STRINGS: Record<Locale, Strings> = { en: EN, ru: RU, uk: UK, qa: EN };
 
 export function ReactionTimeTest({ lang = "en" }: { lang?: Locale }) {
   const tx = STRINGS[lang];

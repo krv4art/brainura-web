@@ -57,7 +57,20 @@ const RU: Strings = {
   sec: "с",
 };
 
-const STRINGS: Record<Locale, Strings> = { en: EN, ru: RU, uk: EN, qa: EN };
+// Українська (14.11.2026). Множина — за тією ж схемою, що й російська (pluralRu).
+const UK: Strings = {
+  grid: "Таблиця:",
+  find: "Знайдіть",
+  errors: (n) => `${pluralRu(n, "помилка", "помилки", "помилок")}: ${n}`,
+  best: (n) => `Рекорд ${n}×${n}:`,
+  result: (secs, e) => `${secs} с · ${e} ${pluralRu(e, "помилка", "помилки", "помилок")} — ще раз`,
+  start: (n) => `Почати ${n}×${n}`,
+  hint: (total) =>
+    `Натискайте числа від 1 до ${total} по черзі. Тримайте погляд у центрі таблиці й шукайте наступне число боковим зором.`,
+  sec: "с",
+};
+
+const STRINGS: Record<Locale, Strings> = { en: EN, ru: RU, uk: UK, qa: EN };
 
 export function SchulteTableTest({ lang = "en" }: { lang?: Locale }) {
   const tx = STRINGS[lang];

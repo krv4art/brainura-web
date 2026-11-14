@@ -61,8 +61,9 @@ export const SECTION_SLUGS: Record<Locale, Record<SectionName, string>> = {
   en: EN_SECTIONS,
   // ru: адреса утверждены владельцем 12.11.2026 (тесты для мозга 58 · игры для мозга 503 — точная частота)
   ru: { tests: "testy-dlya-mozga", games: "igry-dlya-mozga", learn: "stati", compare: "sravneniya" },
-  // uk: слаги ВРЕМЕННЫЕ (английские) — утвердить по главным ключам хабов на этапе 5 (STATUS_uk.md), до публикации
-  uk: EN_SECTIONS,
+  // uk: 14.11.2026 — по главным ключам хабов («тести для мозку», «ігри для мозку»), транслитерация КМУ 2010
+  // (и → y, г → h, я → ia). До этого разделы uk были пустыми (404), так что переезда и редиректов нет.
+  uk: { tests: "testy-dlia-mozku", games: "ihry-dlia-mozku", learn: "statti", compare: "porivniannia" },
   // qa: другие слаги, чтобы проверить, что нигде не осталось жёстких «/tests»
   qa: { tests: "testy-qa", games: "igry-qa", learn: "stati-qa", compare: "compare-qa" },
 };

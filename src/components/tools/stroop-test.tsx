@@ -113,7 +113,31 @@ const RU: Strings = {
   ms: "мс",
 };
 
-const STRINGS: Record<Locale, Strings> = { en: EN, ru: RU, uk: EN, qa: EN };
+// Українська: як у російській — клавіші 1–4 (від розкладки не залежать).
+const UK: Strings = {
+  colors: {
+    red: { label: "Червоний", hotkey: "1" },
+    green: { label: "Зелений", hotkey: "2" },
+    blue: { label: "Синій", hotkey: "3" },
+    yellow: { label: "Жовтий", hotkey: "4" },
+  },
+  intro: (n, keys) => [
+    "Слово — назва кольору — написане кольоровим чорнилом. Натисніть на ",
+    "колір чорнила",
+    `, а не на саме слово. ${n} слів — відповідайте швидко й точно. Клавіатура: ${keys}.`,
+  ],
+  start: "Почати тест Струпа",
+  effect: "Ваш ефект Струпа",
+  matching: "Збігаються",
+  mismatched: "Не збігаються",
+  accuracy: "Точність",
+  again: "Ще раз",
+  explain: "Ефект Струпа — наскільки повільніше ви відповідаєте, коли слово й колір чорнила не збігаються. Ураховуються лише правильні відповіді.",
+  smallest: "Ваш найменший ефект досі:",
+  ms: "мс",
+};
+
+const STRINGS: Record<Locale, Strings> = { en: EN, ru: RU, uk: UK, qa: EN };
 
 export function StroopTest({ lang = "en" }: { lang?: Locale }) {
   const tx = STRINGS[lang];
