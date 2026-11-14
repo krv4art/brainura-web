@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronDown } from "lucide-react";
 import { sectionPath, supportPath, type Locale } from "@/lib/i18n";
 import { supportFor } from "@/content/support";
 // Переключатель языка (./lang-switch.tsx) временно снят с шапки по просьбе владельца 13.11.
@@ -11,6 +10,7 @@ import { pagesOf } from "@/content/registry";
 import { UI } from "@/lib/ui";
 import { playUrl } from "@/lib/site";
 import { MobileMenu, type MenuGroup } from "./mobile-menu";
+import { NavDropdown } from "./nav-dropdown";
 
 const item = "rounded-full px-3 py-2 hover:bg-[var(--color-surface)] hover:text-[var(--color-text)]";
 
@@ -58,30 +58,7 @@ export function SiteHeader({ lang = "en", sections }: { lang?: Locale; sections?
             </Link>
           )}
           {groups.map((g) => (
-            <div key={g.href} className="group relative hidden md:block">
-              <Link href={g.href} className={`inline-flex items-center gap-1 ${item}`}>
-                {g.title}
-                <ChevronDown className="h-4 w-4 transition group-hover:rotate-180 group-focus-within:rotate-180" aria-hidden="true" />
-              </Link>
-              <div className="invisible absolute right-0 top-full z-50 pt-2 opacity-0 transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                <ul
-                  className={`grid gap-1 rounded-2xl border border-[var(--color-border)]/70 bg-white p-3 shadow-xl ${
-                    g.links.length > 8 ? "w-[640px] grid-cols-3" : "w-[440px] grid-cols-2"
-                  }`}
-                >
-                  {g.links.map((l) => (
-                    <li key={l.href}>
-                      <Link
-                        href={l.href}
-                        className="block rounded-xl px-3 py-2 text-sm font-medium text-[var(--color-text)] hover:bg-[var(--color-surface)] hover:text-[var(--color-primary)]"
-                      >
-                        {l.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+            <NavDropdown key={g.href} group={g} itemClass={item} />
           ))}
           {!en && has.learn && (
             <Link href={sectionPath(lang, "learn")} className={`hidden md:block ${item}`}>
