@@ -41,6 +41,8 @@ interface BaseProps {
   campaign: string;
   /** Язык страницы (по умолчанию английский). */
   lang?: Locale;
+  /** Игра есть в расширении для Chrome — в промо-блоке кнопка «Добавить в Chrome». */
+  extension?: boolean;
 }
 
 function Shell({
@@ -59,6 +61,7 @@ function Shell({
   intro,
   lang = "en",
   promo = false,
+  extension = false,
 }: BaseProps & { top?: ReactNode; ld: object[]; meta?: ReactNode; intro?: ReactNode; promo?: boolean }) {
   return (
     <article className="mx-auto max-w-3xl px-4 pb-20 pt-8 sm:px-6 sm:pt-12">
@@ -71,7 +74,7 @@ function Shell({
       <div className="mt-4 text-lg leading-relaxed text-[var(--color-text-secondary)]">{lead}</div>
       {intro}
       {top && <div className="mt-8">{top}</div>}
-      {promo && <MoreGamesPromo campaign={campaign} lang={lang} />}
+      {promo && <MoreGamesPromo campaign={campaign} lang={lang} extension={extension} />}
       <div className={`mt-4 ${proseClass}`}>{children}</div>
       <FaqList faq={faq} lang={lang} />
       <Related links={related} lang={lang} />

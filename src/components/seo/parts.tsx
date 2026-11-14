@@ -2,8 +2,8 @@
 // FAQ, источники, «скачать», связанные страницы.
 
 import Link from "next/link";
-import { BrainCircuit, ChevronDown, ChevronRight, Play, Apple as AppleStore } from "lucide-react";
-import { APP_STORE_URL, playUrl } from "@/lib/site";
+import { BrainCircuit, ChevronDown, ChevronRight, Play, Puzzle, Apple as AppleStore } from "lucide-react";
+import { APP_STORE_URL, CHROME_URL, playUrl } from "@/lib/site";
 import type { Crumb } from "@/lib/schema";
 import type { Locale } from "@/lib/i18n";
 import { UI } from "@/lib/ui";
@@ -143,7 +143,7 @@ export function DownloadBlock({
  * Светлая карточка с градиентной полосой — в тон остальным карточкам страницы, не спорит с
  * синим блоком «скачать» внизу. Ссылки на Google Play (с UTM) и App Store.
  */
-export function MoreGamesPromo({ campaign, lang = "en" }: { campaign: string; lang?: Locale }) {
+export function MoreGamesPromo({ campaign, lang = "en", extension = false }: { campaign: string; lang?: Locale; extension?: boolean }) {
   const t = UI[lang].store;
   const p = UI[lang].promo;
   const play = `${campaign}-promo`;
@@ -175,6 +175,16 @@ export function MoreGamesPromo({ campaign, lang = "en" }: { campaign: string; la
             <AppleStore className="h-5 w-5" aria-hidden="true" />
             {t.appStore}
           </a>
+          {/* Игра есть в расширении (content/extension.ts) — человек и так за компьютером. */}
+          {extension && (
+            <a
+              href={CHROME_URL}
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-[var(--color-border)] bg-white px-5 py-2.5 text-sm font-semibold text-[var(--color-text)] shadow-sm transition hover:scale-[1.02]"
+            >
+              <Puzzle className="h-5 w-5" aria-hidden="true" />
+              {t.chrome}
+            </a>
+          )}
         </div>
       </div>
     </aside>

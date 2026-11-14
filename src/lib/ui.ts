@@ -12,7 +12,8 @@ export interface Ui {
   faq: string;
   sources: string;
   tryNext: string;
-  store: { play: string; appStore: string; note: string };
+  /** `chrome` — кнопка расширения (только на играх/тестах из расширения, content/extension.ts). */
+  store: { play: string; appStore: string; chrome: string; note: string };
   article: { team: string; minRead: (n: number) => string; toc: string; takeaways: string; updated: string };
   blocks: BlockLabels;
   hub: {
@@ -50,7 +51,7 @@ const EN: Ui = {
   faq: "Frequently asked questions",
   sources: "Sources",
   tryNext: "Try next",
-  store: { play: "Get it on Google Play", appStore: "Download on the App Store", note: "Free to install · no ads · no account needed" },
+  store: { play: "Get it on Google Play", appStore: "Download on the App Store", chrome: "Add to Chrome", note: "Free to install · no ads · no account needed" },
   article: {
     team: "Brainura team",
     minRead: (n) => `${n} min read`,
@@ -111,7 +112,7 @@ const RU: Ui = {
   faq: "Частые вопросы",
   sources: "Источники",
   tryNext: "Попробуйте ещё",
-  store: { play: "Скачать в Google Play", appStore: "Загрузить в App Store", note: "Бесплатно · без рекламы · без регистрации" },
+  store: { play: "Скачать в Google Play", appStore: "Загрузить в App Store", chrome: "Добавить в Chrome", note: "Бесплатно · без рекламы · без регистрации" },
   article: {
     team: "Команда Brainura",
     minRead: (n) => `${n} ${plural(n, "минута", "минуты", "минут")} на чтение`,
@@ -168,7 +169,7 @@ const UK: Ui = {
   faq: "Часті запитання",
   sources: "Джерела",
   tryNext: "Спробуйте ще",
-  store: { play: "Завантажити з Google Play", appStore: "Завантажити з App Store", note: "Безкоштовно · без реклами · без реєстрації" },
+  store: { play: "Завантажити з Google Play", appStore: "Завантажити з App Store", chrome: "Додати в Chrome", note: "Безкоштовно · без реклами · без реєстрації" },
   article: {
     team: "Команда Brainura",
     minRead: (n) => `${n} ${plural(n, "хвилина", "хвилини", "хвилин")} читання`,

@@ -15,6 +15,7 @@ import type { Game, GamePageContent } from "@/content/games";
 import type { TestPageContent } from "@/content/l10n";
 import { SECTIONS, hubVersions, pagesOf, versionsOf, type SectionKey } from "@/content/registry";
 import { ToolFor } from "@/components/tools/tool-for";
+import { EXTENSION_GAMES, EXTENSION_TESTS } from "@/content/extension";
 
 // ─────────────── статьи ───────────────
 
@@ -122,6 +123,7 @@ export function GameView({
       sources={p.sources}
       related={related}
       campaign={`game-${game.slug}`}
+      extension={EXTENSION_GAMES.has(game.slug)}
       download={{ title: ui.game.playIn(name), body: ui.game.playInBody }}
     >
       <BlockSections
@@ -169,6 +171,7 @@ export function TestView({ t, lang }: { t: TestPageContent; lang: Locale }) {
       sources={t.sources}
       related={related}
       campaign={t.key}
+      extension={EXTENSION_TESTS.has(t.key)}
       download={t.download}
     >
       <BlockSections sections={t.sections} pagePath={path} labels={ui.blocks} />
