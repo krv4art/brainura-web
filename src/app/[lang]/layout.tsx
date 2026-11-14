@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Manrope } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { SiteAnalytics } from "@/components/site-analytics";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { absoluteUrl, isLocale, LOCALES, subdomainLocales } from "@/lib/i18n";
@@ -47,6 +48,7 @@ export default async function LangLayout({ children, params }: { children: React
         <main className="flex-1">{children}</main>
         <SiteFooter lang={lang} sections={sections} />
         <Analytics />
+        <SiteAnalytics lang={lang} />
       </body>
     </html>
   );

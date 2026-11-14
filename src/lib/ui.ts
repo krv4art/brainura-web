@@ -35,6 +35,8 @@ export interface Ui {
   /** Заметный блок «больше игр в приложении» под инструментом/игрой. */
   promo: { title: string; body: string };
   notFound: { title: string; body: string; home: string };
+  /** Баннер согласия на cookie Google Analytics (components/site-analytics.tsx). */
+  consent: { text: string; accept: string; decline: string; more: string; settings: string; privacyHref: string };
 }
 
 const EN: Ui = {
@@ -90,6 +92,14 @@ const EN: Ui = {
     body: "Brainura has 26 short games for memory, attention, speed and logic, a daily plan and levels that adapt to you. 13 games are free.",
   },
   notFound: { title: "Page not found", body: "This page does not exist or has moved.", home: "Go to the home page" },
+  consent: {
+    text: "We use Google Analytics cookies to see which pages are useful. Nothing is used for advertising.",
+    accept: "Accept",
+    decline: "Decline",
+    more: "Privacy Policy",
+    settings: "Cookie settings",
+    privacyHref: "/privacy",
+  },
 };
 
 // Русский (ru.brainura.app). Регистр — «вы», типографика — «ёлочки» и тире «—».
@@ -151,6 +161,14 @@ const RU: Ui = {
     body: "В Brainura 26 коротких игр на память, внимание, скорость и логику, ежедневный план и уровни, которые подстраиваются под вас. 13 игр бесплатны.",
   },
   notFound: { title: "Страница не найдена", body: "Такой страницы нет или она переехала.", home: "На главную" },
+  consent: {
+    text: "Мы используем cookie Google Analytics, чтобы понимать, какие страницы полезны. Для рекламы ничего не используется.",
+    accept: "Принять",
+    decline: "Отклонить",
+    more: "Политика конфиденциальности",
+    settings: "Настройки cookie",
+    privacyHref: "https://brainura.app/privacy",
+  },
 };
 
 // Украинский: одобрен владельцем 13.11.2026 (docs/growth/seo/l10n/audit_landing_uk.md, §2).
@@ -208,6 +226,14 @@ const UK: Ui = {
     body: "У Brainura 26 коротких ігор на пам’ять, увагу, швидкість і логіку, щоденний план і рівні, що підлаштовуються під вас. 13 ігор безкоштовні.",
   },
   notFound: { title: "Сторінку не знайдено", body: "Такої сторінки немає або її перенесено.", home: "На головну" },
+  consent: {
+    text: "Ми використовуємо cookie Google Analytics, щоб розуміти, які сторінки корисні. Для реклами нічого не використовується.",
+    accept: "Прийняти",
+    decline: "Відхилити",
+    more: "Політика конфіденційності",
+    settings: "Налаштування cookie",
+    privacyHref: "https://brainura.app/privacy",
+  },
 };
 
 export const UI: Record<Locale, Ui> = {

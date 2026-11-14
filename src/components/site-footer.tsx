@@ -3,6 +3,7 @@ import { absoluteUrl, LOCALES, sectionPath, type Locale } from "@/lib/i18n";
 import { UI } from "@/lib/ui";
 import { builtLocales, supportHref } from "@/content/registry";
 import { SecretLangSwitch, type SecretLang } from "./secret-lang-switch";
+import { ConsentSettingsLink } from "./site-analytics";
 
 // Языки скрытого переключателя: всё, что собирается в этой сборке (qa — только локально).
 const SECRET_LANGS: SecretLang[] = builtLocales().map((l) => ({
@@ -40,6 +41,7 @@ export function SiteFooter({ lang = "en", sections }: { lang?: Locale; sections?
           <a href={main("/terms")} className="hover:text-[var(--color-text)]">{t.terms}</a>
           <a href={supportHref(lang)} className="hover:text-[var(--color-text)]">{t.support}</a>
           <a href="mailto:krv4art.dev@gmail.com" className="hover:text-[var(--color-text)]">krv4art.dev@gmail.com</a>
+          <ConsentSettingsLink label={UI[lang].consent.settings} />
           {!en && (
             <a href={absoluteUrl("en", "/")} hrefLang="en" className="hover:text-[var(--color-text)]">{LOCALES.en.nativeName}</a>
           )}

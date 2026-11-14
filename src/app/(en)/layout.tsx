@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { SupportChat } from "@/components/support-chat";
 import { Analytics } from "@vercel/analytics/next";
+import { SiteAnalytics } from "@/components/site-analytics";
 import "../globals.css";
 
 const manrope = Manrope({
@@ -67,6 +68,8 @@ export default function RootLayout({
         <SupportChat />
         {/* Просмотры страниц без cookie (Vercel Web Analytics) — SEO_PLAN шаг 0.5, Privacy §12. */}
         <Analytics />
+        {/* GA4 с баннером согласия (Consent Mode), кроме /extension/* — Privacy §12. */}
+        <SiteAnalytics lang="en" />
       </body>
     </html>
   );

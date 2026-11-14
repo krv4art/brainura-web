@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <LegalShell title="Privacy Policy" updated="November 11, 2026">
+    <LegalShell title="Privacy Policy" updated="November 14, 2026">
       <p>
         This Privacy Policy explains how Brainura (&quot;Brainura&quot;,
         &quot;we&quot;, &quot;us&quot;, &quot;our&quot;) collects, uses, shares,
@@ -173,8 +173,9 @@ export default function PrivacyPage() {
         Brainura does <strong>not</strong> display third-party advertisements,
         does <strong>not</strong> use the iOS App Tracking Transparency
         framework, and does <strong>not</strong> share any data with
-        advertising networks or data brokers. We perform first-party analytics
-        only.
+        advertising networks or data brokers. The website uses Google
+        Analytics only to measure how its pages are used, with Google&apos;s
+        advertising features turned off (see section 12).
       </p>
 
       <h2>7. Data retention</h2>
@@ -239,20 +240,44 @@ export default function PrivacyPage() {
 
       <h2>12. Cookies and similar technologies</h2>
       <p>
-        The Brainura mobile app does not use HTTP cookies. The marketing
-        website at brainura.app uses only the technical cookies set by Vercel
-        for hosting (load balancing, security). We do not use analytics
-        cookies, advertising cookies, or any cross-site tracking on the
-        website.
+        The Brainura mobile app does not use HTTP cookies. The website at
+        brainura.app and its language versions (such as ru.brainura.app) use
+        the technical cookies set by Vercel for hosting (load balancing,
+        security) and, only if you agree, analytics cookies from Google
+        Analytics. We do not use advertising cookies or cross-site tracking.
       </p>
       <p>
-        To know which pages of the website are useful, we count page views
-        with Vercel Web Analytics. It is cookieless: it records the page
-        address, the referring site, and the browser, operating system,
-        device type and country derived from the request, and it does not
-        store your IP address or build a profile of you. Results of the
-        brain tests on the website (for example, your best reaction time)
-        stay in your browser&apos;s local storage and are never sent to us.
+        <strong>Google Analytics (with your consent).</strong> On your first
+        visit the website asks whether you accept analytics cookies. If you
+        accept, Google Analytics sets first-party cookies (named{" "}
+        <code>_ga</code> and <code>_ga_*</code>, kept for up to 2 years) to
+        count visits and to tell new visitors from returning ones. It records
+        the pages you open, how you arrived (for example, from a search
+        engine), your approximate location derived from the request, your
+        browser and device type, and clicks on the buttons that lead to Google
+        Play, the App Store or the Chrome Web Store. Google Signals,
+        advertising features and ad personalisation are turned off, and we do
+        not send Google any name, email or account identifier. If you decline,
+        or until you choose, no analytics cookies are set and Google Analytics
+        receives only cookieless, aggregate signals that cannot recognise you
+        on another visit. Your choice applies to all language versions of the
+        website and can be changed at any time with the &quot;Cookie
+        settings&quot; link at the bottom of every page. Google processes this
+        data as our service provider; see{" "}
+        <a href="https://policies.google.com/technologies/partner-sites">
+          how Google uses information from sites that use its services
+        </a>
+        .
+      </p>
+      <p>
+        We also count page views with Vercel Web Analytics. It is cookieless:
+        it records the page address, the referring site, and the browser,
+        operating system, device type and country derived from the request,
+        and it does not store your IP address or build a profile of you.
+        Results of the brain tests on the website (for example, your best
+        reaction time) stay in your browser&apos;s local storage and are never
+        sent to us. Pages opened by the Brainura extension for Chrome (section
+        13) do not load Google Analytics.
       </p>
 
       <h2>13. Brainura extension for Chrome</h2>
